@@ -1377,7 +1377,7 @@ async function fetchSportsData() {
 
   // Kraken
   try {
-    const resp = await fetchESPNRaw('hockey/nhl/teams/24');
+    const resp = await fetchESPNRaw('hockey/nhl/teams/124292');
     if (resp.ok) {
       const data = await resp.json();
       const team = data.team;
