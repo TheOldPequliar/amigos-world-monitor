@@ -1624,8 +1624,8 @@ function updateClock() {
   const now = new Date();
   const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
   const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  document.getElementById('clock').textContent = timeStr;
-  document.getElementById('clockDate').textContent = dateStr;
+  document.getElementById('clock').innerHTML = timeStr;
+  document.getElementById('clockDate').innerHTML = dateStr;
 }
 setInterval(updateClock, 1000);
 updateClock();
@@ -1636,7 +1636,7 @@ updateClock();
   const today = new Date();
   const senior = new Date(today.getFullYear() + 10, today.getMonth(), today.getDate());
   const daysToSenior = Math.ceil((senior - today) / (1000 * 60 * 60 * 24));
-  document.getElementById('seniorCountdown').textContent = daysToSenior.toLocaleString();
+  document.getElementById('seniorCountdown').innerHTML = daysToSenior.toLocaleString();
 
   const roasts = [
     `"40 years old. 0.4 handicap. The man's index is literally 1% of his age. That's not golf, that's a psychological condition."`,
@@ -1655,7 +1655,7 @@ updateClock();
     roastIdx = (roastIdx + 1) % roasts.length;
     roastEl.style.opacity = '0';
     setTimeout(() => {
-      roastEl.textContent = roasts[roastIdx];
+      roastEl.innerHTML = roasts[roastIdx];
       roastEl.style.opacity = '1';
     }, 400);
   }, 6000);
@@ -1663,7 +1663,7 @@ updateClock();
 })();
 
 // &#9552;&#9552;&#9552; CURTIS YASUTAKE TRACKER &#9552;&#9552;&#9552;
-(function initCurtis(){var lastDay=new Date(2025,6,4);function u(){var n=new Date();var d=Math.floor((n-lastDay)/864e5);var e=document.getElementById('curtisCounter');if(e)e.textContent=d;}u();setInterval(u,60000)})();
+(function initCurtis(){var lastDay=new Date(2025,6,4);function u(){var n=new Date();var d=Math.floor((n-lastDay)/864e5);var e=document.getElementById('curtisCounter');if(e)e.innerHTML =d;}u();setInterval(u,60000)})();
 
 // &#9552;&#9552;&#9552; LIVE DATA: STOCKS &#9552;&#9552;&#9552;
 const STOCKS = [
@@ -1777,7 +1777,7 @@ function renderStocks() {
   });
 
   // Update sidebar finance numbers
-  document.getElementById('btcPrice').textContent = stockData['BTC-USD'] ? '$' + Math.round(stockData['BTC-USD'].price).toLocaleString() : '--';
+  document.getElementById('btcPrice').innerHTML = stockData['BTC-USD'] ? '$' + Math.round(stockData['BTC-USD'].price).toLocaleString() : '--';
 }
 
 function drawSparkline(canvasId, currentPrice, up) {
@@ -1873,8 +1873,8 @@ async function fetchSportsData() {
       const team = data.team;
       const record = team.record?.items?.[0]?.summary || '--';
       const standing = team.standingSummary || '';
-      document.getElementById('seahawksRecord').textContent = record;
-      document.getElementById('seahawksDetail').textContent = standing;
+      document.getElementById('seahawksRecord').innerHTML = record;
+      document.getElementById('seahawksDetail').innerHTML = standing;
     }
   } catch (e) { console.log('Seahawks fetch failed', e); }
 
@@ -1888,13 +1888,13 @@ async function fetchSportsData() {
       const next = events.find(e => new Date(e.date) > now);
       if (next) {
         const d = new Date(next.date);
-        document.getElementById('seahawksNext').textContent = `NEXT: ${next.shortName || next.name} &#8212; ${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+        document.getElementById('seahawksNext').innerHTML = `NEXT: ${next.shortName || next.name} &#8212; ${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
       } else {
-        document.getElementById('seahawksNext').textContent = '2026 SEASON: SEP';
+        document.getElementById('seahawksNext').innerHTML = '2026 SEASON: SEP';
       }
     }
   } catch (e) {
-    document.getElementById('seahawksNext').textContent = '2026 SEASON: SEP';
+    document.getElementById('seahawksNext').innerHTML = '2026 SEASON: SEP';
   }
 
   // Mariners
@@ -1905,12 +1905,12 @@ async function fetchSportsData() {
       const team = data.team;
       const record = team.record?.items?.[0]?.summary || 'Spring Training';
       const standing = team.standingSummary || 'AL West';
-      document.getElementById('marinersRecord').textContent = record;
-      document.getElementById('marinersDetail').textContent = standing;
+      document.getElementById('marinersRecord').innerHTML = record;
+      document.getElementById('marinersDetail').innerHTML = standing;
     }
   } catch (e) {
-    document.getElementById('marinersRecord').textContent = 'Spring Training';
-    document.getElementById('marinersDetail').textContent = 'Hope springs eternal';
+    document.getElementById('marinersRecord').innerHTML = 'Spring Training';
+    document.getElementById('marinersDetail').innerHTML = 'Hope springs eternal';
   }
 
   try {
@@ -1924,7 +1924,7 @@ async function fetchSportsData() {
         const comp = marGame.competitions[0];
         const away = comp.competitors.find(c => c.homeAway === 'away');
         const home = comp.competitors.find(c => c.homeAway === 'home');
-        document.getElementById('marinersNext').textContent = `TODAY: ${away.team.abbreviation} @ ${home.team.abbreviation}`;
+        document.getElementById('marinersNext').innerHTML = `TODAY: ${away.team.abbreviation} @ ${home.team.abbreviation}`;
       }
     }
   } catch (e) {}
@@ -1937,8 +1937,8 @@ async function fetchSportsData() {
       const team = data.team;
       const record = team.record?.items?.[0]?.summary || '--';
       const standing = team.standingSummary || '';
-      document.getElementById('krakenRecord').textContent = record;
-      document.getElementById('krakenDetail').textContent = standing;
+      document.getElementById('krakenRecord').innerHTML = record;
+      document.getElementById('krakenDetail').innerHTML = standing;
     }
   } catch (e) { console.log('Kraken fetch failed', e); }
 
@@ -1951,7 +1951,7 @@ async function fetchSportsData() {
       );
       if (krkGame) {
         const d = new Date(krkGame.date);
-        document.getElementById('krakenNext').textContent = `NEXT: ${krkGame.shortName} &#8212; ${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+        document.getElementById('krakenNext').innerHTML = `NEXT: ${krkGame.shortName} &#8212; ${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
       }
     }
   } catch (e) {}
@@ -1964,14 +1964,14 @@ async function fetchSportsData() {
       const team = data.team;
       const record = team.record?.items?.[0]?.summary || 'Off-Season';
       const standing = team.standingSummary || 'Big Ten';
-      document.getElementById('uwRecord').textContent = record;
-      document.getElementById('uwDetail').textContent = standing;
+      document.getElementById('uwRecord').innerHTML = record;
+      document.getElementById('uwDetail').innerHTML = standing;
     }
   } catch (e) {
-    document.getElementById('uwRecord').textContent = 'Off-Season';
-    document.getElementById('uwDetail').textContent = 'Big Ten Conference';
+    document.getElementById('uwRecord').innerHTML = 'Off-Season';
+    document.getElementById('uwDetail').innerHTML = 'Big Ten Conference';
   }
-  document.getElementById('uwNext').textContent = 'SEASON STARTS: AUG 2026';
+  document.getElementById('uwNext').innerHTML = 'SEASON STARTS: AUG 2026';
 }
 
 // &#9552;&#9552;&#9552; GOLF DATA &#9552;&#9552;&#9552;
@@ -1988,9 +1988,9 @@ function initGolf() {
   const nextMajor = majors.find(m => m.date > now) || majors[0];
   const daysUntil = Math.ceil((nextMajor.date - now) / (1000 * 60 * 60 * 24));
 
-  document.getElementById('majorCountdown').textContent = daysUntil;
-  document.getElementById('majorName').textContent = `DAYS TO ${nextMajor.name.toUpperCase()}`;
-  document.getElementById('majorVenue').textContent = nextMajor.venue;
+  document.getElementById('majorCountdown').innerHTML = daysUntil;
+  document.getElementById('majorName').innerHTML = `DAYS TO ${nextMajor.name.toUpperCase()}`;
+  document.getElementById('majorVenue').innerHTML = nextMajor.venue;
 
   // Majors schedule
   const schedEl = document.getElementById('majorsSchedule');
@@ -2163,10 +2163,10 @@ async function fetchGolfWeather() {
       if (code >= 71 && code <= 77) condition = 'Snow';
       if (code >= 80 && code <= 82) condition = 'Showers';
       if (code >= 95) condition = 'Thunderstorm';
-      document.getElementById('golfWeather').textContent = `${temp}&#176;F &#8212; ${condition} &#8212; Wind ${wind} mph`;
+      document.getElementById('golfWeather').innerHTML = `${temp}&#176;F &#8212; ${condition} &#8212; Wind ${wind} mph`;
     }
   } catch (e) {
-    document.getElementById('golfWeather').textContent = 'Probably raining. It\'s Seattle.';
+    document.getElementById('golfWeather').innerHTML = 'Probably raining. It\'s Seattle.';
   }
 }
 
@@ -2279,7 +2279,7 @@ async function fetchIranData() {
 // &#9552;&#9552;&#9552; REFRESH TIMESTAMP &#9552;&#9552;&#9552;
 function updateRefreshTime() {
   const now = new Date();
-  document.getElementById('lastRefresh').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' PT';
+  document.getElementById('lastRefresh').innerHTML = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' PT';
 }
 
 
@@ -2322,11 +2322,11 @@ function updateRefreshTime() {
         var nameEl = document.getElementById("trending"+idx+"Name");
         var priceEl = document.getElementById("trending"+idx+"Price");
         var changeEl = document.getElementById("trending"+idx+"Change");
-        if(nameEl) nameEl.textContent = c.name;
-        if(priceEl) priceEl.textContent = "$"+livePrice;
+        if(nameEl) nameEl.innerHTML = c.name;
+        if(priceEl) priceEl.innerHTML = "$"+livePrice;
         if(changeEl) {
           var isUp = parseFloat(swing) >= 0;
-          changeEl.textContent = (isUp?"+":"")+swing+"% vs 30d avg";
+          changeEl.innerHTML = (isUp?"+":"")+swing+"% vs 30d avg";
           changeEl.className = "trending-card-change "+(isUp?"trending-up":"trending-down");
         }
       }
@@ -2345,7 +2345,7 @@ function updateRefreshTime() {
       [{id:"curtScore",b:9.2},{id:"mikeScore",b:8.7},{id:"gibbyScore",b:9.5}].forEach(function(d){
         var s = (d.b + (Math.random()*0.6-0.3)).toFixed(1);
         var el = document.getElementById(d.id);
-        if(el) el.textContent = "\uD83D\uDCA3 DEGEN LVL: "+s+"/10";
+        if(el) el.innerHTML = "\uD83D\uDCA3 DEGEN LVL: "+s+"/10";
       });
     }
 
@@ -2413,7 +2413,7 @@ async function fetchWeather(){
       var code=d.current.weather_code;
       el.querySelector(".weather-icon").innerHTML=weatherCodeToIcon(code);
       el.querySelector(".weather-temp").innerHTML=temp+"&#176;F";
-      el.querySelector(".weather-desc").textContent=weatherCodeToDesc(code);
+      el.querySelector(".weather-desc").innerHTML =weatherCodeToDesc(code);
     }
   }catch(e){console.log("Weather fetch error",e);}
 }
@@ -2462,7 +2462,7 @@ async function fetchWeather(){
     var hrs = Math.floor((diff % 86400000) / 3600000);
     var min = Math.floor((diff % 3600000) / 60000);
     var sec = Math.floor((diff % 60000) / 1000);
-    el.textContent = d + 'd ' + hrs.toString().padStart(2,'0') + 'h ' + min.toString().padStart(2,'0') + 'm ' + sec.toString().padStart(2,'0') + 's';
+    el.innerHTML = d + 'd ' + hrs.toString().padStart(2,'0') + 'h ' + min.toString().padStart(2,'0') + 'm ' + sec.toString().padStart(2,'0') + 's';
   }
   update();
   setInterval(update, 1000);
@@ -2482,7 +2482,7 @@ async function fetchWeather(){
       var el = document.getElementById(id);
       if (!el) continue;
       var diff = Math.ceil((targets[id] - now) / 86400000);
-      el.textContent = diff > 0 ? diff : 'NOW';
+      el.innerHTML = diff > 0 ? diff : 'NOW';
     }
   }
   update();
@@ -2499,7 +2499,7 @@ async function fetchWeather(){
     var elapsed = (now - startOfYear) / 1000;
     var spent = elapsed * perSecond;
     var el = document.getElementById('defenseSpend');
-    if (el) el.textContent = '$' + (spent / 1e9).toFixed(3) + 'B';
+    if (el) el.innerHTML = '$' + (spent / 1e9).toFixed(3) + 'B';
   }
   update();
   setInterval(update, 100);
@@ -2512,12 +2512,12 @@ async function fetchWeather(){
   var jitter = Math.floor(Math.random() * 50) - 25;
   var days = base + jitter;
   var el = document.getElementById('agiCounter');
-  if (el) el.textContent = days + ' days';
+  if (el) el.innerHTML = days + ' days';
   // Randomly "reset" every few hours
   setInterval(function() {
     if (Math.random() < 0.15) {
       days = Math.floor(Math.random() * 500) + 30;
-      if (el) el.textContent = days + ' days';
+      if (el) el.innerHTML = days + ' days';
     }
   }, 1800000);
 })();
@@ -2546,8 +2546,8 @@ async function fetchWeather(){
   var q = quotes[dayOfYear % quotes.length];
   var el = document.getElementById('quoteText');
   var src = document.getElementById('quoteSource');
-  if (el) el.textContent = q.q;
-  if (src) src.textContent = '\u2014 ' + q.s;
+  if (el) el.innerHTML = q.q;
+  if (src) src.innerHTML = '\u2014 ' + q.s;
 })();
 
 // ===== THIS DAY IN HISTORY =====
@@ -2565,8 +2565,8 @@ async function fetchWeather(){
   var ev = events[key] || {e:'History is happening right now. You just might not recognize it yet.',s:'Every day'};
   var el = document.getElementById('historyText');
   var src = document.getElementById('historySource');
-  if (el) el.textContent = ev.e;
-  if (src) src.textContent = ev.s;
+  if (el) el.innerHTML = ev.e;
+  if (src) src.innerHTML = ev.s;
 })();
 
 // ===== PHILOSOPHICAL QUESTION ROTATOR =====
@@ -2585,7 +2585,7 @@ async function fetchWeather(){
   ];
   var dayOfYear = Math.floor((new Date() - new Date(2026,0,1)) / 86400000);
   var el = document.getElementById('philQuestion');
-  if (el) el.textContent = qs[dayOfYear % qs.length];
+  if (el) el.innerHTML = qs[dayOfYear % qs.length];
 })();
 
 // ===== DAYLIGHT CALCULATOR =====
@@ -2600,7 +2600,7 @@ async function fetchWeather(){
   var hrs = Math.floor(daylight);
   var mins = Math.round((daylight - hrs) * 60);
   var el = document.getElementById('daylightHours');
-  if (el) el.textContent = hrs + 'h ' + mins.toString().padStart(2,'0') + 'm';
+  if (el) el.innerHTML = hrs + 'h ' + mins.toString().padStart(2,'0') + 'm';
 })();
 
 // ===== FEAR & GREED SIMULATION =====
@@ -2615,8 +2615,8 @@ async function fetchWeather(){
   var fgVal = document.getElementById('fgValue');
   var fgLbl = document.getElementById('fgLabel');
   if (needle) needle.style.transform = 'rotate(' + (val * 1.8 - 90) + 'deg)';
-  if (fgVal) { fgVal.textContent = val; fgVal.className = 'fg-value ' + cls; }
-  if (fgLbl) { fgLbl.textContent = label; fgLbl.className = 'fg-label-text ' + cls; }
+  if (fgVal) { fgVal.innerHTML = val; fgVal.className = 'fg-value ' + cls; }
+  if (fgLbl) { fgLbl.innerHTML = label; fgLbl.className = 'fg-label-text ' + cls; }
 })();
 
 // ===== WHAT IF YOU BOUGHT =====
@@ -2628,7 +2628,7 @@ async function fetchWeather(){
   var shares = invested / buyPrice;
   var currentVal = Math.round(shares * currentPrice);
   var el = document.getElementById('whatIfValue');
-  if (el) el.textContent = '$' + currentVal.toLocaleString();
+  if (el) el.innerHTML = '$' + currentVal.toLocaleString();
 })();
 
 // ===== AQI FETCH =====
@@ -2640,7 +2640,7 @@ async function fetchWeather(){
         var aqi=d.current.us_aqi;
         var el=document.getElementById('aqiValue');
         var label=aqi<=50?'Good':aqi<=100?'Moderate':aqi<=150?'Unhealthy (Sensitive)':'Unhealthy';
-        if(el) el.textContent='AQI: '+aqi+' ('+label+')';
+        if(el) el.innerHTML ='AQI: '+aqi+' ('+label+')';
       }
     }).catch(function(){});
 })();
