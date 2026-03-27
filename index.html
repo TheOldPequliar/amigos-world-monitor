@@ -1023,6 +1023,10 @@
   @media(max-width:600px){ .top-row{flex-direction:column;} .curtis-mini{width:100%;min-width:100%;} }
 
   
+/* Golf Info Row (Next Major + Leaderboard) */
+.golf-info-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+@media(max-width:600px){ .golf-info-row{grid-template-columns:1fr;} }
+
 /* Golf Handicap Grid */
 .golf-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:0; border-radius:10px; overflow:hidden; border:1px solid var(--border); background:var(--surface); margin-bottom:16px; }
 .golf-cell { text-align:center; padding:10px 6px; border-right:1px solid var(--border); border-bottom:1px solid var(--border); transition:background 0.3s; }
@@ -1251,6 +1255,29 @@ body.light-mode .curtis-mini { background: var(--surface); border-color: rgba(26
 body.light-mode .ms-hype-card { background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
 body.light-mode .ms-hype-stat { color: #0c2c56; }
 body.light-mode .ms-hype-name { color: #3a5a45; }
+body.light-mode .countdown-card { background: var(--surface); box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+body.light-mode .countdown-value { color: #0c2c56; }
+body.light-mode .countdown-label { color: #1a2a1e; }
+body.light-mode .countdown-unit { color: #3a5a45; }
+body.light-mode .countdown-sub { color: #1a6b45; }
+body.light-mode .leaderboard-card { background: var(--surface); box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+body.light-mode .leaderboard-title { color: #1a2a1e; }
+body.light-mode .lb-name { color: #1a2a1e; }
+body.light-mode .lb-pos { color: #3a5a45; }
+body.light-mode .lb-score { color: #1a2a1e; }
+body.light-mode .lb-score.under { color: #c0392b; }
+body.light-mode .lb-score.over { color: #3a5a45; }
+body.light-mode .gcal-event { background: rgba(0,0,0,0.03); border-color: var(--border); color: #1a2a1e; }
+body.light-mode .gcal-date { color: #1a2a1e; }
+body.light-mode .gcal-date-num { color: #3a5a45; }
+body.light-mode .gcal-empty { color: #5e7a68; }
+body.light-mode .section-quip { color: #5e7a68; }
+body.light-mode .golf-name { color: #1a2a1e; }
+body.light-mode .golf-hi { color: #0c2c56; }
+body.light-mode .golf-club { color: #3a5a45; }
+body.light-mode .golf-low { color: #5e7a68; }
+body.light-mode .golf-pedersen .golf-hi { color: #b5720a; }
+body.light-mode .golf-pedersen .golf-name { color: #b5720a; }
 /* Theme toggle */
 .theme-toggle { position:fixed; bottom:16px; right:16px; z-index:999; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:6px 12px; cursor:pointer; font-size:14px; transition:all 0.3s; box-shadow:0 2px 8px rgba(0,0,0,0.15); }
 .theme-toggle:hover { transform:scale(1.1); }
@@ -1757,7 +1784,7 @@ body.light-mode .mountain-banner { opacity: 0.65; }
     <span class="section-quip">Days since someone claimed they shot under 80 (unverified): <span id="under80days" style="color: var(--amber);">0</span></span>
   </div>
 
-  <div class="golf-grid">
+  <div class="golf-info-row">
     <div class="countdown-card">
       <div class="countdown-label">NEXT MAJOR</div>
       <div class="countdown-value" id="majorCountdown">--</div>
