@@ -1494,13 +1494,13 @@ body.light-mode .mountain-banner { opacity: 0.65; }
       <div class="world-card-icon">&#129302;</div>
       <div class="world-card-title">AI & TECHNOLOGY</div>
       <div class="world-card-value" id="aiHeadline">FRONTIER MODELS</div>
-      <div class="world-card-detail">Claude, GPT-5, Gemini 2.0 racing. Agentic AI entering clinical care workflows. Robotics demos weekly.</div>
+      <div class="world-card-detail" id="aiDetail">Claude, GPT-5, Gemini 2.0 racing. Agentic AI entering clinical care workflows. Robotics demos weekly.</div>
     </div>
     <div class="world-card medicine">
       <div class="world-card-icon">&#129657;</div>
       <div class="world-card-title">MEDICINE</div>
-      <div class="world-card-value">BREAKTHROUGHS</div>
-      <div class="world-card-detail">CRISPR gene editing approvals expanding. GLP-1 drugs reshaping obesity treatment. AI diagnostics matching specialists.</div>
+      <div class="world-card-value" id="medHeadline">BREAKTHROUGHS</div>
+      <div class="world-card-detail" id="medDetail">CRISPR gene editing approvals expanding. GLP-1 drugs reshaping obesity treatment. AI diagnostics matching specialists.</div>
     </div>
     <div class="world-card conflict">
       <div class="world-card-icon">&#128161;</div>
@@ -1512,13 +1512,13 @@ body.light-mode .mountain-banner { opacity: 0.65; }
       <div class="world-card-icon">&#127757;</div>
       <div class="world-card-title">CLIMATE & ENVIRONMENT</div>
       <div class="world-card-value" id="aqiValue">AQI: --</div>
-      <div class="world-card-detail">Seattle air quality &bull; Wildfire season monitoring &bull; Cascades snowpack tracking</div>
+      <div class="world-card-detail" id="climateDetail">Seattle air quality &bull; Wildfire season monitoring &bull; Cascades snowpack tracking</div>
     </div>
     <div class="world-card space">
       <div class="world-card-icon">&#128640;</div>
       <div class="world-card-title">SPACE & EXPLORATION</div>
       <div class="world-card-value" id="spaceHeadline">STARSHIP ERA</div>
-      <div class="world-card-detail">SpaceX Starship operational. Artemis program targeting lunar surface. Mars sample return under review.</div>
+      <div class="world-card-detail" id="spaceDetail">SpaceX Starship operational. Artemis program targeting lunar surface. Mars sample return under review.</div>
     </div>
   </div>
 
@@ -2976,11 +2976,64 @@ async function fetchWeather(){
   }catch(e){console.log("Weather fetch error",e);}
 }
 
+// ═══ WORLD MONITOR CARD UPDATERS ═══
+async function fetchWorldCards() {
+  var topics = [
+    { query: 'artificial+intelligence+AI+technology', headlineEl: 'aiHeadline', detailEl: 'aiDetail', fallbackHeadline: 'FRONTIER MODELS', keywords: ['AI','GPT','Claude','Gemini','robot','chip','neural','LLM','OpenAI','Anthropic','Google','Apple','Microsoft','Meta'] },
+    { query: 'medical+breakthrough+health+science', headlineEl: 'medHeadline', detailEl: 'medDetail', fallbackHeadline: 'BREAKTHROUGHS', keywords: ['drug','FDA','cancer','vaccine','CRISPR','gene','trial','therapy','diagnosis','treatment','hospital','disease'] },
+    { query: 'global+conflict+war+geopolitics', headlineEl: 'conflictStatus', detailEl: 'conflictDetail', fallbackHeadline: 'ELEVATED', keywords: ['war','military','strike','conflict','troops','NATO','sanctions','nuclear','missile','attack','ceasefire','peace'] },
+    { query: 'NASA+SpaceX+space+exploration', headlineEl: 'spaceHeadline', detailEl: 'spaceDetail', fallbackHeadline: 'STARSHIP ERA', keywords: ['SpaceX','NASA','rocket','orbit','moon','Mars','satellite','launch','astronaut','Artemis','Starship','ISS'] },
+    { query: 'climate+change+environment+wildfire', headlineEl: null, detailEl: 'climateDetail', fallbackHeadline: null, keywords: ['climate','wildfire','flood','heat','storm','carbon','emission','drought','ice','temperature','weather','fire'] }
+  ];
+  for (var t = 0; t < topics.length; t++) {
+    try {
+      var rssUrl = 'https://news.google.com/rss/search?q=' + topics[t].query + '&hl=en-US&gl=US&ceid=US:en&_=' + Date.now();
+      var resp = await fetchViaProxy(rssUrl);
+      if (!resp || !resp.ok) continue;
+      var text = await resp.text();
+      var parser = new DOMParser();
+      var xml = parser.parseFromString(text, 'text/xml');
+      var items = xml.querySelectorAll('item');
+      var headlines = [];
+      for (var i = 0; i < items.length && headlines.length < 3; i++) {
+        var title = items[i].querySelector('title')?.textContent || '';
+        if (title && title.length > 15 && title.length < 200) {
+          headlines.push(title);
+        }
+      }
+      if (headlines.length > 0) {
+        // Set headline to first 2-3 key words from top story
+        if (topics[t].headlineEl) {
+          var hEl = document.getElementById(topics[t].headlineEl);
+          if (hEl) {
+            var words = headlines[0].split(/[\s\-:,]+/);
+            var keyWords = [];
+            for (var w = 0; w < words.length && keyWords.length < 3; w++) {
+              if (words[w].length > 2) keyWords.push(words[w].toUpperCase());
+            }
+            hEl.textContent = keyWords.join(' ');
+          }
+        }
+        // Set detail to condensed headlines
+        var dEl = document.getElementById(topics[t].detailEl);
+        if (dEl) {
+          var summaries = headlines.map(function(h) {
+            return h.length > 80 ? h.substring(0, 77) + '...' : h;
+          });
+          dEl.textContent = summaries.join(' \u2022 ');
+        }
+      }
+    } catch (e) {
+      console.log('World card fetch failed for ' + topics[t].query, e);
+    }
+  }
+}
+
 (async function init() {
       fetchCardMarket();
     fetchWeather();
     setInterval(fetchWeather, 600000); // refresh weather every 10 min
-      
+
   initPracticalFinance();
   initGolf();
   updateRefreshTime();
@@ -2990,6 +3043,7 @@ async function fetchWeather(){
     fetchNews(),
     fetchGolfWeather(),
     fetchIranData(),
+    fetchWorldCards(),
   ]);
   updateRefreshTime();
 
@@ -3001,6 +3055,7 @@ async function fetchWeather(){
       fetchNews(),
       fetchGolfWeather(),
       fetchIranData(),
+      fetchWorldCards(),
     ]);
     updateRefreshTime();
   }, 5 * 60 * 1000);
