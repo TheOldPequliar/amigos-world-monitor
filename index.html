@@ -1446,14 +1446,14 @@ body.light-mode .mountain-banner { opacity: 0.65; }
         <div class="gameday-stat-detail">Luis Castillo (13&ndash;9, 3.34 ERA) vs Tanner Bibee (12&ndash;8, 3.52 ERA)</div>
       </div>
       <div class="gameday-stat">
-        <div class="gameday-stat-label">CAL RALEIGH</div>
-        <div class="gameday-stat-value">60 HR</div>
-        <div class="gameday-stat-detail">2025 &bull; 2 shy of AL record</div>
+        <div class="gameday-stat-label">MONEY LINE</div>
+        <div class="gameday-stat-value" id="mlOdds">--</div>
+        <div class="gameday-stat-detail" id="mlDetail">Loading odds...</div>
       </div>
       <div class="gameday-stat">
-        <div class="gameday-stat-label">JULIO RODRIGUEZ</div>
-        <div class="gameday-stat-value">30/30</div>
-        <div class="gameday-stat-detail">2nd career 30&ndash;30 season</div>
+        <div class="gameday-stat-label">RUN LINE</div>
+        <div class="gameday-stat-value" id="rlOdds">--</div>
+        <div class="gameday-stat-detail" id="rlDetail">Loading line...</div>
       </div>
     </div>
     <!-- WHERE TO WATCH -->
@@ -2371,6 +2371,36 @@ async function fetchSportsData() {
         const away = comp.competitors.find(c => c.homeAway === 'away');
         const home = comp.competitors.find(c => c.homeAway === 'home');
         document.getElementById('marinersNext').innerHTML = `TODAY: ${away.team.abbreviation} @ ${home.team.abbreviation}`;
+        // Extract betting odds
+        const odds = comp.odds?.[0];
+        if (odds) {
+          const seaIsHome = home?.team?.abbreviation === 'SEA';
+          const mlEl = document.getElementById('mlOdds');
+          const mlDet = document.getElementById('mlDetail');
+          const rlEl = document.getElementById('rlOdds');
+          const rlDet = document.getElementById('rlDetail');
+          // Money line
+          const homeMl = odds.homeTeamOdds?.moneyLine;
+          const awayMl = odds.awayTeamOdds?.moneyLine;
+          if (mlEl && homeMl != null && awayMl != null) {
+            const seaMl = seaIsHome ? homeMl : awayMl;
+            mlEl.textContent = (seaMl > 0 ? '+' : '') + seaMl;
+            mlDet.textContent = 'SEA ' + (seaMl > 0 ? '+' : '') + seaMl + ' / ' + (seaIsHome ? away : home).team.abbreviation + ' ' + ((!seaIsHome ? homeMl : awayMl) > 0 ? '+' : '') + (!seaIsHome ? homeMl : awayMl);
+          }
+          // Spread / run line
+          const spread = odds.spread;
+          const overUnder = odds.overUnder;
+          if (rlEl && (spread != null || overUnder != null)) {
+            if (spread != null) {
+              const seaSpread = seaIsHome ? parseFloat(spread) * -1 : parseFloat(spread);
+              rlEl.textContent = (seaSpread > 0 ? '+' : '') + seaSpread.toFixed(1);
+              rlDet.textContent = 'SEA ' + (seaSpread > 0 ? '+' : '') + seaSpread.toFixed(1) + (overUnder ? ' \u2022 O/U ' + overUnder : '');
+            } else if (overUnder != null) {
+              rlEl.textContent = 'O/U ' + overUnder;
+              rlDet.textContent = 'Total runs over/under';
+            }
+          }
+        }
       }
     }
   } catch (e) {}
@@ -2976,6 +3006,57 @@ async function fetchWeather(){
   }catch(e){console.log("Weather fetch error",e);}
 }
 
+// ═══ MARINERS ODDS FALLBACK ═══
+async function fetchMarinersOdds() {
+  // If odds weren't populated by scoreboard, try the-odds-api (free tier)
+  var mlEl = document.getElementById('mlOdds');
+  if (mlEl && mlEl.textContent !== '--') return; // already populated
+  try {
+    // Try ESPN odds endpoint
+    var resp = await fetchESPNRaw('baseball/mlb/scoreboard?dates=' + new Date().toISOString().slice(0,10).replace(/-/g,''));
+    if (resp && resp.ok) {
+      var data = await resp.json();
+      var game = data.events?.find(function(e) {
+        return e.competitions?.[0]?.competitors?.some(function(c) { return c.team?.abbreviation === 'SEA'; });
+      });
+      if (game) {
+        var comp = game.competitions[0];
+        var odds = comp.odds?.[0];
+        var home = comp.competitors.find(function(c) { return c.homeAway === 'home'; });
+        var away = comp.competitors.find(function(c) { return c.homeAway === 'away'; });
+        var seaIsHome = home?.team?.abbreviation === 'SEA';
+        if (odds) {
+          var homeMl = odds.homeTeamOdds?.moneyLine;
+          var awayMl = odds.awayTeamOdds?.moneyLine;
+          if (homeMl != null && awayMl != null) {
+            var seaMl = seaIsHome ? homeMl : awayMl;
+            var oppMl = seaIsHome ? awayMl : homeMl;
+            var oppAbbr = (seaIsHome ? away : home).team.abbreviation;
+            mlEl.textContent = (seaMl > 0 ? '+' : '') + seaMl;
+            document.getElementById('mlDetail').textContent = 'SEA ' + (seaMl > 0 ? '+' : '') + seaMl + ' / ' + oppAbbr + ' ' + (oppMl > 0 ? '+' : '') + oppMl;
+          }
+          var spread = odds.spread;
+          var ou = odds.overUnder;
+          var rlEl = document.getElementById('rlOdds');
+          if (rlEl) {
+            if (ou != null) { rlEl.textContent = 'O/U ' + ou; document.getElementById('rlDetail').textContent = 'Total runs'; }
+            if (spread != null) {
+              var seaSp = seaIsHome ? parseFloat(spread) * -1 : parseFloat(spread);
+              rlEl.textContent = (seaSp > 0 ? '+' : '') + seaSp.toFixed(1);
+              document.getElementById('rlDetail').textContent = 'SEA ' + (seaSp > 0 ? '+' : '') + seaSp.toFixed(1) + (ou ? ' \u2022 O/U ' + ou : '');
+            }
+          }
+        } else {
+          mlEl.textContent = 'TBD';
+          document.getElementById('mlDetail').textContent = 'Lines not yet posted';
+          document.getElementById('rlOdds').textContent = 'TBD';
+          document.getElementById('rlDetail').textContent = 'Check closer to game time';
+        }
+      }
+    }
+  } catch(e) { console.log('Odds fallback failed', e); }
+}
+
 // ═══ WORLD MONITOR CARD UPDATERS ═══
 async function fetchWorldCards() {
   var topics = [
@@ -3045,6 +3126,7 @@ async function fetchWorldCards() {
     fetchIranData(),
     fetchWorldCards(),
   ]);
+  await fetchMarinersOdds();
   updateRefreshTime();
 
   // Auto-refresh every 5 minutes
@@ -3057,6 +3139,7 @@ async function fetchWorldCards() {
       fetchIranData(),
       fetchWorldCards(),
     ]);
+    await fetchMarinersOdds();
     updateRefreshTime();
   }, 5 * 60 * 1000);
 })();
