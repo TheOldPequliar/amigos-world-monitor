@@ -4635,10 +4635,61 @@ async function fetchWorldCards() {
   ];
 
   var STORE_KEY = 'amigos_price_picks_v2';
+  var FIREBASE_DB = 'https://amigos-world-monitor-default-rtdb.firebaseio.com';
   var currentPlayer = null;
+  var picksCache = {};
+  var firebaseReady = false;
 
-  function loadPicks(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch(e){ return {}; } }
-  function savePicks(data){ localStorage.setItem(STORE_KEY, JSON.stringify(data)); }
+  // Firebase REST API — shared state across all devices
+  function loadPicksFromFirebase(cb){
+    fetch(FIREBASE_DB + '/picks.json').then(function(r){ return r.json(); }).then(function(data){
+      picksCache = data || {};
+      firebaseReady = true;
+      if(cb) cb(picksCache);
+    }).catch(function(e){
+      console.warn('Firebase read failed, falling back to localStorage', e);
+      picksCache = loadPicksLocal();
+      if(cb) cb(picksCache);
+    });
+  }
+  function savePicksToFirebase(data, cb){
+    picksCache = data;
+    fetch(FIREBASE_DB + '/picks.json', {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    }).then(function(){ if(cb) cb(); }).catch(function(e){
+      console.warn('Firebase write failed, saving to localStorage', e);
+      savePicksLocal(data);
+    });
+  }
+  // localStorage fallback
+  function loadPicksLocal(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch(e){ return {}; } }
+  function savePicksLocal(data){ localStorage.setItem(STORE_KEY, JSON.stringify(data)); }
+  // Unified interface
+  function loadPicks(){ return picksCache; }
+  function savePicks(data){ savePicksToFirebase(data); savePicksLocal(data); }
+
+  // Initial load from Firebase (migrate localStorage data if Firebase is empty)
+  loadPicksFromFirebase(function(data){
+    var localData = loadPicksLocal();
+    var localHasData = Object.keys(localData).length > 0;
+    var firebaseEmpty = Object.keys(data).length === 0;
+    if(firebaseEmpty && localHasData){
+      console.log('Migrating localStorage picks to Firebase...');
+      savePicksToFirebase(localData);
+      picksCache = localData;
+    }
+    if(currentPlayer) { renderGame(); }
+    updateLeaderboard();
+  });
+  // Auto-sync from Firebase every 15 seconds
+  setInterval(function(){
+    loadPicksFromFirebase(function(){
+      if(currentPlayer) renderGame();
+      updateLeaderboard();
+    });
+  }, 15000);
 
   // Build player buttons
   var btnContainer = document.getElementById('playerBtns');
@@ -4724,7 +4775,11 @@ async function fetchWorldCards() {
           var picks = loadPicks();
           if(!picks[currentPlayer]) picks[currentPlayer] = {};
           picks[currentPlayer][catId] = parseFloat(val);
-          savePicks(picks);
+          savePicksToFirebase(picks, function(){
+            renderGame();
+            updateLeaderboard();
+          });
+          savePicksLocal(picks);
           renderGame();
           updateLeaderboard();
         }
