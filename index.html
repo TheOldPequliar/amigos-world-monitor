@@ -1289,6 +1289,21 @@
 .trump-quote-meta{font-size:8px;color:var(--text-muted);margin-top:6px;letter-spacing:1px}
 .daily-source{font-size:8px;color:var(--text-muted);margin-top:4px;text-align:right}
 
+/* ===== TRUTH SOCIAL LIVE FEED ===== */
+.truth-feed-panel{background:linear-gradient(135deg,rgba(100,30,30,0.1),rgba(180,40,40,0.06));border:1px solid rgba(180,40,40,0.2);border-left:3px solid rgba(180,40,40,0.5);border-radius:10px;padding:14px 18px;margin-bottom:16px;position:relative}
+.truth-feed-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.truth-feed-title{font-size:7px;letter-spacing:3px;color:var(--text-dim);font-weight:700}
+.truth-feed-list{max-height:400px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(180,40,40,0.3) transparent}
+.truth-feed-list::-webkit-scrollbar{width:4px}
+.truth-feed-list::-webkit-scrollbar-thumb{background:rgba(180,40,40,0.3);border-radius:4px}
+.truth-item{border-bottom:1px solid rgba(255,255,255,0.05);padding:10px 0;position:relative}
+.truth-item:last-child{border-bottom:none}
+.truth-item-time{font-size:8px;letter-spacing:1px;color:var(--text-dim);font-weight:600;margin-bottom:4px}
+.truth-item-text{font-size:12px;color:var(--text);line-height:1.55}
+.truth-item-text a{color:var(--cyan);text-decoration:none}
+.truth-item-engagement{font-size:8px;color:var(--text-muted);margin-top:5px;display:flex;gap:12px}
+.truth-item-engagement span{display:inline-flex;align-items:center;gap:3px}
+
 /* ===== SEATTLE LIFE ===== */
 .seattle-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px}
 @media(max-width:700px){.seattle-grid{grid-template-columns:repeat(2,1fr)}}
@@ -1430,6 +1445,8 @@ body.light-mode .predict-card { background: var(--surface); box-shadow: 0 1px 4p
 body.light-mode .predict-bar { background: rgba(0,0,0,0.08); }
 body.light-mode .daily-strip { background: var(--surface); box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
 body.light-mode .trump-quotes-strip { background: linear-gradient(135deg, rgba(180,40,40,0.06), rgba(0,40,104,0.06)); border-color: rgba(180,40,40,0.2); box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+body.light-mode .truth-feed-panel { background: linear-gradient(135deg, rgba(100,30,30,0.05), rgba(180,40,40,0.03)); border-color: rgba(180,40,40,0.15); box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+body.light-mode .truth-item { border-bottom-color: rgba(0,0,0,0.08); }
 body.light-mode .objectives-panel { background: var(--surface); box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
 body.light-mode .obj-person-col { background: rgba(0,0,0,0.02); }
 body.light-mode .obj-quote { color: #3a5a45; border-bottom-color: rgba(0,0,0,0.06); }
@@ -1865,6 +1882,20 @@ body.light-mode .easter-banner{background:linear-gradient(135deg,rgba(255,200,60
     <div class="trump-quotes-label">&#128483; TRUMP GREATEST HITS &mdash; THE WORDS OF A VERY STABLE GENIUS</div>
     <div class="trump-quote-text" id="trumpQuote">Loading quote...</div>
     <div class="trump-quote-meta" id="trumpQuoteMeta"></div>
+  </div>
+
+  <!-- LATEST TRUTHS - LIVE FEED -->
+  <div class="truth-feed-panel" id="truthFeedPanel">
+    <div class="truth-feed-header">
+      <div class="truth-feed-title">&#128225; LATEST TRUTHS &mdash; LIVE FROM TRUTH SOCIAL</div>
+      <div class="truth-feed-status"><span id="truthFeedStatus" style="font-size:8px;letter-spacing:2px;color:var(--text-dim);">LOADING...</span></div>
+    </div>
+    <div class="truth-feed-list" id="truthFeedList">
+      <div style="text-align:center;padding:20px;color:var(--text-dim);font-size:11px;">Fetching latest posts from Truth Social...</div>
+    </div>
+    <div style="text-align:center;margin-top:8px;">
+      <span style="font-size:8px;letter-spacing:2px;color:var(--text-dim);">SOURCE: <a href="https://github.com/stiles/trump-truth-social-archive" target="_blank" style="color:var(--cyan);text-decoration:none;">CNN/STILES ARCHIVE</a> &bull; AUTO-REFRESHES EVERY 5 MIN</span>
+    </div>
   </div>
 
   <!-- THE OBJECTIVES ARE CLEAR -->
@@ -5267,6 +5298,113 @@ async function fetchWorldCards() {
   idx = Math.floor(Date.now() / 1000) % quotes.length;
   show();
   setInterval(show, 12000); // rotate every 12 seconds
+})();
+
+// ===== TRUTH SOCIAL LIVE FEED =====
+(function initTruthFeed() {
+  var TRUTH_URL = 'https://ix.cnn.io/data/truth-social/truth_archive.json';
+  var FALLBACK_URL = 'https://raw.githubusercontent.com/stiles/trump-truth-social-archive/main/data/truth_archive.json';
+  var listEl = document.getElementById('truthFeedList');
+  var statusEl = document.getElementById('truthFeedStatus');
+  var lastPostId = null;
+
+  function timeAgo(dateStr) {
+    var d = new Date(dateStr);
+    var now = new Date();
+    var diff = Math.floor((now - d) / 1000);
+    if (diff < 60) return diff + 's ago';
+    if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+    if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+    if (diff < 604800) return Math.floor(diff/86400) + 'd ago';
+    return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+  }
+
+  function formatDate(dateStr) {
+    var d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric', year:'numeric'}) +
+      ' at ' + d.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'});
+  }
+
+  function stripHtml(html) {
+    var tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    // Convert links to visible text
+    var links = tmp.querySelectorAll('a');
+    links.forEach(function(a) {
+      var span = document.createElement('span');
+      span.style.color = 'var(--cyan)';
+      span.textContent = a.textContent;
+      a.parentNode.replaceChild(span, a);
+    });
+    // Remove invisible spans and clean up
+    var text = tmp.innerHTML;
+    // Remove class attributes and simplify
+    text = text.replace(/<br\s*\/?>/gi, '\n');
+    text = text.replace(/<\/p>\s*<p[^>]*>/gi, '\n\n');
+    return text.replace(/<[^>]+>/g, '').trim();
+  }
+
+  function renderPosts(posts) {
+    if (!listEl) return;
+    // Sort by date descending and take latest 15
+    posts.sort(function(a,b) { return new Date(b.created_at) - new Date(a.created_at); });
+    var latest = posts.slice(0, 15);
+    if (latest.length === 0) {
+      listEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-dim);font-size:11px;">No posts found.</div>';
+      return;
+    }
+    // Check for new posts
+    if (lastPostId && latest[0].id !== lastPostId) {
+      // Flash notification
+      var panel = document.getElementById('truthFeedPanel');
+      if (panel) { panel.style.borderColor = 'rgba(255,50,50,0.6)'; setTimeout(function(){ panel.style.borderColor = ''; }, 3000); }
+    }
+    lastPostId = latest[0].id;
+    var html = '';
+    latest.forEach(function(post) {
+      var content = stripHtml(post.content || '');
+      if (!content) return; // skip empty
+      // Truncate very long posts
+      var truncated = content.length > 500 ? content.substring(0, 500) + '...' : content;
+      var reblogsLabel = post.reblogs_count !== undefined ? '&#128260; ' + (post.reblogs_count || 0).toLocaleString() : '';
+      var favesLabel = post.favourites_count !== undefined ? '&#10084;&#65039; ' + (post.favourites_count || 0).toLocaleString() : '';
+      var repliesLabel = post.replies_count !== undefined ? '&#128172; ' + (post.replies_count || 0).toLocaleString() : '';
+      html += '<div class="truth-item">';
+      html += '<div class="truth-item-time">' + formatDate(post.created_at) + ' &bull; ' + timeAgo(post.created_at) + '</div>';
+      html += '<div class="truth-item-text">' + truncated.replace(/\n/g, '<br>') + '</div>';
+      html += '<div class="truth-item-engagement">';
+      if (reblogsLabel) html += '<span>' + reblogsLabel + '</span>';
+      if (favesLabel) html += '<span>' + favesLabel + '</span>';
+      if (repliesLabel) html += '<span>' + repliesLabel + '</span>';
+      if (post.url) html += '<span><a href="' + post.url + '" target="_blank" style="color:var(--cyan);text-decoration:none;font-size:8px;">VIEW ON TRUTH SOCIAL</a></span>';
+      html += '</div></div>';
+    });
+    listEl.innerHTML = html;
+    if (statusEl) statusEl.textContent = 'LIVE \u2022 ' + latest.length + ' LATEST POSTS \u2022 UPDATED ' + new Date().toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'});
+  }
+
+  function fetchTruths(url, fallback) {
+    fetch(url).then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }).then(function(data) {
+      var posts = Array.isArray(data) ? data : [];
+      renderPosts(posts);
+    }).catch(function(e) {
+      console.warn('Truth feed primary failed:', e);
+      if (fallback) {
+        fetchTruths(fallback, null);
+      } else {
+        if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--red);font-size:11px;">Could not load Truth Social feed. CORS or network issue.</div>';
+        if (statusEl) statusEl.textContent = 'OFFLINE';
+      }
+    });
+  }
+
+  // Initial load
+  fetchTruths(TRUTH_URL, FALLBACK_URL);
+  // Refresh every 5 minutes
+  setInterval(function() { fetchTruths(TRUTH_URL, FALLBACK_URL); }, 300000);
 })();
 
 // ===== LIBERATION DAY SCOREBOARD =====
