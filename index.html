@@ -621,6 +621,18 @@
   }
 
   /* &#9472;&#9472; Cards Grid &#9472;&#9472; */
+  /* MarinersMeter Panel */
+  .mm-panel{background:linear-gradient(135deg,rgba(0,90,92,0.08),rgba(0,56,82,0.12));border:1px solid rgba(0,90,92,0.25);border-left:3px solid var(--mariners-teal,#005c5c);border-radius:10px;padding:16px 20px;margin-bottom:16px;position:relative}
+  .mm-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .mm-title{font-size:7px;letter-spacing:3px;color:var(--text-dim);font-weight:700}
+  .mm-credit{opacity:0.7}
+  .mm-desc{font-size:10px;color:var(--text-muted);margin-bottom:12px;letter-spacing:1px}
+  .mm-iframe-wrap{border-radius:8px;overflow:hidden;border:1px solid rgba(0,90,92,0.15);margin-bottom:10px}
+  .mm-controls{display:flex;gap:8px;justify-content:center}
+  .mm-btn{background:rgba(0,90,92,0.15);border:1px solid rgba(0,90,92,0.3);color:var(--mariners-teal,#005c5c);font-size:8px;letter-spacing:2px;padding:5px 14px;border-radius:4px;cursor:pointer;font-weight:600;transition:all 0.2s}
+  .mm-btn:hover{background:rgba(0,90,92,0.3);border-color:rgba(0,90,92,0.5)}
+  body.light-mode .mm-panel{background:linear-gradient(135deg,rgba(0,90,92,0.04),rgba(0,56,82,0.06));border-color:rgba(0,90,92,0.15);box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+
   .cards-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -2948,6 +2960,22 @@ body.light-mode .easter-banner{background:linear-gradient(135deg,rgba(255,200,60
       <div class="card-detail" id="uwDetail">--</div>
       <div class="card-next" id="uwNext">NEXT: --</div>
       <div class="card-quip" id="uwQuip">"Big Ten money, Pac-12 memories."</div>
+    </div>
+  </div>
+
+  <!-- ═══ MARINERS METER ═══ -->
+  <div class="mm-panel" id="marinersMeterPanel">
+    <div class="mm-header">
+      <div class="mm-title">&#9918; MARINERS METER</div>
+      <div class="mm-credit"><a href="https://github.com/jeremyperonto/MarinersMeter" target="_blank" style="color:var(--mariners-teal);text-decoration:none;font-size:8px;letter-spacing:2px;">BY JEREMY PERONTO</a></div>
+    </div>
+    <div class="mm-desc">Interactive season timeline &bull; AL West standings &bull; Fan mood tracker &bull; Game-by-game results</div>
+    <div class="mm-iframe-wrap">
+      <iframe id="marinersMeterFrame" src="https://jeremyperonto.github.io/MarinersMeter/" title="MarinersMeter" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" style="width:100%;height:600px;border:none;border-radius:8px;background:#0a0f1a;"></iframe>
+    </div>
+    <div class="mm-controls">
+      <button class="mm-btn" onclick="document.getElementById('marinersMeterFrame').style.height=document.getElementById('marinersMeterFrame').style.height==='600px'?'900px':'600px';this.textContent=document.getElementById('marinersMeterFrame').style.height==='900px'?'COLLAPSE':'EXPAND'">EXPAND</button>
+      <button class="mm-btn" onclick="window.open('https://jeremyperonto.github.io/MarinersMeter/','_blank')">OPEN FULL SCREEN &#8599;</button>
     </div>
   </div>
 
