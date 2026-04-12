@@ -1857,6 +1857,27 @@ body.light-mode .mountain-banner { opacity: 0.75; }
     </div>
   </div>
 
+  <!-- MAGA TEARS -->
+  <div style="background:linear-gradient(135deg,rgba(180,40,40,0.06),rgba(30,60,120,0.06));border:1px solid rgba(180,40,40,0.2);border-left:3px solid rgba(255,60,60,0.5);border-radius:10px;padding:14px 18px;margin-bottom:16px;position:relative;overflow:hidden;">
+    <div style="font-size:9px;font-weight:900;letter-spacing:3px;color:var(--red);margin-bottom:10px;">&#128557; MAGA TEARS &mdash; THE COPE IS REAL</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px;border:1px solid rgba(255,255,255,0.05);">
+        <div style="font-size:8px;font-weight:900;letter-spacing:2px;color:var(--amber);margin-bottom:4px;">&#9981; &ldquo;OIL PRICES WERE HIGH UNDER BIDEN TOO&rdquo;</div>
+        <div style="font-size:8px;color:var(--text);line-height:1.6;">Biden oil spike: Russia invaded Ukraine &mdash; a global supply shock no president caused. Trump oil spike: He started a war with Iran and closed the Strait of Hormuz. One is bad luck, the other is self-inflicted. Cope harder.</div>
+        <div style="font-size:7px;color:var(--text-muted);margin-top:4px;font-style:italic;">Brent crude: $72/bbl on Jan 20, 2025 (inauguration) &rarr; ~$100/bbl now. That&rsquo;s a Trump premium.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px;border:1px solid rgba(255,255,255,0.05);">
+        <div style="font-size:8px;font-weight:900;letter-spacing:2px;color:var(--amber);margin-bottom:4px;">&#128200; &ldquo;THE ECONOMY IS GREAT ACTUALLY&rdquo;</div>
+        <div style="font-size:8px;color:var(--text);line-height:1.6;">S&amp;P 500 has erased all post-election gains. The &ldquo;Trump bump&rdquo; is now the Trump dump. Tariffs are a tax on Americans. The trade war is costing jobs. But sure, blame Biden.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px;border:1px solid rgba(255,255,255,0.05);">
+        <div style="font-size:8px;font-weight:900;letter-spacing:2px;color:var(--amber);margin-bottom:4px;">&#127987; &ldquo;HE&rsquo;S BRINGING PEACE&rdquo;</div>
+        <div style="font-size:8px;color:var(--text);line-height:1.6;">Day <span class="iran-day-count">43</span> of a war he started. Zero deals closed. Ceasefire barely holding. Israel expanding operations in Lebanon. Gas prices through the roof. Very peaceful, very cool.</div>
+      </div>
+    </div>
+    <div style="text-align:center;font-size:7px;color:var(--text-muted);margin-top:10px;letter-spacing:1px;font-style:italic;">This section exists because your uncle posted something on Facebook again</div>
+  </div>
+
   <!-- THE OBJECTIVES ARE CLEAR -->
   <div class="objectives-panel">
     <div class="objectives-header">
@@ -1973,19 +1994,9 @@ body.light-mode .mountain-banner { opacity: 0.75; }
         <div class="war-context">FOR COMPARISON</div>
       </div>
       <div class="war-row">
-        <div class="war-name">World War I</div>
-        <div class="war-duration">1 yr 7 mo <span class="war-note">(US involvement)</span></div>
-        <div class="war-context war-funny">Shorter than a Tesla Cybertruck lease</div>
-      </div>
-      <div class="war-row">
-        <div class="war-name">World War II</div>
-        <div class="war-duration">3 yr 8 mo <span class="war-note">(US involvement)</span></div>
-        <div class="war-context war-funny">About as long as Trump&rsquo;s attention span on infrastructure week</div>
-      </div>
-      <div class="war-row">
-        <div class="war-name">Korean War</div>
-        <div class="war-duration">3 years</div>
-        <div class="war-context war-funny">Same length as the average DOGE employee tenure</div>
+        <div class="war-name">Afghanistan</div>
+        <div class="war-duration">20 years</div>
+        <div class="war-context war-funny">Longer than most Americans&rsquo; mortgages</div>
       </div>
       <div class="war-row">
         <div class="war-name">Vietnam War</div>
@@ -1998,9 +2009,19 @@ body.light-mode .mountain-banner { opacity: 0.75; }
         <div class="war-context war-funny">Mission Accomplished banner went up after 6 weeks</div>
       </div>
       <div class="war-row">
-        <div class="war-name">Afghanistan</div>
-        <div class="war-duration">20 years</div>
-        <div class="war-context war-funny">Longer than most Americans&rsquo; mortgages</div>
+        <div class="war-name">World War II</div>
+        <div class="war-duration">3 yr 8 mo <span class="war-note">(US involvement)</span></div>
+        <div class="war-context war-funny">About as long as Trump&rsquo;s attention span on infrastructure week</div>
+      </div>
+      <div class="war-row">
+        <div class="war-name">Korean War</div>
+        <div class="war-duration">3 years</div>
+        <div class="war-context war-funny">Same length as the average DOGE employee tenure</div>
+      </div>
+      <div class="war-row">
+        <div class="war-name">World War I</div>
+        <div class="war-duration">1 yr 7 mo <span class="war-note">(US involvement)</span></div>
+        <div class="war-context war-funny">Shorter than a Tesla Cybertruck lease</div>
       </div>
       <div class="war-row highlight-row">
         <div class="war-name">Iran (current)</div>
@@ -5022,6 +5043,8 @@ async function fetchWorldCards() {
     if (el1) el1.innerHTML = dayNum;
     if (el2) el2.innerHTML = 'DAY ' + dayNum;
     if (el3) el3.innerHTML = dayNum;
+    // Update MAGA Tears day references
+    document.querySelectorAll('.iran-day-count').forEach(function(el){ el.innerHTML = dayNum; });
     // Update banner title
     var bannerTitle = document.querySelector('#iranWarBanner .gameday-title');
     if (bannerTitle) bannerTitle.innerHTML = '&#9888;&#65039; DAY ' + dayNum + ' &mdash; US-IRAN WAR &#9888;&#65039;';
