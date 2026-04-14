@@ -5071,7 +5071,7 @@ async function fetchWorldCards() {
       {p:Math.round(87500+seed(4)*5000), pct:seed(4)*4},
       {p:Math.round(3050+seed(5)*100), pct:seed(5)*1.5},
       {p:(4.15+seed(6)*0.3).toFixed(2), pct:seed(6)*3},
-      {p:(5.80+seed(7)*1.5).toFixed(2), pct:-(Math.abs(seed(7))*8+2)}
+      {p:(3.55+seed(7)*0.25).toFixed(2), pct:-(Math.abs(seed(7))*6+1)}
     ];
     sims.forEach(function(s,i){
       var display = typeof s.p === 'string' ? s.p : s.p > 10000 ? s.p.toLocaleString() : s.p.toString();
