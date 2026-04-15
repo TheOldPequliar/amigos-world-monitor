@@ -17,30 +17,34 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Four Fingers News &mdash; The news, neat.">
 <meta name="twitter:description" content="Pour first. Read second. Two fingers for the markets, two for the politics.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='14' y='10' width='36' height='44' rx='3' ry='3' fill='none' stroke='%2300d4ff' stroke-width='3'/%3E%3Crect x='17' y='28' width='30' height='23' fill='%23ff8c00' opacity='0.9'/%3E%3Ccircle cx='40' cy='34' r='3' fill='%23fff' opacity='0.7'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='14' y='10' width='36' height='44' rx='3' ry='3' fill='none' stroke='%23d4af37' stroke-width='3'/%3E%3Crect x='17' y='28' width='30' height='23' fill='%23b8860b' opacity='0.95'/%3E%3Crect x='17' y='28' width='30' height='3' fill='%23d4a017' opacity='0.9'/%3E%3Ccircle cx='40' cy='34' r='3' fill='%23fff8e7' opacity='0.55'/%3E%3C/svg%3E">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg: #0f1419;
-    --surface: #161d26;
-    --surface-hover: #1d2635;
-    --border: #2a3340;
-    --border-glow: #3d4a5a;
-    --text: #e8eef5;
-    --text-dim: #8fa3b8;
-    --text-muted: #5a6a7f;
-    --accent: #4d9970;
-    --accent-glow: rgba(77, 153, 112, 0.15);
-    --green: #7ec88f;
-    --red: #d97d7d;
-    --amber: #d4a574;
-    --forest-dark: #1a4d31;
-    --forest-light: #6fb896;
-    --mountain-blue: #3d5a73;
-    --mountain-slate: #5a6f85;
+    /* ═══ FOUR FINGERS NEWS — DISTILLERY PALETTE ═══
+       Aged oak, copper still, amber whiskey, parchment label */
+    --bg: #1a0f08;              /* darkest oak / unlit cellar */
+    --surface: #241610;         /* aged barrel */
+    --surface-hover: #2e1d14;   /* lit-from-within cask */
+    --border: #4a2e1a;          /* dark leather strap */
+    --border-glow: #6b3f22;     /* polished oak rim */
+    --text: #f4e8d0;            /* parchment label */
+    --text-dim: #c9a878;        /* aged paper */
+    --text-muted: #8a6a48;      /* faded ink */
+    --accent: #c08020;          /* copper still */
+    --accent-glow: rgba(192, 128, 32, 0.18);
+    --green: #8a9a5b;           /* moss on a barrel */
+    --red: #a83232;             /* wax seal red */
+    --amber: #d4a017;           /* whiskey in the glass */
+    --copper: #b87333;          /* polished copper */
+    --brass: #d4af37;           /* brass label plate */
+    --forest-dark: #3a2818;     /* deep walnut */
+    --forest-light: #c89858;    /* warm honey oak */
+    --mountain-blue: #6b4226;   /* aged mahogany */
+    --mountain-slate: #8a5a3a;  /* tobacco brown */
     --seahawks-green: #69BE28;
     --seahawks-blue: #002244;
     --mariners-teal: #005C5C;
@@ -59,23 +63,33 @@
     min-height: 100vh;
   }
 
-  /* &#9472;&#9472; Animated Background Grid &#9472;&#9472; */
+  /* &#9472;&#9472; Distillery Background — warm cellar glow + oak grain &#9472;&#9472; */
   .bg-grid {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background:
-      radial-gradient(ellipse at 20% 50%, rgba(77, 153, 112, 0.04) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba(61, 90, 115, 0.03) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 0%, rgba(77, 153, 112, 0.02) 0%, transparent 60%);
+      radial-gradient(ellipse at 20% 30%, rgba(212, 160, 23, 0.06) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 70%, rgba(184, 115, 51, 0.05) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 100%, rgba(192, 128, 32, 0.04) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 0%, rgba(74, 46, 26, 0.4) 0%, transparent 70%);
     z-index: 0;
     pointer-events: none;
-    animation: mistFlow 15s ease-in-out infinite;
+    animation: cellarFlicker 18s ease-in-out infinite;
+  }
+  /* Subtle wood-grain SVG noise overlaid above the warm glow */
+  .bg-grid::after {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.85' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.22 0 0 0 0 0.08 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.18;
+    mix-blend-mode: overlay;
   }
 
-  @keyframes mistFlow {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 0.85; }
+  @keyframes cellarFlicker {
+    0%, 100% { opacity: 0.55; }
+    35% { opacity: 0.78; }
+    65% { opacity: 0.62; }
   }
 
   /* &#9472;&#9472; Floating Particles &#9472;&#9472; */
@@ -1548,19 +1562,22 @@ body.light-mode .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
 .theme-toggle { position:fixed; bottom:16px; right:16px; z-index:999; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:6px 12px; cursor:pointer; font-size:14px; transition:all 0.3s; box-shadow:0 2px 8px rgba(0,0,0,0.15); }
 .theme-toggle:hover { transform:scale(1.1); }
 
-/* ── Chyron Ticker ── */
+/* ── Chyron Ticker — distillery brass plate ── */
 .chyron {
   position: relative;
   z-index: 10;
-  background: linear-gradient(90deg, #0c2c56, #005C5C);
-  border-bottom: 2px solid rgba(111, 184, 150, 0.3);
+  background: linear-gradient(90deg, #2e1d14, #4a2e1a 50%, #2e1d14);
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.2), inset 0 -1px 0 rgba(0,0,0,0.5);
   overflow: hidden;
   white-space: nowrap;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   font-weight: 600;
-  color: #e8eef5;
+  color: #f4e8d0;
   letter-spacing: 0.5px;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
 }
 .chyron-track {
   display: inline-block;
@@ -1573,7 +1590,7 @@ body.light-mode .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
   100% { transform: translateX(-50%); }
 }
 .chyron-item { display: inline; padding: 0 32px; }
-.chyron-sep { color: rgba(111, 184, 150, 0.5); padding: 0 8px; }
+.chyron-sep { color: rgba(212, 175, 55, 0.6); padding: 0 8px; }
 .chyron-label {
   display: inline-block;
   background: rgba(255,255,255,0.12);
@@ -1601,26 +1618,25 @@ body.light-mode .mountain-banner { opacity: 0.75; }
 /* Artemis 2 tracker CSS removed — mission complete */
 
 /* ═══ NYT-STYLE SECTION NAV + MASTHEADS ═══ */
-/* ═══ LAN PARTY NAV — Halo / GoldenEye / N64-era HUD aesthetic ═══ */
-.section-nav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(4,10,18,0.98),rgba(8,18,30,0.96));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid #00d4ff;border-bottom:1px solid rgba(0,212,255,0.3);box-shadow:0 0 24px rgba(0,212,255,0.15),inset 0 -1px 0 rgba(0,212,255,0.4);margin:0 0 20px 0;font-family:'JetBrains Mono','Courier New',monospace;}
-.section-nav::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(0,212,255,0.03) 2px 3px);pointer-events:none;}
+/* ═══ DISTILLERY NAV — copper still + brass label aesthetic ═══ */
+.section-nav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(20,10,4,0.98),rgba(36,22,16,0.96));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid #b87333;border-bottom:1px solid rgba(184,115,51,0.4);box-shadow:0 4px 18px rgba(0,0,0,0.5),0 0 24px rgba(212,160,23,0.08),inset 0 -1px 0 rgba(212,175,55,0.35),inset 0 1px 0 rgba(212,175,55,0.18);margin:0 0 20px 0;font-family:Georgia,'Playfair Display',serif;}
+.section-nav::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='40'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02 1.2' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.25 0 0 0 0 0.10 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");opacity:0.22;mix-blend-mode:overlay;pointer-events:none;}
 .section-nav-inner{display:flex;justify-content:center;align-items:stretch;max-width:1400px;margin:0 auto;flex-wrap:wrap;position:relative;}
-.section-nav a{display:block;padding:14px 22px 12px 22px;font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#00d4ff;text-decoration:none;border-right:1px solid rgba(0,212,255,0.18);transition:all 0.12s ease;position:relative;text-shadow:0 0 8px rgba(0,212,255,0.4);clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);margin-right:-10px;}
-.section-nav a:first-child{border-left:1px solid rgba(0,212,255,0.18);margin-left:10px;}
-.section-nav a:last-child{margin-right:0;}
-.section-nav a::before{content:"&gt; ";opacity:0.5;}
-.section-nav a:hover{color:#fff;background:rgba(0,212,255,0.12);text-shadow:0 0 12px #00d4ff;}
-.section-nav a.active{color:#ff8c00;text-shadow:0 0 10px rgba(255,140,0,0.6);background:rgba(255,140,0,0.08);}
-.section-nav a.active::after{content:"";position:absolute;bottom:-1px;left:10px;right:10px;height:2px;background:#ff8c00;box-shadow:0 0 8px #ff8c00;}
-@media (max-width:700px){.section-nav a{padding:10px 12px;font-size:9px;letter-spacing:1.5px;clip-path:none;margin:0;}.section-nav a:first-child{margin-left:0;}}
-/* ═══ Section masthead — Cortana-briefing style ═══ */
-.lan-masthead{margin:32px 0 14px 0;padding:12px 18px 10px 18px;position:relative;background:linear-gradient(90deg,rgba(0,212,255,0.12),rgba(0,212,255,0.02) 70%,transparent);border-left:4px solid #00d4ff;border-top:1px solid rgba(0,212,255,0.3);border-bottom:1px solid rgba(0,212,255,0.3);font-family:'JetBrains Mono','Courier New',monospace;overflow:hidden;}
-.lan-masthead::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(0,212,255,0.04) 2px 3px);pointer-events:none;}
-.lan-masthead::after{content:"";position:absolute;top:0;right:0;width:140px;height:100%;background:linear-gradient(90deg,transparent,rgba(255,140,0,0.08));pointer-events:none;}
-.lan-masthead .lm-tag{font-size:8px;font-weight:900;letter-spacing:2px;color:#ff8c00;text-transform:uppercase;margin-bottom:2px;text-shadow:0 0 6px rgba(255,140,0,0.4);}
-.lan-masthead .lm-name{font-size:20px;font-weight:900;letter-spacing:3px;color:#00d4ff;text-transform:uppercase;line-height:1.1;text-shadow:0 0 10px rgba(0,212,255,0.5);}
-.lan-masthead .lm-kicker{font-size:10px;font-style:italic;color:#e8e8e8;letter-spacing:0.5px;margin-top:4px;opacity:0.82;}
-.lan-masthead .lm-kicker::before{content:"// ";color:#ff8c00;font-style:normal;opacity:0.7;}
+.section-nav a{display:block;padding:14px 24px 12px 24px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#d4a017;text-decoration:none;border-right:1px solid rgba(184,115,51,0.22);transition:all 0.18s ease;position:relative;text-shadow:0 1px 0 rgba(0,0,0,0.6),0 0 8px rgba(212,160,23,0.18);font-variant:small-caps;}
+.section-nav a:first-child{border-left:1px solid rgba(184,115,51,0.22);}
+.section-nav a:hover{color:#f4e8d0;background:linear-gradient(180deg,rgba(212,175,55,0.12),rgba(184,115,51,0.06));text-shadow:0 1px 0 rgba(0,0,0,0.6),0 0 12px rgba(212,160,23,0.5);}
+.section-nav a.active{color:#f4e8d0;background:linear-gradient(180deg,rgba(212,175,55,0.18),rgba(184,115,51,0.08));text-shadow:0 1px 0 rgba(0,0,0,0.6),0 0 14px rgba(212,175,55,0.6);}
+.section-nav a.active::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#d4af37,#b87333,#d4af37,transparent);box-shadow:0 0 10px rgba(212,175,55,0.6);}
+@media (max-width:700px){.section-nav a{padding:10px 12px;font-size:9px;letter-spacing:1.5px;}}
+/* ═══ Cask label masthead — branded barrel-end / parchment label ═══ */
+.lan-masthead{margin:32px 0 14px 0;padding:14px 22px 12px 22px;position:relative;background:linear-gradient(135deg,rgba(74,46,26,0.55),rgba(36,22,16,0.35) 70%,rgba(20,10,4,0.4));border:1px solid rgba(184,115,51,0.4);border-left:5px solid #b87333;border-radius:2px;font-family:Georgia,'Playfair Display',serif;overflow:hidden;box-shadow:inset 0 1px 0 rgba(212,175,55,0.18),inset 0 -1px 0 rgba(0,0,0,0.5),0 4px 14px rgba(0,0,0,0.45);}
+.lan-masthead::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='80'%3E%3Cfilter id='wg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.008 0.9' numOctaves='3' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.28 0 0 0 0 0.10 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23wg)'/%3E%3C/svg%3E");opacity:0.28;mix-blend-mode:overlay;pointer-events:none;}
+.lan-masthead::after{content:"";position:absolute;top:8px;right:12px;width:42px;height:42px;border:2px solid rgba(212,175,55,0.55);border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,0.18) 0%,rgba(184,115,51,0.08) 60%,transparent 100%);box-shadow:0 0 12px rgba(212,160,23,0.25),inset 0 0 8px rgba(0,0,0,0.4);pointer-events:none;}
+.lan-masthead .lm-tag{font-size:9px;font-weight:700;letter-spacing:3px;color:#d4af37;text-transform:uppercase;margin-bottom:4px;text-shadow:0 1px 0 rgba(0,0,0,0.6);font-family:'JetBrains Mono',monospace;font-variant:small-caps;}
+.lan-masthead .lm-name{font-size:24px;font-weight:900;letter-spacing:2px;color:#f4e8d0;text-transform:uppercase;line-height:1.05;text-shadow:0 1px 0 rgba(0,0,0,0.7),0 0 14px rgba(212,160,23,0.25);font-variant:small-caps;}
+.lan-masthead .lm-kicker{font-size:11px;font-style:italic;color:#c9a878;letter-spacing:0.3px;margin-top:5px;}
+.lan-masthead .lm-kicker::before{content:"\201C ";color:#b87333;font-style:normal;opacity:0.75;}
+.lan-masthead .lm-kicker::after{content:" \201D";color:#b87333;font-style:normal;opacity:0.75;}
 .section-anchor{scroll-margin-top:70px;}
 </style>
 </head>
@@ -1774,13 +1790,25 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   <!-- &#9552;&#9552;&#9552; HEADER &#9552;&#9552;&#9552; -->
   <header class="header">
     <div class="header-left">
-      <!-- whiskey-glass mark -->
-      <svg width="48" height="48" viewBox="0 0 64 64" style="flex-shrink:0;margin-right:14px;filter:drop-shadow(0 0 8px rgba(0,212,255,0.35));" aria-hidden="true">
-        <rect x="14" y="10" width="36" height="44" rx="3" ry="3" fill="none" stroke="#00d4ff" stroke-width="2.5"/>
-        <rect x="17" y="28" width="30" height="23" fill="#ff8c00" opacity="0.92"/>
-        <rect x="17" y="28" width="30" height="3" fill="#ffb347" opacity="0.9"/>
-        <circle cx="40" cy="35" r="3" fill="#fff" opacity="0.65"/>
-        <circle cx="36" cy="42" r="1.6" fill="#fff" opacity="0.45"/>
+      <!-- whiskey-glass mark — distillery palette -->
+      <svg width="52" height="52" viewBox="0 0 64 64" style="flex-shrink:0;margin-right:14px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.5)) drop-shadow(0 0 10px rgba(212,160,23,0.35));" aria-hidden="true">
+        <defs>
+          <linearGradient id="whiskey" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#d4a017"/>
+            <stop offset="50%" stop-color="#b8860b"/>
+            <stop offset="100%" stop-color="#8b5a0a"/>
+          </linearGradient>
+          <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#d4af37"/>
+            <stop offset="100%" stop-color="#b87333"/>
+          </linearGradient>
+        </defs>
+        <rect x="14" y="10" width="36" height="44" rx="3" ry="3" fill="none" stroke="url(#glass)" stroke-width="2.5"/>
+        <rect x="17" y="28" width="30" height="23" fill="url(#whiskey)" opacity="0.95"/>
+        <rect x="17" y="28" width="30" height="2.5" fill="#f0c64a" opacity="0.85"/>
+        <circle cx="40" cy="35" r="3" fill="#fff8e7" opacity="0.55"/>
+        <circle cx="36" cy="42" r="1.6" fill="#fff8e7" opacity="0.4"/>
+        <line x1="22" y1="51" x2="42" y2="51" stroke="#fff8e7" stroke-width="0.6" opacity="0.3"/>
       </svg>
       <div>
         <div class="header-title" style="font-family:Georgia,'Playfair Display',serif;letter-spacing:2px;">FOUR FINGERS NEWS</div>
@@ -1831,8 +1859,8 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   <!-- AUTO-UPDATED BY: the-run-down scheduled task (daily 7am local) -->
   <!-- EDIT TARGETS: #runDownUpdated, #runDownList (<article> items) -->
   <style>
-    #theRunDown{background:linear-gradient(135deg,rgba(111,184,150,0.10),rgba(12,44,86,0.25));border:1px solid rgba(111,184,150,0.35);border-left:3px solid #6fb896;border-radius:12px;padding:12px 16px;margin-bottom:18px;position:relative;overflow:hidden;font-family:Georgia,'Times New Roman',serif;}
-    #theRunDown::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#6fb896,#ffd700,#e94560,#6fb896);background-size:200% 100%;animation:priceRainbow 6s linear infinite;}
+    #theRunDown{background:linear-gradient(135deg,rgba(74,46,26,0.45),rgba(36,22,16,0.65));border:1px solid rgba(184,115,51,0.45);border-left:4px solid #b87333;border-radius:4px;padding:14px 18px;margin-bottom:18px;position:relative;overflow:hidden;font-family:Georgia,'Playfair Display',serif;box-shadow:inset 0 1px 0 rgba(212,175,55,0.18),0 4px 14px rgba(0,0,0,0.4);}
+    #theRunDown::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#d4af37 20%,#b87333 50%,#d4af37 80%,transparent);background-size:200% 100%;animation:priceRainbow 8s linear infinite;}
     #theRunDown .rd-masthead{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:6px;margin-bottom:8px;border-bottom:2px double rgba(111,184,150,0.35);flex-wrap:wrap;gap:6px;}
     #theRunDown .rd-title{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:900;letter-spacing:1px;color:#6fb896;line-height:1;font-variant:small-caps;}
     #theRunDown .rd-sub{font-size:9px;letter-spacing:2px;color:var(--text-muted);font-style:italic;margin-top:3px;font-family:Georgia,serif;}
@@ -3262,7 +3290,7 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   <!-- AMIGOS PRICE IS RIGHT -->
   <div style="margin-bottom:6px;padding:0 4px"><span style="font-size:9px;font-weight:700;letter-spacing:3px;color:var(--text-dim)">&#127911; AMIGOS PRICE IS RIGHT &mdash; LOCK IN YOUR PICKS</span></div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px;position:relative;overflow:hidden;" id="priceGamePanel">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#ffd700,#e94560,#00d4ff,#00e68a,#ffd700);background-size:200% 100%;animation:priceRainbow 3s linear infinite;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#d4af37,#b87333,#d4af37,transparent);background-size:200% 100%;animation:priceRainbow 6s linear infinite;"></div>
 
     <!-- Player Select -->
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
