@@ -24,27 +24,28 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    /* ═══ FOUR FINGERS NEWS — DISTILLERY PALETTE ═══
-       Aged oak, copper still, amber whiskey, parchment label */
-    --bg: #1a0f08;              /* darkest oak / unlit cellar */
-    --surface: #241610;         /* aged barrel */
-    --surface-hover: #2e1d14;   /* lit-from-within cask */
-    --border: #4a2e1a;          /* dark leather strap */
-    --border-glow: #6b3f22;     /* polished oak rim */
-    --text: #f4e8d0;            /* parchment label */
-    --text-dim: #c9a878;        /* aged paper */
-    --text-muted: #8a6a48;      /* faded ink */
-    --accent: #c08020;          /* copper still */
-    --accent-glow: rgba(192, 128, 32, 0.18);
-    --green: #8a9a5b;           /* moss on a barrel */
-    --red: #a83232;             /* wax seal red */
-    --amber: #d4a017;           /* whiskey in the glass */
-    --copper: #b87333;          /* polished copper */
-    --brass: #d4af37;           /* brass label plate */
-    --forest-dark: #3a2818;     /* deep walnut */
-    --forest-light: #c89858;    /* warm honey oak */
-    --mountain-blue: #6b4226;   /* aged mahogany */
-    --mountain-slate: #8a5a3a;  /* tobacco brown */
+    /* ═══ FOUR FINGERS NEWS — NEWSPRINT PALETTE ═══
+       Warm cream page, black ink, whiskey accents held in reserve.
+       Readability first. Atmosphere through accent, not ground. */
+    --bg: #f5f1e8;              /* warm newsprint cream */
+    --surface: #ffffff;         /* printed card / white stock */
+    --surface-hover: #faf6ec;   /* hover warmth */
+    --border: #d8cfbd;          /* soft warm rule */
+    --border-glow: #b8a98a;     /* darker rule for emphasis */
+    --text: #1a1611;            /* near-black ink, slightly warm */
+    --text-dim: #4a4238;        /* body-secondary */
+    --text-muted: #7d7368;      /* tertiary / bylines */
+    --accent: #8b4513;          /* saddle-brown whiskey accent */
+    --accent-glow: rgba(139, 69, 19, 0.12);
+    --green: #2d7a3e;           /* readable market green */
+    --red: #a42020;             /* nameplate red / market down */
+    --amber: #b8860b;           /* dark goldenrod — readable */
+    --copper: #8b4513;          /* same as accent, for compatibility */
+    --brass: #8a6d3b;           /* muted brass for rules */
+    --forest-dark: #2c3e2a;
+    --forest-light: #5a7a50;
+    --mountain-blue: #34495e;
+    --mountain-slate: #566573;
     --seahawks-green: #69BE28;
     --seahawks-blue: #002244;
     --mariners-teal: #005C5C;
@@ -63,34 +64,17 @@
     min-height: 100vh;
   }
 
-  /* &#9472;&#9472; Distillery Background — warm cellar glow + oak grain &#9472;&#9472; */
+  /* ── Newsprint Background — quiet warm page ── */
   .bg-grid {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background:
-      radial-gradient(ellipse at 20% 30%, rgba(212, 160, 23, 0.06) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 70%, rgba(184, 115, 51, 0.05) 0%, transparent 55%),
-      radial-gradient(ellipse at 50% 100%, rgba(192, 128, 32, 0.04) 0%, transparent 60%),
-      radial-gradient(ellipse at 50% 0%, rgba(74, 46, 26, 0.4) 0%, transparent 70%);
+    background: var(--bg);
     z-index: 0;
     pointer-events: none;
-    animation: cellarFlicker 18s ease-in-out infinite;
   }
-  /* Subtle wood-grain SVG noise overlaid above the warm glow */
-  .bg-grid::after {
-    content: "";
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.85' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.22 0 0 0 0 0.08 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.18;
-    mix-blend-mode: overlay;
-  }
-
-  @keyframes cellarFlicker {
-    0%, 100% { opacity: 0.55; }
-    35% { opacity: 0.78; }
-    65% { opacity: 0.62; }
-  }
+  .bg-grid::after { content: none; }
+  .particles { display: none !important; }
 
   /* &#9472;&#9472; Floating Particles &#9472;&#9472; */
   .particles {
@@ -161,13 +145,11 @@
   }
 
   .header-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    background: linear-gradient(90deg, #fff, var(--forest-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #1a1611;
   }
 
   .header-subtitle {
@@ -1438,7 +1420,7 @@ body.light-mode {
 }
 body.light-mode { background: var(--bg); color: var(--text); }
 body.light-mode .main { background: var(--bg); }
-body.light-mode .header-title { background: linear-gradient(90deg, #0c2c56, #1a6b45); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+body.light-mode .header-title { background: none; -webkit-text-fill-color: #1a1611; color: #1a1611; }
 body.light-mode .header-subtitle { color: #3a5a45; }
 body.light-mode .live-indicator { color: #1a8a50; }
 body.light-mode .live-dot { background: #1a8a50; }
@@ -1562,14 +1544,14 @@ body.light-mode .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
 .theme-toggle { position:fixed; bottom:16px; right:16px; z-index:999; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:6px 12px; cursor:pointer; font-size:14px; transition:all 0.3s; box-shadow:0 2px 8px rgba(0,0,0,0.15); }
 .theme-toggle:hover { transform:scale(1.1); }
 
-/* ── Chyron Ticker — distillery brass plate ── */
+/* ── Chyron Ticker — newsprint rule ── */
 .chyron {
   position: relative;
   z-index: 10;
-  background: linear-gradient(90deg, #2e1d14, #4a2e1a 50%, #2e1d14);
-  border-top: 1px solid rgba(212, 175, 55, 0.35);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
-  box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.2), inset 0 -1px 0 rgba(0,0,0,0.5);
+  background: #ffffff;
+  border-top: 2px solid #1a1611;
+  border-bottom: 1px solid var(--border);
+  box-shadow: none;
   overflow: hidden;
   white-space: nowrap;
   font-family: 'JetBrains Mono', monospace;
@@ -1617,30 +1599,26 @@ body.light-mode .chyron { background: linear-gradient(90deg, #0c2c56, #1a5040); 
 body.light-mode .mountain-banner { opacity: 0.75; }
 /* Artemis 2 tracker CSS removed — mission complete */
 
-/* ═══ NYT-STYLE SECTION NAV + MASTHEADS ═══ */
-/* ═══ DISTILLERY NAV — copper still + brass label aesthetic ═══ */
-.section-nav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(20,10,4,0.98),rgba(36,22,16,0.96));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid #b87333;border-bottom:1px solid rgba(184,115,51,0.4);box-shadow:0 4px 18px rgba(0,0,0,0.5),0 0 24px rgba(212,160,23,0.08),inset 0 -1px 0 rgba(212,175,55,0.35),inset 0 1px 0 rgba(212,175,55,0.18);margin:0 0 20px 0;font-family:Georgia,'Playfair Display',serif;}
-.section-nav::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='40'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02 1.2' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.25 0 0 0 0 0.10 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");opacity:0.22;mix-blend-mode:overlay;pointer-events:none;}
+/* ═══ NEWSPRINT SECTION NAV + MASTHEADS ═══ */
+.section-nav{position:sticky;top:0;z-index:100;background:#ffffff;border-top:2px solid #1a1611;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.04);margin:0 0 20px 0;font-family:Georgia,'Playfair Display',serif;}
 .section-nav-inner{display:flex;justify-content:center;align-items:stretch;max-width:1400px;margin:0 auto;flex-wrap:wrap;position:relative;}
-.section-nav a{display:block;padding:14px 24px 12px 24px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#d4a017;text-decoration:none;border-right:1px solid rgba(184,115,51,0.22);transition:all 0.18s ease;position:relative;text-shadow:0 1px 0 rgba(0,0,0,0.6),0 0 8px rgba(212,160,23,0.18);font-variant:small-caps;}
-.section-nav a:first-child{border-left:1px solid rgba(184,115,51,0.22);}
-.section-nav a:hover{color:#f4e8d0;background:linear-gradient(180deg,rgba(212,175,55,0.12),rgba(184,115,51,0.06));text-shadow:0 1px 0 rgba(0,0,0,0.6),0 0 12px rgba(212,160,23,0.5);}
-.section-nav a.active{color:#f4e8d0;background:linear-gradient(180deg,rgba(212,175,55,0.18),rgba(184,115,51,0.08));text-shadow:0 1px 0 rgba(0,0,0,0.6),0 0 14px rgba(212,175,55,0.6);}
-.section-nav a.active::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#d4af37,#b87333,#d4af37,transparent);box-shadow:0 0 10px rgba(212,175,55,0.6);}
+.section-nav a{display:block;padding:14px 24px 12px 24px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#1a1611;text-decoration:none;border-right:1px solid var(--border);transition:all 0.18s ease;position:relative;font-variant:small-caps;}
+.section-nav a:first-child{border-left:1px solid var(--border);}
+.section-nav a:hover{color:var(--red);background:#faf6ec;}
+.section-nav a.active{color:var(--red);background:#faf6ec;}
+.section-nav a.active::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--red);}
 @media (max-width:700px){.section-nav a{padding:10px 12px;font-size:9px;letter-spacing:1.5px;}}
-/* ═══ Cask label masthead — branded barrel-end / parchment label ═══ */
-.lan-masthead{margin:32px 0 14px 0;padding:14px 22px 12px 22px;position:relative;background:linear-gradient(135deg,rgba(74,46,26,0.55),rgba(36,22,16,0.35) 70%,rgba(20,10,4,0.4));border:1px solid rgba(184,115,51,0.4);border-left:5px solid #b87333;border-radius:2px;font-family:Georgia,'Playfair Display',serif;overflow:hidden;box-shadow:inset 0 1px 0 rgba(212,175,55,0.18),inset 0 -1px 0 rgba(0,0,0,0.5),0 4px 14px rgba(0,0,0,0.45);}
-.lan-masthead::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='80'%3E%3Cfilter id='wg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.008 0.9' numOctaves='3' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.28 0 0 0 0 0.10 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23wg)'/%3E%3C/svg%3E");opacity:0.28;mix-blend-mode:overlay;pointer-events:none;}
-.lan-masthead::after{content:"";position:absolute;top:8px;right:12px;width:42px;height:42px;border:2px solid rgba(212,175,55,0.55);border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,0.18) 0%,rgba(184,115,51,0.08) 60%,transparent 100%);box-shadow:0 0 12px rgba(212,160,23,0.25),inset 0 0 8px rgba(0,0,0,0.4);pointer-events:none;}
-.lan-masthead .lm-tag{font-size:9px;font-weight:700;letter-spacing:3px;color:#d4af37;text-transform:uppercase;margin-bottom:4px;text-shadow:0 1px 0 rgba(0,0,0,0.6);font-family:'JetBrains Mono',monospace;font-variant:small-caps;}
-.lan-masthead .lm-name{font-size:24px;font-weight:900;letter-spacing:2px;color:#f4e8d0;text-transform:uppercase;line-height:1.05;text-shadow:0 1px 0 rgba(0,0,0,0.7),0 0 14px rgba(212,160,23,0.25);font-variant:small-caps;}
-.lan-masthead .lm-kicker{font-size:11px;font-style:italic;color:#c9a878;letter-spacing:0.3px;margin-top:5px;}
-.lan-masthead .lm-kicker::before{content:"\201C ";color:#b87333;font-style:normal;opacity:0.75;}
-.lan-masthead .lm-kicker::after{content:" \201D";color:#b87333;font-style:normal;opacity:0.75;}
+/* ═══ Newsprint section masthead — full-width rule + kicker + hed + deck ═══ */
+.lan-masthead{margin:32px 0 14px 0;padding:18px 4px 12px 4px;position:relative;background:transparent;border:none;border-top:2px solid #1a1611;border-bottom:1px solid var(--border);border-radius:0;font-family:Georgia,'Playfair Display',serif;}
+.lan-masthead .lm-tag{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:6px;font-family:'JetBrains Mono',monospace;font-variant:small-caps;}
+.lan-masthead .lm-name{font-size:30px;font-weight:900;letter-spacing:0.5px;color:#1a1611;text-transform:uppercase;line-height:1.05;font-variant:small-caps;}
+.lan-masthead .lm-kicker{font-size:13px;font-style:italic;color:var(--text-dim);letter-spacing:0.2px;margin-top:6px;}
+.lan-masthead .lm-kicker::before{content:"\201C ";color:var(--text-muted);font-style:normal;opacity:0.75;}
+.lan-masthead .lm-kicker::after{content:" \201D";color:var(--text-muted);font-style:normal;opacity:0.75;}
 .section-anchor{scroll-margin-top:70px;}
 </style>
 </head>
-<body>
+<body class="light-mode">
 
 <!-- &#9552;&#9552;&#9552; CHYRON TICKER &#9552;&#9552;&#9552; -->
 <div class="chyron" id="chyronBar">
@@ -1731,14 +1709,15 @@ body.light-mode .mountain-banner { opacity: 0.75; }
 
   <!-- ═══ FROM THE EDITOR — daily personal note ═══ -->
   <style>
-    .editor-note{margin:0 0 16px 0;padding:14px 20px 14px 22px;position:relative;background:linear-gradient(135deg,rgba(74,46,26,0.35),rgba(36,22,16,0.22) 70%,transparent);border-left:3px solid #b87333;border-top:1px solid rgba(184,115,51,0.25);border-bottom:1px solid rgba(184,115,51,0.25);font-family:Georgia,'Playfair Display',serif;overflow:hidden;}
-    .editor-note::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='80'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.85' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.22 0 0 0 0 0.08 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");opacity:0.18;mix-blend-mode:overlay;pointer-events:none;}
-    .editor-note .en-tag{font-size:9px;font-weight:700;letter-spacing:3px;color:#d4af37;text-transform:uppercase;margin-bottom:4px;font-family:'JetBrains Mono',monospace;font-variant:small-caps;text-shadow:0 1px 0 rgba(0,0,0,0.5);}
-    .editor-note .en-tag .en-date{color:#8a6a48;margin-left:8px;font-weight:400;letter-spacing:2px;}
-    .editor-note .en-text{font-size:14px;line-height:1.65;color:#f4e8d0;font-style:italic;}
+    .editor-note{margin:0 0 16px 0;padding:14px 20px 14px 22px;position:relative;background:#ffffff;border:1px solid var(--border);border-left:3px solid var(--red);border-radius:2px;font-family:Georgia,'Playfair Display',serif;overflow:hidden;}
+    .editor-note::before{content:none;}
+    .editor-note .en-tag{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:6px;font-family:'JetBrains Mono',monospace;font-variant:small-caps;}
+    .editor-note .en-tag .en-date{color:var(--text-muted);margin-left:8px;font-weight:400;letter-spacing:2px;}
+    .editor-note .en-text{font-size:15px;line-height:1.7;color:#1a1611;font-style:italic;}
     .editor-note .en-text .en-emph{font-style:normal;color:#d4a017;font-weight:600;}
-    .editor-note .en-sig{margin-top:6px;font-size:10px;color:#c9a878;letter-spacing:1px;font-style:italic;text-align:right;}
-    .editor-note .en-sig::before{content:"\2014 ";color:#8a6a48;font-style:normal;}
+    .editor-note .en-sig{margin-top:6px;font-size:11px;color:var(--text-muted);letter-spacing:1px;font-style:italic;text-align:right;}
+    .editor-note .en-sig::before{content:"\2014 ";color:var(--text-muted);font-style:normal;}
+    .editor-note .en-text .en-emph{font-style:normal;color:var(--red);font-weight:700;}
   </style>
   <div class="editor-note">
     <div class="en-tag">From the Editor <span class="en-date" id="editorNoteDate">&middot; April 14, 2026</span></div>
@@ -1833,45 +1812,45 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   <!-- AUTO-UPDATED BY: the-run-down scheduled task (daily 7am local) -->
   <!-- EDIT TARGETS: #runDownUpdated, #runDownList (<article> items) -->
   <style>
-    #theRunDown{background:linear-gradient(135deg,rgba(74,46,26,0.45),rgba(36,22,16,0.65));border:1px solid rgba(184,115,51,0.45);border-left:4px solid #b87333;border-radius:4px;padding:14px 18px;margin-bottom:18px;position:relative;overflow:hidden;font-family:Georgia,'Playfair Display',serif;box-shadow:inset 0 1px 0 rgba(212,175,55,0.18),0 4px 14px rgba(0,0,0,0.4);}
-    #theRunDown::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#d4af37 20%,#b87333 50%,#d4af37 80%,transparent);background-size:200% 100%;animation:priceRainbow 8s linear infinite;}
-    #theRunDown .rd-masthead{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:6px;margin-bottom:8px;border-bottom:2px double rgba(111,184,150,0.35);flex-wrap:wrap;gap:6px;}
-    #theRunDown .rd-title{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:900;letter-spacing:1px;color:#6fb896;line-height:1;font-variant:small-caps;}
-    #theRunDown .rd-sub{font-size:9px;letter-spacing:2px;color:var(--text-muted);font-style:italic;margin-top:3px;font-family:Georgia,serif;}
-    #theRunDown .rd-dateline{font-size:8px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+    #theRunDown{background:#ffffff;border:1px solid var(--border);border-top:3px solid #1a1611;border-radius:2px;padding:18px 22px;margin-bottom:18px;position:relative;overflow:hidden;font-family:Georgia,'Playfair Display',serif;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+    #theRunDown::before{content:none;}
+    #theRunDown .rd-masthead{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:8px;margin-bottom:12px;border-bottom:2px solid #1a1611;flex-wrap:wrap;gap:6px;}
+    #theRunDown .rd-title{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:900;letter-spacing:0.5px;color:#1a1611;line-height:1;font-variant:small-caps;}
+    #theRunDown .rd-sub{font-size:11px;letter-spacing:1px;color:var(--text-muted);font-style:italic;margin-top:3px;font-family:Georgia,serif;}
+    #theRunDown .rd-dateline{font-size:9px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
     #runDownList{display:grid;grid-template-columns:repeat(3,1fr);gap:0;list-style:none;margin:0;padding:0;}
-    #runDownList article{padding:3px 10px 6px 10px;border-right:1px solid rgba(111,184,150,0.15);break-inside:avoid;}
+    #runDownList article{padding:6px 14px 10px 14px;border-right:1px solid var(--border);break-inside:avoid;}
     #runDownList article:nth-child(3n){border-right:none;}
-    #runDownList article:nth-child(n+4){padding-top:8px;border-top:1px solid rgba(111,184,150,0.15);}
-    #runDownList .rd-kicker{font-size:7px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:#6fb896;font-family:'JetBrains Mono',monospace;margin-bottom:2px;display:block;}
+    #runDownList article:nth-child(n+4){padding-top:12px;border-top:1px solid var(--border);}
+    #runDownList .rd-kicker{font-size:9px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);font-family:'JetBrains Mono',monospace;margin-bottom:4px;display:block;}
     #runDownList .rd-kicker.urgent{color:var(--red);}
-    #runDownList .rd-head{font-family:Georgia,'Times New Roman',serif;font-size:12px;font-weight:900;line-height:1.18;color:var(--text);margin:0 0 3px 0;letter-spacing:-0.2px;}
-    #runDownList .rd-dek{font-family:Georgia,'Times New Roman',serif;font-size:9.5px;line-height:1.35;color:var(--text-muted);margin:0;}
-    #runDownList .rd-src{margin-top:3px;font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;}
-    #runDownList .rd-src a{color:#6fb896;text-decoration:none;border-bottom:1px dotted rgba(111,184,150,0.5);margin-right:5px;}
-    #runDownList .rd-src a:hover{color:#ffd700;border-bottom-color:#ffd700;}
-    #runDownList article.lead{grid-column:span 2;grid-row:span 2;padding-bottom:8px;display:flex;flex-direction:column;}
-    #runDownList article.lead .rd-head{font-size:16px;line-height:1.15;color:var(--text);}
-    #runDownList article.lead .rd-dek{font-size:11px;line-height:1.45;color:var(--text);}
-    #runDownList article.lead .rd-kicker{font-size:8px;}
-    #runDownList article.lead .rd-factbox{margin-top:8px;padding:8px 10px;border-top:1px dashed rgba(111,184,150,0.35);border-bottom:1px dashed rgba(111,184,150,0.35);background:rgba(12,44,86,0.18);}
-    #runDownList article.lead .rd-factbox-title{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:900;letter-spacing:2px;color:#ffd700;margin-bottom:4px;}
+    #runDownList .rd-head{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:900;line-height:1.2;color:#1a1611;margin:0 0 4px 0;letter-spacing:-0.2px;}
+    #runDownList .rd-dek{font-family:Georgia,'Times New Roman',serif;font-size:12px;line-height:1.45;color:var(--text-dim);margin:0;}
+    #runDownList .rd-src{margin-top:5px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;}
+    #runDownList .rd-src a{color:var(--text-muted);text-decoration:none;border-bottom:1px dotted var(--border-glow);margin-right:5px;}
+    #runDownList .rd-src a:hover{color:var(--red);border-bottom-color:var(--red);}
+    #runDownList article.lead{grid-column:span 2;grid-row:span 2;padding-bottom:12px;display:flex;flex-direction:column;}
+    #runDownList article.lead .rd-head{font-size:22px;line-height:1.15;color:#1a1611;}
+    #runDownList article.lead .rd-dek{font-size:14px;line-height:1.5;color:var(--text-dim);}
+    #runDownList article.lead .rd-kicker{font-size:10px;}
+    #runDownList article.lead .rd-factbox{margin-top:10px;padding:10px 12px;border-top:1px dashed var(--border-glow);border-bottom:1px dashed var(--border-glow);background:#faf6ec;}
+    #runDownList article.lead .rd-factbox-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:900;letter-spacing:2px;color:var(--red);margin-bottom:4px;}
     #runDownList article.lead .rd-factbox ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:3px 14px;}
-    #runDownList article.lead .rd-factbox li{font-family:Georgia,'Times New Roman',serif;font-size:10px;line-height:1.35;color:var(--text);padding-left:10px;position:relative;}
-    #runDownList article.lead .rd-factbox li::before{content:"\25B6";position:absolute;left:0;top:0;color:#e94560;font-size:7px;}
-    #runDownList article.lead .rd-factbox li b{color:#ffd700;font-weight:900;}
-    #runDownList article.lead .rd-pullquote{margin-top:8px;padding:6px 12px;border-left:3px solid #e94560;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:11px;line-height:1.4;color:var(--text-dim);}
-    #runDownList article.lead .rd-pullquote cite{display:block;margin-top:3px;font-style:normal;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+    #runDownList article.lead .rd-factbox li{font-family:Georgia,'Times New Roman',serif;font-size:11px;line-height:1.4;color:var(--text);padding-left:10px;position:relative;}
+    #runDownList article.lead .rd-factbox li::before{content:"\25B6";position:absolute;left:0;top:0;color:var(--red);font-size:7px;}
+    #runDownList article.lead .rd-factbox li b{color:#1a1611;font-weight:900;}
+    #runDownList article.lead .rd-pullquote{margin-top:10px;padding:6px 14px;border-left:3px solid var(--red);font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:13px;line-height:1.45;color:var(--text-dim);}
+    #runDownList article.lead .rd-pullquote cite{display:block;margin-top:4px;font-style:normal;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
     @media (max-width:900px){
       #runDownList{grid-template-columns:repeat(2,1fr);}
-      #runDownList article{border-right:1px solid rgba(111,184,150,0.15);}
-      #runDownList article:nth-child(3n){border-right:1px solid rgba(111,184,150,0.15);}
+      #runDownList article{border-right:1px solid var(--border);}
+      #runDownList article:nth-child(3n){border-right:1px solid var(--border);}
       #runDownList article:nth-child(2n){border-right:none;}
       #runDownList article.lead{grid-column:span 2;grid-row:auto;}
     }
     @media (max-width:560px){
       #runDownList{grid-template-columns:1fr;}
-      #runDownList article,#runDownList article.lead{grid-column:auto;grid-row:auto;border-right:none;border-bottom:1px solid rgba(111,184,150,0.15);padding:12px 4px;}
+      #runDownList article,#runDownList article.lead{grid-column:auto;grid-row:auto;border-right:none;border-bottom:1px solid var(--border);padding:14px 4px;}
     }
   </style>
   <style>
@@ -2186,7 +2165,7 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   </div>
 
   <!-- IRAN WAR — NO DEAL BANNER -->
-  <div class="gameday-banner" id="iranWarBanner" style="background:linear-gradient(135deg,rgba(80,10,10,0.3),rgba(180,40,40,0.12),rgba(30,10,10,0.25));border-color:rgba(255,60,60,0.6);position:relative;overflow:hidden;">
+  <div class="gameday-banner" id="iranWarBanner" style="background:#ffffff;border:1px solid var(--border);border-left:3px solid var(--red);position:relative;overflow:hidden;">
     <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1a0505,#e94560,#ff4444,#ffa500,#e94560,#1a0505);background-size:200% 100%;animation:iranStripe 3s linear infinite;"></div>
     <style>
       @keyframes iranStripe{0%{background-position:0% 0}100%{background-position:200% 0}}
@@ -6053,19 +6032,11 @@ async function fetchWorldCards() {
   setInterval(tryFetch, 3600000); // refresh every hour
 })();
 
-// ===== AUTO DAY/NIGHT THEME =====
+// ===== NEWSPRINT THEME (always light) =====
 function applyAutoTheme() {
-  var hour = new Date().getHours();
-  // Day mode: 7 AM to 7 PM (Seattle time assumed)
-  var isDay = hour >= 7 && hour < 19;
-  var override = localStorage.getItem('themeOverride');
-  if (override) {
-    document.body.classList.toggle('light-mode', override === 'light');
-    updateToggleIcon(override === 'light');
-  } else {
-    document.body.classList.toggle('light-mode', isDay);
-    updateToggleIcon(isDay);
-  }
+  // Newsprint is the identity of the site; always render light-mode.
+  document.body.classList.add('light-mode');
+  updateToggleIcon(true);
 }
 function updateToggleIcon(isLight) {
   var btn = document.getElementById('themeToggle');
