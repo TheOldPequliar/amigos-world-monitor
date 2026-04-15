@@ -1761,6 +1761,9 @@ body.light-mode .mountain-banner { opacity: 0.75; }
     #runDownList .rd-kicker.urgent{color:var(--red);}
     #runDownList .rd-head{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:900;line-height:1.2;color:var(--text);margin:0 0 6px 0;letter-spacing:-0.2px;}
     #runDownList .rd-dek{font-family:Georgia,'Times New Roman',serif;font-size:11px;line-height:1.45;color:var(--text-muted);margin:0;}
+    #runDownList .rd-src{margin-top:5px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;}
+    #runDownList .rd-src a{color:#6fb896;text-decoration:none;border-bottom:1px dotted rgba(111,184,150,0.5);margin-right:6px;}
+    #runDownList .rd-src a:hover{color:#ffd700;border-bottom-color:#ffd700;}
     #runDownList article.lead{grid-column:span 2;grid-row:span 2;padding-bottom:14px;}
     #runDownList article.lead .rd-head{font-size:22px;line-height:1.15;color:var(--text);}
     #runDownList article.lead .rd-dek{font-size:13px;line-height:1.55;color:var(--text);}
@@ -1778,11 +1781,12 @@ body.light-mode .mountain-banner { opacity: 0.75; }
     }
   </style>
   <style>
-    .top-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;align-items:start;}
-    .top-split > #theRunDown{grid-column:1;grid-row:1;margin-bottom:0;}
-    .top-split > #iranWarBanner{grid-column:2;grid-row:1;margin-bottom:0;}
+    .top-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;align-items:stretch;}
+    .top-split > #theRunDown{grid-column:1;grid-row:1;margin-bottom:0;display:flex;flex-direction:column;height:100%;}
+    .top-split > #iranWarBanner{grid-column:2;grid-row:1;margin-bottom:0;display:flex;flex-direction:column;height:100%;}
+    .top-split > #theRunDown #runDownList{flex:1 1 auto;align-content:start;}
     .top-split > #trackTroops{grid-column:1 / -1;grid-row:2;margin-bottom:0;}
-    @media (max-width:900px){.top-split{grid-template-columns:1fr;}.top-split > #theRunDown,.top-split > #iranWarBanner,.top-split > #trackTroops{grid-column:1;grid-row:auto;}}
+    @media (max-width:900px){.top-split{grid-template-columns:1fr;align-items:start;}.top-split > #theRunDown,.top-split > #iranWarBanner,.top-split > #trackTroops{grid-column:1;grid-row:auto;height:auto;}}
   </style>
   <div class="top-split">
   <div id="theRunDown">
@@ -1798,36 +1802,69 @@ body.light-mode .mountain-banner { opacity: 0.75; }
         <span class="rd-kicker">&#9888;&#65039; Iran War &middot; Day 45</span>
         <h3 class="rd-head">Round 2 Iran Talks Back On The Table As Hormuz Blockade Hits Day 2</h3>
         <p class="rd-dek">White House says it&rsquo;s &ldquo;open to further talks&rdquo; after the Pakistan marathon round collapsed. Iran defiant, calling the blockade &ldquo;piracy,&rdquo; but 14 non-Iranian ships have transited since the order. Ceasefire expires Apr 21 &mdash; seven days to find a deal before the whole thing catches fire again.</p>
+        <div class="rd-src">
+          <a href="https://www.reuters.com/world/middle-east/" target="_blank" rel="noopener">Reuters</a>
+          <a href="https://apnews.com/hub/iran" target="_blank" rel="noopener">AP</a>
+          <a href="https://www.aljazeera.com/tag/iran/" target="_blank" rel="noopener">Al Jazeera</a>
+        </div>
       </article>
       <article>
         <span class="rd-kicker">&#9878;&#65039; Epstein Files</span>
         <h3 class="rd-head">Fed Judge Tosses Trump&rsquo;s WSJ Lawsuit</h3>
         <p class="rd-dek">Court rules Trump came &ldquo;nowhere close&rdquo; to the &ldquo;actual malice&rdquo; standard over reporting on the 50th-birthday Epstein letter. Fourth news cycle for that letter.</p>
+        <div class="rd-src">
+          <a href="https://www.wsj.com/politics" target="_blank" rel="noopener">WSJ</a>
+          <a href="https://apnews.com/hub/donald-trump" target="_blank" rel="noopener">AP</a>
+        </div>
       </article>
       <article>
         <span class="rd-kicker urgent">&#128680; Tomorrow</span>
         <h3 class="rd-head">Tax Day Is Wednesday &mdash; File Or Extend</h3>
         <p class="rd-dek">March CPI just printed 3.3% (up from 2.4% in Feb) &mdash; war-driven inflation biting. IRS still wants its cut by midnight Wed.</p>
+        <div class="rd-src">
+          <a href="https://www.bls.gov/cpi/" target="_blank" rel="noopener">BLS</a>
+          <a href="https://www.irs.gov/filing" target="_blank" rel="noopener">IRS</a>
+        </div>
       </article>
       <article>
         <span class="rd-kicker">&#128200; Markets</span>
         <h3 class="rd-head">WTI Settles ~$91 (&darr;~8%) On Deal Hopes</h3>
         <p class="rd-dek">Worst WTI day in weeks &mdash; first close below $92 since the blockade order, erasing Monday&rsquo;s spike toward $105. S&amp;P 500 closed ~6,906 (+0.3%). JPM, Citi, Wells, BofA all report Q1 this week.</p>
+        <div class="rd-src">
+          <a href="https://www.reuters.com/markets/commodities/" target="_blank" rel="noopener">Reuters</a>
+          <a href="https://www.cnbc.com/energy/" target="_blank" rel="noopener">CNBC</a>
+          <a href="https://www.bloomberg.com/markets" target="_blank" rel="noopener">Bloomberg</a>
+        </div>
       </article>
       <article>
         <span class="rd-kicker">&#9971; Masters</span>
         <h3 class="rd-head">Rory Wins Back-To-Back At Augusta</h3>
         <p class="rd-dek">Beat Scheffler by 1 at -12. Fourth repeat champion in Masters history, first since Tiger &rsquo;01&ndash;&rsquo;02. Career Grand Slam x2. Legend cemented.</p>
+        <div class="rd-src">
+          <a href="https://www.masters.com/" target="_blank" rel="noopener">Masters.com</a>
+          <a href="https://www.espn.com/golf/" target="_blank" rel="noopener">ESPN</a>
+          <a href="https://www.pgatour.com/" target="_blank" rel="noopener">PGA Tour</a>
+        </div>
       </article>
       <article>
         <span class="rd-kicker">&#9918; Mariners</span>
         <h3 class="rd-head">Sweep Of Houston Pushes Mariners Back To .500</h3>
         <p class="rd-dek">9-9 with a 5-game win streak. Tuesday cap: 6-2 behind Naylor (2 HR, 5 RBI) and Kirby (7.2 IP). Padres series opens Wednesday in San Diego.</p>
+        <div class="rd-src">
+          <a href="https://www.mlb.com/mariners" target="_blank" rel="noopener">MLB.com</a>
+          <a href="https://www.espn.com/mlb/team/_/name/sea/seattle-mariners" target="_blank" rel="noopener">ESPN</a>
+          <a href="https://www.seattletimes.com/sports/mariners/" target="_blank" rel="noopener">Seattle Times</a>
+        </div>
       </article>
       <article>
         <span class="rd-kicker">&#128176; Scandal</span>
         <h3 class="rd-head">Polymarket Insider Probe Widens To 50+ Accounts</h3>
         <p class="rd-dek">$200M+ traded on Iran war markets, with bets placed hours before the ceasefire. Congress demanding an investigation.</p>
+        <div class="rd-src">
+          <a href="https://www.bloomberg.com/" target="_blank" rel="noopener">Bloomberg</a>
+          <a href="https://www.ft.com/" target="_blank" rel="noopener">FT</a>
+          <a href="https://polymarket.com/" target="_blank" rel="noopener">Polymarket</a>
+        </div>
       </article>
     </div>
   </div>
