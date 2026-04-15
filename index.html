@@ -1729,63 +1729,37 @@ body.light-mode .mountain-banner { opacity: 0.75; }
 
 <div class="main">
 
-  <!-- &#9552;&#9552;&#9552; SEATTLE SPORTS (MOVED TO TOP) &#9552;&#9552;&#9552; -->
+  <!-- ═══ FROM THE EDITOR — daily personal note ═══ -->
   <style>
-    .sports-compact{margin-bottom:14px;}
-    .sports-compact .section-header{margin-bottom:6px;}
-    .sports-compact .section-tag{font-size:9px;padding:3px 8px;}
-    .sports-compact .section-quip{font-size:9px;}
-    .sports-compact .cards-row{gap:8px;}
-    .sports-compact .card{padding:10px 12px;min-height:0;}
-    .sports-compact .card-team-name{font-size:11px;letter-spacing:2px;margin-bottom:3px;}
-    .sports-compact .card-score{font-size:16px;margin-bottom:2px;}
-    .sports-compact .card-detail{font-size:9px;margin-bottom:3px;}
-    .sports-compact .card-next{font-size:8px;margin-bottom:4px;}
-    .sports-compact .card-quip{font-size:8px;line-height:1.4;max-height:3.6em;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+    .editor-note{margin:0 0 16px 0;padding:14px 20px 14px 22px;position:relative;background:linear-gradient(135deg,rgba(74,46,26,0.35),rgba(36,22,16,0.22) 70%,transparent);border-left:3px solid #b87333;border-top:1px solid rgba(184,115,51,0.25);border-bottom:1px solid rgba(184,115,51,0.25);font-family:Georgia,'Playfair Display',serif;overflow:hidden;}
+    .editor-note::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='80'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.85' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.22 0 0 0 0 0.08 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");opacity:0.18;mix-blend-mode:overlay;pointer-events:none;}
+    .editor-note .en-tag{font-size:9px;font-weight:700;letter-spacing:3px;color:#d4af37;text-transform:uppercase;margin-bottom:4px;font-family:'JetBrains Mono',monospace;font-variant:small-caps;text-shadow:0 1px 0 rgba(0,0,0,0.5);}
+    .editor-note .en-tag .en-date{color:#8a6a48;margin-left:8px;font-weight:400;letter-spacing:2px;}
+    .editor-note .en-text{font-size:14px;line-height:1.65;color:#f4e8d0;font-style:italic;}
+    .editor-note .en-text .en-emph{font-style:normal;color:#d4a017;font-weight:600;}
+    .editor-note .en-sig{margin-top:6px;font-size:10px;color:#c9a878;letter-spacing:1px;font-style:italic;text-align:right;}
+    .editor-note .en-sig::before{content:"\2014 ";color:#8a6a48;font-style:normal;}
   </style>
-  <div class="sports-compact">
-    <div class="section-header">
-      <span class="section-tag">SEATTLE SPORTS</span>
-      <span class="section-quip">Pain is just weakness leaving your wallet at the stadium.</span>
+  <div class="editor-note">
+    <div class="en-tag">From the Editor <span class="en-date" id="editorNoteDate">&middot; April 14, 2026</span></div>
+    <div class="en-text">
+      Pour something. Sit down. The world will still be on fire when you stand up &mdash; but at least you&rsquo;ll have read about it on purpose. Currently working through Itzhak Bentov&rsquo;s <span class="en-emph">Stalking the Wild Pendulum</span>, which is &mdash; among other things &mdash; an argument that the universe is a slow oscillation we&rsquo;re all riding without quite realizing it. Hard to think about Hormuz the same way after that.
     </div>
-    <div class="cards-row" id="sportsCards">
-      <!-- Seahawks -->
-      <div class="card card-seahawks fade-in">
-        <div class="card-team-name">SEAHAWKS</div>
-        <div class="card-score" id="seahawksRecord">Loading...</div>
-        <div class="card-detail" id="seahawksDetail">--</div>
-        <div class="card-next" id="seahawksNext">NEXT: --</div>
-        <div class="card-quip" id="seahawksQuip">Super Bowl LX champs &bull; Draft Apr 23&ndash;25 in Pittsburgh &bull; Pick #32 &bull; Need EDGE, CB, S, RB.</div>
-      </div>
-      <!-- Mariners -->
-      <div class="card card-mariners fade-in">
-        <div class="card-team-name">MARINERS</div>
-        <div class="card-score" id="marinersRecord">Loading...</div>
-        <div class="card-detail" id="marinersDetail">--</div>
-        <div class="card-next" id="marinersNext">NEXT: --</div>
-        <div class="card-quip" id="marinersQuip">9-9 &bull; Swept Houston &bull; 5-game win streak &bull; Kirby, Miller dealing &bull; Padres next.</div>
-      </div>
-      <!-- Kraken -->
-      <div class="card card-kraken fade-in">
-        <div class="card-team-name">KRAKEN</div>
-        <div class="card-score" id="krakenRecord">Loading...</div>
-        <div class="card-detail" id="krakenDetail">--</div>
-        <div class="card-next" id="krakenNext">NEXT: --</div>
-        <div class="card-quip" id="krakenQuip">Eliminated &bull; 3 games left &bull; Playing for draft position and dignity. Mostly draft position.</div>
-      </div>
-      <!-- UW Football -->
-      <div class="card card-uw fade-in">
-        <div class="card-team-name">UW HUSKIES</div>
-        <div class="card-score" id="uwRecord">Loading...</div>
-        <div class="card-detail" id="uwDetail">--</div>
-        <div class="card-next" id="uwNext">NEXT: --</div>
-        <div class="card-quip" id="uwQuip">Big Ten money, Pac-12 memories.</div>
-      </div>
-    </div>
+    <div class="en-sig">T.</div>
   </div>
+  <script>
+    // Auto-fill today's date in From The Editor (format: April 14, 2026)
+    (function(){
+      var el = document.getElementById('editorNoteDate');
+      if(!el) return;
+      var d = new Date();
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      el.innerHTML = '&middot; ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    })();
+  </script>
 
   <!-- &#9552;&#9552;&#9552; PNW MOUNTAIN BANNER (REMOVED) &#9552;&#9552;&#9552; -->
-  <!-- Skyline SVG replaced by Seattle Sports section above -->
+  <!-- Sports cards moved to Frag Party section per Apr 14 redesign -->
 
   <!-- &#9552;&#9552;&#9552; HEADER &#9552;&#9552;&#9552; -->
   <header class="header">
@@ -3367,7 +3341,61 @@ body.light-mode .mountain-banner { opacity: 0.75; }
     <div class="lm-kicker">Scoreboards, weather, the Mariners Meter&trade;, Masters week, and the card market where every hobby-box is a Klobb.</div>
   </div>
 
-  <!-- &#9552;&#9552;&#9552; SEATTLE SPORTS &#9552;&#9552;&#9552; -->
+  <!-- ═══ SEATTLE TEAMS &mdash; the four horsemen of mild disappointment ═══ -->
+  <style>
+    .sports-compact{margin-bottom:14px;}
+    .sports-compact .section-header{margin-bottom:6px;}
+    .sports-compact .section-tag{font-size:9px;padding:3px 8px;}
+    .sports-compact .section-quip{font-size:9px;}
+    .sports-compact .cards-row{gap:8px;}
+    .sports-compact .card{padding:10px 12px;min-height:0;}
+    .sports-compact .card-team-name{font-size:11px;letter-spacing:2px;margin-bottom:3px;}
+    .sports-compact .card-score{font-size:16px;margin-bottom:2px;}
+    .sports-compact .card-detail{font-size:9px;margin-bottom:3px;}
+    .sports-compact .card-next{font-size:8px;margin-bottom:4px;}
+    .sports-compact .card-quip{font-size:9px;line-height:1.45;max-height:4.4em;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  </style>
+  <div class="sports-compact">
+    <div class="section-header">
+      <span class="section-tag">SEATTLE TEAMS</span>
+      <span class="section-quip">Pain is just weakness leaving your wallet at the stadium.</span>
+    </div>
+    <div class="cards-row" id="sportsCards">
+      <!-- Seahawks -->
+      <div class="card card-seahawks fade-in">
+        <div class="card-team-name">SEAHAWKS</div>
+        <div class="card-score" id="seahawksRecord">Loading...</div>
+        <div class="card-detail" id="seahawksDetail">--</div>
+        <div class="card-next" id="seahawksNext">NEXT: --</div>
+        <div class="card-quip" id="seahawksQuip">Super Bowl LX champs &bull; Draft Apr 23&ndash;25 in Pittsburgh &bull; Pick #32 &bull; Need EDGE, CB, S, RB.</div>
+      </div>
+      <!-- Mariners -->
+      <div class="card card-mariners fade-in">
+        <div class="card-team-name">MARINERS</div>
+        <div class="card-score" id="marinersRecord">Loading...</div>
+        <div class="card-detail" id="marinersDetail">--</div>
+        <div class="card-next" id="marinersNext">NEXT: --</div>
+        <div class="card-quip" id="marinersQuip">9-9 &bull; Swept Houston &bull; 5-game win streak &bull; Kirby, Miller dealing &bull; Padres next.</div>
+      </div>
+      <!-- Kraken -->
+      <div class="card card-kraken fade-in">
+        <div class="card-team-name">KRAKEN</div>
+        <div class="card-score" id="krakenRecord">Loading...</div>
+        <div class="card-detail" id="krakenDetail">--</div>
+        <div class="card-next" id="krakenNext">NEXT: --</div>
+        <div class="card-quip" id="krakenQuip">Eliminated &bull; 3 games left &bull; Playing for draft position and dignity. Mostly draft position.</div>
+      </div>
+      <!-- UW Football -->
+      <div class="card card-uw fade-in">
+        <div class="card-team-name">UW HUSKIES</div>
+        <div class="card-score" id="uwRecord">Loading...</div>
+        <div class="card-detail" id="uwDetail">--</div>
+        <div class="card-next" id="uwNext">NEXT: --</div>
+        <div class="card-quip" id="uwQuip">Big Ten money, Pac-12 memories.</div>
+      </div>
+    </div>
+  </div>
+
   <!-- WEATHER STRIP -->
   <div class="weather-label">
     <span class="weather-label-left">&#9729; CURRENT CONDITIONS</span>
