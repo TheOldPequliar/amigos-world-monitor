@@ -3226,18 +3226,100 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   </div>
 
 
-  <!-- ═══ ESPN LIVE SCOREBOARD ═══ -->
-  <div style="margin-bottom:6px;padding:0 4px"><span style="font-size:9px;font-weight:700;letter-spacing:3px;color:var(--text-dim)">&#128250; LIVE SCOREBOARDS</span></div>
+  <!-- ═══ LIVE SCOREBOARDS (MLB + NHL via official APIs) ═══ -->
+  <div style="margin-bottom:6px;padding:0 4px;display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-size:9px;font-weight:700;letter-spacing:3px;color:var(--text-dim)">&#128250; LIVE SCOREBOARDS</span>
+    <span style="font-size:7px;letter-spacing:2px;color:var(--text-muted)">MLB STATSAPI &middot; NHL API &middot; AUTO-REFRESH 60s</span>
+  </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-    <div style="border-radius:10px;overflow:hidden;border:1px solid var(--border);height:360px;background:var(--surface);">
-      <div style="font-size:8px;font-weight:900;letter-spacing:2px;color:var(--accent);padding:8px 12px;border-bottom:1px solid var(--border);">&#9918; MLB SCORES &mdash; TODAY</div>
-      <iframe src="https://www.espn.com/mlb/scoreboard" title="ESPN MLB Scoreboard" style="width:100%;height:calc(100% - 30px);border:none;" loading="lazy"></iframe>
+    <div style="border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--surface);">
+      <div style="font-size:8px;font-weight:900;letter-spacing:2px;color:var(--accent);padding:8px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;">
+        <span>&#9918; MLB SCORES &mdash; TODAY</span>
+        <a href="https://www.espn.com/mlb/scoreboard" target="_blank" style="color:var(--text-muted);text-decoration:none;font-size:7px;">ESPN &#8599;</a>
+      </div>
+      <div id="mlbScoreboard" style="padding:8px 10px;max-height:360px;overflow-y:auto;font-family:'JetBrains Mono',monospace;font-size:10px;">Loading...</div>
     </div>
-    <div style="border-radius:10px;overflow:hidden;border:1px solid var(--border);height:360px;background:var(--surface);">
-      <div style="font-size:8px;font-weight:900;letter-spacing:2px;color:var(--accent);padding:8px 12px;border-bottom:1px solid var(--border);">&#127954; NHL SCORES &mdash; FINAL WEEK (Season ends Wed Apr 15 &bull; Stanley Cup Playoffs Apr 18 &bull; Kraken eliminated)</div>
-      <iframe src="https://www.espn.com/nhl/scoreboard" title="ESPN NHL Scoreboard" style="width:100%;height:calc(100% - 30px);border:none;" loading="lazy"></iframe>
+    <div style="border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--surface);">
+      <div style="font-size:8px;font-weight:900;letter-spacing:2px;color:var(--accent);padding:8px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;">
+        <span>&#127954; NHL SCORES &mdash; FINAL WEEK</span>
+        <a href="https://www.espn.com/nhl/scoreboard" target="_blank" style="color:var(--text-muted);text-decoration:none;font-size:7px;">ESPN &#8599;</a>
+      </div>
+      <div id="nhlScoreboard" style="padding:8px 10px;max-height:360px;overflow-y:auto;font-family:'JetBrains Mono',monospace;font-size:10px;">Loading...</div>
     </div>
   </div>
+  <script>
+  (function(){
+    function row(away, home, awayScore, homeScore, status, extra){
+      var winA = awayScore > homeScore;
+      var winH = homeScore > awayScore;
+      var statusColor = /final/i.test(status) ? 'var(--text-muted)' : (/progress|live|\d+(st|nd|rd|th)|top|bot|period/i.test(status) ? '#6fb896' : 'var(--text-muted)');
+      return '<div style="display:grid;grid-template-columns:1fr 38px;gap:6px;padding:6px 4px;border-bottom:1px solid rgba(255,255,255,0.04);">'
+        + '<div>'
+        +   '<div style="color:'+(winA?'#6fb896':'var(--text)')+';font-weight:'+(winA?'700':'400')+';">'+away+' <span style="float:right;">'+(awayScore!=null?awayScore:'')+'</span></div>'
+        +   '<div style="color:'+(winH?'#6fb896':'var(--text)')+';font-weight:'+(winH?'700':'400')+';">'+home+' <span style="float:right;">'+(homeScore!=null?homeScore:'')+'</span></div>'
+        +   (extra?'<div style="font-size:8px;color:var(--text-muted);margin-top:2px;">'+extra+'</div>':'')
+        + '</div>'
+        + '<div style="font-size:8px;color:'+statusColor+';text-align:right;letter-spacing:1px;align-self:center;">'+status+'</div>'
+        + '</div>';
+    }
+    function loadMLB(){
+      var today = new Date().toISOString().slice(0,10);
+      fetch('https://statsapi.mlb.com/api/v1/schedule?sportId=1&date='+today+'&hydrate=linescore')
+        .then(function(r){return r.json();})
+        .then(function(d){
+          var games = (d.dates && d.dates[0] && d.dates[0].games) || [];
+          if(!games.length){ document.getElementById('mlbScoreboard').innerHTML = '<div style="color:var(--text-muted);padding:20px;text-align:center;">No games scheduled today.</div>'; return; }
+          var html = games.map(function(g){
+            var away = g.teams.away.team.abbreviation || g.teams.away.team.name;
+            var home = g.teams.home.team.abbreviation || g.teams.home.team.name;
+            var as = g.teams.away.score!=null ? g.teams.away.score : null;
+            var hs = g.teams.home.score!=null ? g.teams.home.score : null;
+            var status = g.status.detailedState || g.status.abstractGameState;
+            if(g.linescore && g.linescore.currentInningOrdinal && /progress/i.test(g.status.detailedState)){
+              status = (g.linescore.inningState||'').slice(0,3).toUpperCase() + ' ' + g.linescore.currentInningOrdinal;
+            }
+            if(/scheduled|pre/i.test(g.status.abstractGameState)){
+              var t = new Date(g.gameDate).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/Los_Angeles'});
+              status = t+' PT';
+            }
+            return row(away, home, as, hs, status, '');
+          }).join('');
+          document.getElementById('mlbScoreboard').innerHTML = html;
+        })
+        .catch(function(e){ document.getElementById('mlbScoreboard').innerHTML = '<div style="color:var(--red);padding:10px;">MLB API error. <a href="https://www.espn.com/mlb/scoreboard" target="_blank" style="color:var(--accent);">Open ESPN &#8599;</a></div>'; });
+    }
+    function loadNHL(){
+      fetch('https://api-web.nhle.com/v1/schedule/now')
+        .then(function(r){return r.json();})
+        .then(function(d){
+          var today = (d.gameWeek && d.gameWeek[0] && d.gameWeek[0].games) || [];
+          if(!today.length){ document.getElementById('nhlScoreboard').innerHTML = '<div style="color:var(--text-muted);padding:20px;text-align:center;">No games scheduled today.</div>'; return; }
+          var html = today.map(function(g){
+            var away = g.awayTeam.abbrev;
+            var home = g.homeTeam.abbrev;
+            var as = g.awayTeam.score!=null ? g.awayTeam.score : null;
+            var hs = g.homeTeam.score!=null ? g.homeTeam.score : null;
+            var status = g.gameState;
+            if(g.gameState==='LIVE' || g.gameState==='CRIT'){
+              var per = g.periodDescriptor ? g.periodDescriptor.number : '';
+              status = 'P'+per+(g.clock?' '+g.clock.timeRemaining:'');
+            } else if(g.gameState==='FUT' || g.gameState==='PRE'){
+              var t = new Date(g.startTimeUTC).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/Los_Angeles'});
+              status = t+' PT';
+            } else if(g.gameState==='OFF' || g.gameState==='FINAL'){
+              status = 'FINAL';
+            }
+            return row(away, home, as, hs, status, '');
+          }).join('');
+          document.getElementById('nhlScoreboard').innerHTML = html;
+        })
+        .catch(function(e){ document.getElementById('nhlScoreboard').innerHTML = '<div style="color:var(--red);padding:10px;">NHL API error. <a href="https://www.espn.com/nhl/scoreboard" target="_blank" style="color:var(--accent);">Open ESPN &#8599;</a></div>'; });
+    }
+    loadMLB(); loadNHL();
+    setInterval(loadMLB, 60000);
+    setInterval(loadNHL, 60000);
+  })();
+  </script>
 
   <!-- ═══ THE MASTERS 2026 ═══ -->
   <div style="background:linear-gradient(135deg,rgba(0,100,0,0.1),rgba(255,215,0,0.06));border:1px solid rgba(0,100,0,0.3);border-left:3px solid #006400;border-radius:10px;padding:16px 18px;margin-bottom:16px;position:relative;overflow:hidden;">
