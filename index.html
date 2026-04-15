@@ -3,7 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMIGOS WORLD MONITOR</title>
+<title>Four Fingers News &mdash; The news, neat.</title>
+<meta name="description" content="Four Fingers News &mdash; The news, neat. Hard news with a slanted, joking, cynical take. Pour first. Read second.">
+<meta name="theme-color" content="#0f1419">
+<link rel="canonical" href="https://fourfingersnews.com/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Four Fingers News">
+<meta property="og:title" content="Four Fingers News &mdash; The news, neat.">
+<meta property="og:description" content="Pour first. Read second. Two fingers for the markets, two for the politics.">
+<meta property="og:url" content="https://fourfingersnews.com/">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Four Fingers News &mdash; The news, neat.">
+<meta name="twitter:description" content="Pour first. Read second. Two fingers for the markets, two for the politics.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='14' y='10' width='36' height='44' rx='3' ry='3' fill='none' stroke='%2300d4ff' stroke-width='3'/%3E%3Crect x='17' y='28' width='30' height='23' fill='%23ff8c00' opacity='0.9'/%3E%3Ccircle cx='40' cy='34' r='3' fill='%23fff' opacity='0.7'/%3E%3C/svg%3E">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&display=swap');
 
@@ -148,7 +162,10 @@
     color: var(--text-dim);
     letter-spacing: 2px;
     margin-top: 2px;
+    transition: opacity 0.35s ease;
+    min-height: 1.2em;
   }
+  .header-left { display: flex; align-items: center; }
 
   .header-right {
     display: flex;
@@ -1753,12 +1770,47 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   <!-- &#9552;&#9552;&#9552; HEADER &#9552;&#9552;&#9552; -->
   <header class="header">
     <div class="header-left">
-      <!-- logo icon removed -->
+      <!-- whiskey-glass mark -->
+      <svg width="48" height="48" viewBox="0 0 64 64" style="flex-shrink:0;margin-right:14px;filter:drop-shadow(0 0 8px rgba(0,212,255,0.35));" aria-hidden="true">
+        <rect x="14" y="10" width="36" height="44" rx="3" ry="3" fill="none" stroke="#00d4ff" stroke-width="2.5"/>
+        <rect x="17" y="28" width="30" height="23" fill="#ff8c00" opacity="0.92"/>
+        <rect x="17" y="28" width="30" height="3" fill="#ffb347" opacity="0.9"/>
+        <circle cx="40" cy="35" r="3" fill="#fff" opacity="0.65"/>
+        <circle cx="36" cy="42" r="1.6" fill="#fff" opacity="0.45"/>
+      </svg>
       <div>
-        <div class="header-title">AMIGOS WORLD MONITOR</div>
-        <div class="header-subtitle">EVERYTHING THAT MATTERS. MOST OF IT DOESN'T.</div>
+        <div class="header-title" style="font-family:Georgia,'Playfair Display',serif;letter-spacing:2px;">FOUR FINGERS NEWS</div>
+        <div class="header-subtitle" id="ffnTagline">THE NEWS, NEAT.</div>
       </div>
     </div>
+    <script>
+      // Tagline rotator — keeps all the contenders in circulation
+      (function(){
+        var taglines = [
+          'THE NEWS, NEAT.',
+          'POUR FIRST. READ SECOND.',
+          'TWO FINGERS FOR THE MARKETS, TWO FOR THE POLITICS.',
+          'EVERYTHING THAT MATTERS. MOST OF IT DOESN&rsquo;T.',
+          'HARD NEWS. SOFT IRONY. ROCKS OPTIONAL.',
+          'SERVED NEAT. NEVER WATERED DOWN.',
+          'NO ICE. NO CHASER. NO SPIN.'
+        ];
+        var i = 0;
+        var el = document.getElementById('ffnTagline');
+        if(!el) return;
+        // pick a random starting tagline so it&rsquo;s different each pageload
+        i = Math.floor(Math.random() * taglines.length);
+        el.innerHTML = taglines[i];
+        setInterval(function(){
+          i = (i + 1) % taglines.length;
+          el.style.opacity = '0';
+          setTimeout(function(){
+            el.innerHTML = taglines[i];
+            el.style.opacity = '';
+          }, 350);
+        }, 9000);
+      })();
+    </script>
     <div class="header-right">
       <div class="live-indicator">
         <div class="live-dot"></div>
@@ -3712,7 +3764,7 @@ body.light-mode .mountain-banner { opacity: 0.75; }
 <!-- ═══ FOOTER ═══ -->
   <div class="footer">
     <div class="footer-text">
-      <span class="highlight">AMIGOS WORLD MONITOR</span> &#8212; BUILT BY AI &#8212; TRUSTED BY NOBODY
+      <span class="highlight">FOUR FINGERS NEWS</span> &#8212; <a href="https://fourfingersnews.com/" style="color:inherit;text-decoration:none;border-bottom:1px dotted currentColor;">fourfingersnews.com</a> &#8212; BUILT BY AI &#8212; TRUSTED BY NOBODY &#8212; SERVED NEAT
     </div>
     <div class="footer-quip">"If you're reading this at work, we won't tell."</div>
     <div class="last-refresh">Last refresh: <span id="lastRefresh">--</span></div>
