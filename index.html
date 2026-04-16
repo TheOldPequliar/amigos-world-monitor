@@ -1461,9 +1461,8 @@ body.light-mode .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   font-weight: 600;
-  color: #f4e8d0;
+  color: var(--text);
   letter-spacing: 0.5px;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
 }
 .chyron-track {
   display: inline-block;
@@ -1476,16 +1475,16 @@ body.light-mode .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
   100% { transform: translateX(-50%); }
 }
 .chyron-item { display: inline; padding: 0 32px; }
-.chyron-sep { color: rgba(212, 175, 55, 0.6); padding: 0 8px; }
+.chyron-sep { color: var(--red); padding: 0 8px; }
 .chyron-label {
   display: inline-block;
-  background: rgba(255,255,255,0.12);
-  color: #fff;
+  background: var(--text);
+  color: #ffffff;
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 2px;
   padding: 2px 8px;
-  border-radius: 3px;
+  border-radius: 2px;
   margin-right: 8px;
   vertical-align: middle;
 }
