@@ -1510,10 +1510,11 @@ body.light-mode .mountain-banner { opacity: 0.75; }
 .section-nav a.active::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--red);}
 @media (max-width:700px){.section-nav a{padding:10px 12px;font-size:9px;letter-spacing:1.5px;}}
 /* ═══ Newsprint section masthead — full-width rule + kicker + hed + deck ═══ */
-.lan-masthead{margin:32px 0 14px 0;padding:18px 4px 12px 4px;position:relative;background:transparent;border:none;border-top:2px solid #1a1611;border-bottom:1px solid var(--border);border-radius:0;font-family:Georgia,'Playfair Display',serif;}
-.lan-masthead .lm-tag{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:6px;font-family:'JetBrains Mono',monospace;font-variant:small-caps;}
-.lan-masthead .lm-name{font-size:30px;font-weight:900;letter-spacing:0.5px;color:#1a1611;text-transform:uppercase;line-height:1.05;font-variant:small-caps;}
-.lan-masthead .lm-kicker{font-size:13px;font-style:italic;color:var(--text-dim);letter-spacing:0.2px;margin-top:6px;}
+.lan-masthead{margin:56px 0 18px 0;padding:14px 4px 14px 4px;position:relative;background:transparent;border:none;border-top:6px solid #121212;border-bottom:1px solid #121212;border-radius:0;font-family:Georgia,'Playfair Display',serif;}
+.lan-masthead .lm-tag{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:6px;font-family:'JetBrains Mono',monospace;font-variant:small-caps;display:flex;align-items:center;gap:6px;}
+.lan-masthead .lm-tag::before{content:"";display:inline-block;width:8px;height:8px;background:var(--red);}
+.lan-masthead .lm-name{font-size:36px;font-weight:900;letter-spacing:0.5px;color:#121212;text-transform:uppercase;line-height:1.0;font-variant:small-caps;}
+.lan-masthead .lm-kicker{font-size:13px;font-style:italic;color:var(--text-dim);letter-spacing:0.2px;margin-top:8px;}
 .lan-masthead .lm-kicker::before{content:"\201C ";color:var(--text-muted);font-style:normal;opacity:0.75;}
 .lan-masthead .lm-kicker::after{content:" \201D";color:var(--text-muted);font-style:normal;opacity:0.75;}
 .section-anchor{scroll-margin-top:70px;}
