@@ -1445,8 +1445,6 @@ body.light-mode .section-subtitle { color: #3c3c3c; }
 body.light-mode .card-score { color: #0c2c56; }
 body.light-mode .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
 /* Theme toggle */
-.theme-toggle { position:fixed; bottom:16px; right:16px; z-index:999; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:6px 12px; cursor:pointer; font-size:14px; transition:all 0.3s; box-shadow:0 2px 8px rgba(0,0,0,0.15); }
-.theme-toggle:hover { transform:scale(1.1); }
 
 /* ── Chyron Ticker — newsprint rule ── */
 .chyron {
@@ -5665,33 +5663,13 @@ async function fetchWorldCards() {
   setInterval(tryFetch, 3600000); // refresh every hour
 })();
 
-// ===== NEWSPRINT THEME (always light) =====
-function applyAutoTheme() {
-  // Newsprint is the identity of the site; always render light-mode.
-  document.body.classList.add('light-mode');
-  updateToggleIcon(true);
-}
-function updateToggleIcon(isLight) {
-  var btn = document.getElementById('themeToggle');
-  if (btn) btn.innerHTML = isLight ? '&#127769;' : '&#9728;&#65039;';
-}
-function toggleTheme() {
-  var isLight = document.body.classList.contains('light-mode');
-  if (isLight) {
-    document.body.classList.remove('light-mode');
-    localStorage.setItem('themeOverride', 'dark');
-    updateToggleIcon(false);
-  } else {
-    document.body.classList.add('light-mode');
-    localStorage.setItem('themeOverride', 'light');
-    updateToggleIcon(true);
-  }
-}
-applyAutoTheme();
-// Re-check every 10 minutes (in case user leaves it open across sunrise/sunset)
-setInterval(function() {
-  if (!localStorage.getItem('themeOverride')) applyAutoTheme();
-}, 600000);
+// ===== NEWSPRINT THEME (locked; day/night toggle removed Apr 15 2026) =====
+// Four Fingers News is a newsprint dispatch. The palette is the identity.
+// Belt-and-suspenders: the body tag already carries class="light-mode", this
+// just re-asserts it on boot in case something strips the class.
+document.body.classList.add('light-mode');
+// Clear any legacy override written to localStorage by the old toggle.
+try { localStorage.removeItem('themeOverride'); } catch(e) {}
 
 /* ===== HOUSING MARKET PULSE ===== */
 (function initHousing(){
@@ -5778,8 +5756,6 @@ setInterval(function() {
 })();
 </script>
 
-
-  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">&#9728;&#65039;</button>
 
 </body>
 </html>
