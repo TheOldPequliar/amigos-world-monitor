@@ -4747,19 +4747,22 @@ async function fetchWorldCards() {
   var suffixes = ['','','','','','%',''];
   try {
     var joined = symbols.join(',');
-    var yahooUrl = 'https://query1.finance.yahoo.com/v7/finance/quote?symbols=' + encodeURIComponent(joined) + '&fields=regularMarketPrice,regularMarketChangePercent';
-    var resp = await fetchViaProxy(yahooUrl);
-    if (!resp) throw new Error('All proxies failed');
-    var data = await resp.json();
-    var results = data.quoteResponse.result;
-    results.forEach(function(q) {
-      var idx = symbols.indexOf(q.symbol);
-      if (idx === -1) return;
-      var price = q.regularMarketPrice;
-      var pct = q.regularMarketChangePercent || 0;
-      var display = price > 10000 ? Math.round(price).toLocaleString() : price > 100 ? price.toFixed(1) : price.toFixed(2);
-      setTicker(names[idx], changes[idx], cards[idx], display, pct, prefixes[idx], suffixes[idx]);
+    // Fetch each symbol via v8 chart API (v7 is deprecated)
+    var fetches = symbols.map(function(sym, idx) {
+      return fetchViaProxy('https://query1.finance.yahoo.com/v8/finance/chart/' + encodeURIComponent(sym) + '?interval=1d&range=2d')
+        .then(function(resp) { return resp ? resp.json() : null; })
+        .then(function(data) {
+          if (!data || !data.chart || !data.chart.result) return;
+          var meta = data.chart.result[0].meta;
+          var price = meta.regularMarketPrice;
+          var prev = meta.chartPreviousClose || meta.previousClose || price;
+          var pct = prev ? ((price - prev) / prev) * 100 : 0;
+          var display = price > 10000 ? Math.round(price).toLocaleString() : price > 100 ? price.toFixed(1) : price.toFixed(2);
+          setTicker(names[idx], changes[idx], cards[idx], display, pct, prefixes[idx], suffixes[idx]);
+        }).catch(function() {});
     });
+    await Promise.all(fetches);
+    if (fetches.length === 0) throw new Error('No data');
   } catch(e) {
     // Fallback: try Alpha Vantage-free or just simulate from day seed
     console.log('Market ticker fetch failed, using simulated data:', e);
@@ -4817,17 +4820,21 @@ async function fetchWorldCards() {
     }
   }
   try {
-    var symbols = 'CL=F,BZ=F,NG=F';
-    var yahooUrl = 'https://query1.finance.yahoo.com/v7/finance/quote?symbols=' + encodeURIComponent(symbols) + '&fields=regularMarketPrice,regularMarketChangePercent';
-    var resp = await fetchViaProxy(yahooUrl);
-    if (!resp) throw new Error('All proxies failed');
-    var data = await resp.json();
-    var results = data.quoteResponse.result;
-    results.forEach(function(q) {
-      if (q.symbol === 'CL=F') setEnergy('wtiPrice','wtiChange', q.regularMarketPrice.toFixed(2), q.regularMarketChangePercent||0);
-      if (q.symbol === 'BZ=F') setEnergy('brentPrice','brentChange', q.regularMarketPrice.toFixed(2), q.regularMarketChangePercent||0);
-      if (q.symbol === 'NG=F') setEnergy('natgasPrice','natgasChange', q.regularMarketPrice.toFixed(2), q.regularMarketChangePercent||0);
+    // Fetch energy via v8 chart API (v7 deprecated)
+    var energySyms = [{sym:'CL=F',pId:'wtiPrice',cId:'wtiChange'},{sym:'BZ=F',pId:'brentPrice',cId:'brentChange'},{sym:'NG=F',pId:'natgasPrice',cId:'natgasChange'}];
+    var eFetches = energySyms.map(function(e) {
+      return fetchViaProxy('https://query1.finance.yahoo.com/v8/finance/chart/' + encodeURIComponent(e.sym) + '?interval=1d&range=2d')
+        .then(function(resp) { return resp ? resp.json() : null; })
+        .then(function(data) {
+          if (!data || !data.chart || !data.chart.result) return;
+          var meta = data.chart.result[0].meta;
+          var price = meta.regularMarketPrice;
+          var prev = meta.chartPreviousClose || meta.previousClose || price;
+          var pct = prev ? ((price - prev) / prev) * 100 : 0;
+          setEnergy(e.pId, e.cId, price.toFixed(2), pct);
+        }).catch(function() {});
     });
+    await Promise.all(eFetches);
   } catch(e) {
     console.log('Energy fetch failed, using simulated data:', e);
     var day = Math.floor((new Date() - new Date(2026,0,1))/86400000);
