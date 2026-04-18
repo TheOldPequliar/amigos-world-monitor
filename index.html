@@ -71,7 +71,7 @@
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: var(--bg);
-    z-index: 0;
+    z-index: -1;
     pointer-events: none;
   }
   .bg-grid::after { content: none; }
@@ -228,193 +228,6 @@
     font-size: 12px;
     color: var(--text-muted);
     font-style: italic;
-  }
-
-  /* ── Group Calendar ── */
-  .gcal-container {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 24px;
-  }
-  .gcal-legend {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-  }
-  .gcal-legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: var(--text-dim);
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.5px;
-  }
-  .gcal-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-    flex-shrink: 0;
-  }
-  /* Two-panel layout: month grid + agenda */
-  .gcal-panels {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 20px;
-    align-items: start;
-  }
-  @media(max-width:900px) { .gcal-panels { grid-template-columns: 1fr; } }
-
-  /* Monthly grid */
-  .gcal-month-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-  }
-  .gcal-month-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text);
-  }
-  .gcal-month-nav {
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text-dim);
-    padding: 4px 10px;
-    cursor: pointer;
-    font-size: 12px;
-    font-family: 'JetBrains Mono', monospace;
-    transition: all 0.2s;
-  }
-  .gcal-month-nav:hover { border-color: var(--accent); color: var(--accent); }
-  .gcal-weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
-  .gcal-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
-  }
-  .gcal-cell {
-    min-height: 70px;
-    padding: 4px;
-    border-radius: 6px;
-    transition: background 0.2s;
-    cursor: default;
-    position: relative;
-  }
-  .gcal-cell:hover { background: var(--surface-hover); }
-  .gcal-cell-empty { opacity: 0.3; }
-  .gcal-cell-today {
-    background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--accent);
-  }
-  .gcal-cell-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-dim);
-    margin-bottom: 3px;
-  }
-  .gcal-cell-today .gcal-cell-num { color: var(--accent); font-weight: 700; }
-  .gcal-cell-dots {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3px;
-  }
-  .gcal-cell-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-  }
-  .gcal-cell-evt {
-    font-size: 8px;
-    color: var(--text-dim);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.4;
-  }
-
-  /* Agenda sidebar */
-  .gcal-agenda {
-    border-left: 1px solid var(--border);
-    padding-left: 20px;
-    max-height: 480px;
-    overflow-y: auto;
-  }
-  @media(max-width:900px) { .gcal-agenda { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 16px; } }
-  .gcal-agenda-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--text-dim);
-    margin-bottom: 12px;
-  }
-  .gcal-agenda-day {
-    margin-bottom: 10px;
-  }
-  .gcal-agenda-date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-    letter-spacing: 1px;
-  }
-  .gcal-agenda-date-today { color: var(--accent); }
-  .gcal-agenda-evt {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    color: var(--text);
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    margin-bottom: 3px;
-  }
-  .gcal-agenda-evt-home {
-    border-color: rgba(0, 92, 92, 0.3);
-    background: rgba(0, 92, 92, 0.06);
-  }
-  .gcal-agenda-evt-personal {
-    border-color: rgba(255, 184, 0, 0.2);
-    background: rgba(255, 184, 0, 0.04);
-  }
-  .gcal-agenda-evt-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .gcal-agenda-evt-time {
-    color: var(--text-muted);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    margin-left: auto;
-    flex-shrink: 0;
   }
 
   /* ── Suggestion Box ── */
@@ -1315,18 +1128,6 @@ body.light-mode .live-indicator { color: #2d7a3e; }
 body.light-mode .live-dot { background: #2d7a3e; }
 body.light-mode .section-tag { color: #121212; border-color: rgba(0,0,0,0.2); background: rgba(0,0,0,0.04); }
 body.light-mode .section-header { color: var(--text-dim); }
-body.light-mode .gcal-container { background: var(--surface); border-color: var(--border); box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-body.light-mode .gcal-cell-today { background: rgba(0,0,0,0.04); border-color: #121212; }
-body.light-mode .gcal-cell-today .gcal-cell-num { color: #121212; }
-body.light-mode .gcal-cell-num { color: #121212; }
-body.light-mode .gcal-cell-evt { color: #121212; }
-body.light-mode .gcal-month-title { color: #121212; }
-body.light-mode .gcal-month-nav { border-color: var(--border); color: #3c3c3c; }
-body.light-mode .gcal-month-nav:hover { border-color: #121212; color: #121212; }
-body.light-mode .gcal-agenda-evt { background: rgba(0,0,0,0.03); border-color: var(--border); color: #121212; }
-body.light-mode .gcal-agenda-evt-home { border-color: rgba(0,92,92,0.3); background: rgba(0,92,92,0.06); }
-body.light-mode .gcal-agenda-evt-personal { border-color: rgba(200,140,0,0.3); background: rgba(200,140,0,0.06); }
-body.light-mode .gcal-agenda-date-today { color: #121212; }
 body.light-mode .gameday-banner { background: linear-gradient(135deg, #fae6e6, #e6eefa); border-color: #8b2020; border-width: 2px; }
 body.light-mode .gameday-banner::before { background: linear-gradient(90deg, #b42828, #002868, #b42828); }
 body.light-mode .gameday-title { color: #0c2c56; }
@@ -1390,10 +1191,6 @@ body.light-mode .lb-pos { color: #3c3c3c; }
 body.light-mode .lb-score { color: #121212; }
 body.light-mode .lb-score.under { color: #c0392b; }
 body.light-mode .lb-score.over { color: #3c3c3c; }
-body.light-mode .gcal-event { background: rgba(0,0,0,0.03); border-color: var(--border); color: #121212; }
-body.light-mode .gcal-date { color: #121212; }
-body.light-mode .gcal-date-num { color: #3c3c3c; }
-body.light-mode .gcal-empty { color: #6b6b6b; }
 body.light-mode .section-quip { color: #6b6b6b; }
 body.light-mode .golf-name { color: #121212; }
 body.light-mode .golf-hi { color: #0c2c56; }
@@ -2119,7 +1916,6 @@ body.light-mode .mountain-banner { opacity: 0.75; }
     .dual-grid > .news-map-split,
     .dual-grid > .objectives-panel,
     .dual-grid > .fv-row,
-    .dual-grid > .gcal-container{column-span:all;-webkit-column-span:all;margin-bottom:18px !important;}
     @media (max-width:900px){.dual-grid{column-count:1;}}
   </style>
   <div class="dual-grid">
@@ -3478,40 +3274,6 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   </div>
 
   <div class="dual-grid">
-  <!-- ═══ GROUP CALENDAR ═══ -->
-  <div class="section-header">
-    <span class="section-tag" style="border-color: rgba(0, 0, 0, 0.12); color: var(--forest-light); background: rgba(0, 0, 0, 0.03);">GROUP CALENDAR</span>
-    <span class="section-quip">Games, birthdays, and reasons to leave the house.</span>
-  </div>
-
-  <div class="gcal-container" id="gcalContainer">
-    <div class="gcal-legend">
-      <span class="gcal-legend-item"><span class="gcal-dot" style="background: var(--mariners-teal);"></span>Mariners</span>
-      <span class="gcal-legend-item"><span class="gcal-dot" style="background: var(--seahawks-green);"></span>Seahawks</span>
-      <span class="gcal-legend-item"><span class="gcal-dot" style="background: var(--kraken-teal);"></span>Kraken</span>
-      <span class="gcal-legend-item"><span class="gcal-dot" style="background: var(--uw-purple);"></span>UW Huskies</span>
-      <span class="gcal-legend-item"><span class="gcal-dot" style="background: var(--amber);"></span>Personal</span>
-    </div>
-    <div class="gcal-panels">
-      <div>
-        <div class="gcal-month-header">
-          <button class="gcal-month-nav" id="gcalPrev">&larr;</button>
-          <div class="gcal-month-title" id="gcalMonthTitle">March 2026</div>
-          <button class="gcal-month-nav" id="gcalNext">&rarr;</button>
-        </div>
-        <div class="gcal-weekdays"><span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span></div>
-        <div class="gcal-grid" id="gcalGrid"></div>
-      </div>
-      <div class="gcal-agenda">
-        <div class="gcal-agenda-title">UPCOMING</div>
-        <div id="gcalAgenda"></div>
-      </div>
-    </div>
-    <div style="display:none" id="gcalTimeline">
-      <!-- Populated by JS -->
-    </div>
-  </div>
-
   <!-- ═══ GEOPOLITICAL: IRAN ═══ -->
   <div class="section-header">
     <span class="section-tag" style="border-color: rgba(255, 77, 106, 0.3); color: var(--red); background: rgba(255, 77, 106, 0.05);">GEOPOLITICAL MONITOR</span>
@@ -4469,138 +4231,6 @@ function initPracticalFinance() {
   document.getElementById('fedRate').innerHTML = '4.25 - 4.50%';
 }
 
-// ═══ GROUP CALENDAR ═══
-(function initGroupCalendar() {
-  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const DAYS_SHORT = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-
-  const marinersGames = [
-    { date: '2026-03-27', time: '6:45 PM', opponent: 'Guardians', home: true },
-    { date: '2026-03-28', time: '6:40 PM', opponent: 'Guardians', home: true },
-    { date: '2026-03-29', time: '4:20 PM', opponent: 'Guardians', home: true },
-    { date: '2026-03-30', time: '6:40 PM', opponent: 'Yankees', home: true },
-    { date: '2026-03-31', time: '6:40 PM', opponent: 'Yankees', home: true },
-    { date: '2026-04-01', time: '1:10 PM', opponent: 'Yankees', home: true },
-    { date: '2026-04-03', time: '6:38 PM', opponent: '@ Angels', home: false },
-    { date: '2026-04-04', time: '6:38 PM', opponent: '@ Angels', home: false },
-    { date: '2026-04-05', time: '1:07 PM', opponent: '@ Angels', home: false },
-    { date: '2026-04-06', time: '5:05 PM', opponent: '@ Rangers', home: false },
-    { date: '2026-04-07', time: '5:05 PM', opponent: '@ Rangers', home: false },
-    { date: '2026-04-08', time: '11:35 AM', opponent: '@ Rangers', home: false },
-    { date: '2026-04-10', time: '6:40 PM', opponent: 'Astros', home: true },
-    { date: '2026-04-11', time: '6:40 PM', opponent: 'Astros', home: true },
-    { date: '2026-04-12', time: '1:10 PM', opponent: 'Astros', home: true },
-    { date: '2026-04-13', time: '1:10 PM', opponent: 'Astros', home: true },
-    { date: '2026-04-14', time: '6:40 PM', opponent: '@ Padres', home: false },
-    { date: '2026-04-15', time: '6:40 PM', opponent: '@ Padres', home: false },
-  ];
-
-  const personalEvents = [
-    { date: '2026-03-28', label: "David's 40th @ T-Mobile Park" },
-    { date: '2026-04-03', label: "Trevor's Birthday" },
-    { date: '2026-04-10', label: "Jami Johnson's Birthday" },
-    { date: '2026-04-14', label: "Sami Hoiland's Birthday" },
-    { date: '2026-04-29', label: "Riley Johnson's Birthday" },
-    { date: '2026-04-30', label: "Kellan Kading's Birthday" },
-  ];
-
-  function getEventsForDate(dateStr) {
-    var evts = [];
-    marinersGames.filter(function(g){ return g.date === dateStr; }).forEach(function(g){
-      evts.push({ color: 'var(--mariners-teal)', label: g.home ? 'vs ' + g.opponent : g.opponent, time: g.time, home: g.home, type: 'mariners' });
-    });
-    personalEvents.filter(function(e){ return e.date === dateStr; }).forEach(function(e){
-      evts.push({ color: 'var(--amber)', label: e.label, time: '', home: false, type: 'personal' });
-    });
-    return evts;
-  }
-
-  var today = new Date(); today.setHours(0,0,0,0);
-  var todayStr = today.toISOString().slice(0,10);
-  var viewYear = today.getFullYear();
-  var viewMonth = today.getMonth();
-
-  function pad(n) { return n < 10 ? '0' + n : '' + n; }
-
-  function renderMonth() {
-    document.getElementById('gcalMonthTitle').textContent = MONTH_NAMES[viewMonth] + ' ' + viewYear;
-    var firstDay = new Date(viewYear, viewMonth, 1).getDay();
-    var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-    var grid = document.getElementById('gcalGrid');
-    var html = '';
-
-    // Empty cells before first day
-    for (var e = 0; e < firstDay; e++) {
-      html += '<div class="gcal-cell gcal-cell-empty"></div>';
-    }
-
-    for (var d = 1; d <= daysInMonth; d++) {
-      var dateStr = viewYear + '-' + pad(viewMonth + 1) + '-' + pad(d);
-      var isToday = dateStr === todayStr;
-      var evts = getEventsForDate(dateStr);
-      html += '<div class="gcal-cell' + (isToday ? ' gcal-cell-today' : '') + '">';
-      html += '<div class="gcal-cell-num">' + d + '</div>';
-      if (evts.length > 0) {
-        html += '<div class="gcal-cell-dots">';
-        evts.forEach(function(ev) {
-          html += '<span class="gcal-cell-dot" style="background:' + ev.color + ';" title="' + ev.label + (ev.time ? ' ' + ev.time : '') + '"></span>';
-        });
-        html += '</div>';
-        // Show first event label truncated
-        var firstEvt = evts[0];
-        html += '<div class="gcal-cell-evt" style="color:' + firstEvt.color + ';">' + firstEvt.label + '</div>';
-        if (evts.length > 1) {
-          html += '<div class="gcal-cell-evt" style="color: var(--text-muted);">+' + (evts.length - 1) + ' more</div>';
-        }
-      }
-      html += '</div>';
-    }
-    grid.innerHTML = html;
-  }
-
-  function renderAgenda() {
-    var agenda = document.getElementById('gcalAgenda');
-    var html = '';
-    var count = 0;
-    for (var i = 0; i < 21 && count < 12; i++) {
-      var d = new Date(today); d.setDate(d.getDate() + i);
-      var dateStr = d.toISOString().slice(0,10);
-      var evts = getEventsForDate(dateStr);
-      if (evts.length === 0) continue;
-      var isToday = dateStr === todayStr;
-      var dayLabel = DAYS_SHORT[d.getDay()] + ' ' + MONTH_NAMES[d.getMonth()].substring(0,3) + ' ' + d.getDate();
-      html += '<div class="gcal-agenda-day">';
-      html += '<div class="gcal-agenda-date' + (isToday ? ' gcal-agenda-date-today' : '') + '">' + (isToday ? 'TODAY' : dayLabel) + '</div>';
-      evts.forEach(function(ev) {
-        var cls = ev.type === 'personal' ? ' gcal-agenda-evt-personal' : (ev.home ? ' gcal-agenda-evt-home' : '');
-        html += '<div class="gcal-agenda-evt' + cls + '">';
-        html += '<span class="gcal-agenda-evt-dot" style="background:' + ev.color + ';"></span>';
-        html += ev.label;
-        if (ev.time) html += '<span class="gcal-agenda-evt-time">' + ev.time + '</span>';
-        html += '</div>';
-      });
-      html += '</div>';
-      count++;
-    }
-    if (!html) html = '<div style="color:var(--text-muted);font-size:11px;font-style:italic;">No upcoming events</div>';
-    agenda.innerHTML = html;
-  }
-
-  document.getElementById('gcalPrev').addEventListener('click', function() {
-    viewMonth--;
-    if (viewMonth < 0) { viewMonth = 11; viewYear--; }
-    renderMonth();
-  });
-  document.getElementById('gcalNext').addEventListener('click', function() {
-    viewMonth++;
-    if (viewMonth > 11) { viewMonth = 0; viewYear++; }
-    renderMonth();
-  });
-
-  renderMonth();
-  renderAgenda();
-})();
-
 // ═══ IRAN / GEOPOLITICAL ═══
 async function fetchIranData() {
   // Fetch Iran-related news via RSS
@@ -5117,7 +4747,7 @@ async function fetchWorldCards() {
   var suffixes = ['','','','','','%',''];
   try {
     var joined = symbols.join(',');
-    var url = 'https://query1.finance.yahoo.com/v7/finance/quote?symbols=' + encodeURIComponent(joined) + '&fields=regularMarketPrice,regularMarketChangePercent';
+    var url = 'https://corsproxy.io/?' + encodeURIComponent('https://query1.finance.yahoo.com/v7/finance/quote?symbols=' + joined + '&fields=regularMarketPrice,regularMarketChangePercent');
     var resp = await fetch(url);
     if (!resp.ok) throw new Error('Yahoo blocked');
     var data = await resp.json();
@@ -5188,7 +4818,7 @@ async function fetchWorldCards() {
   }
   try {
     var symbols = 'CL=F,BZ=F,NG=F';
-    var url = 'https://query1.finance.yahoo.com/v7/finance/quote?symbols=' + encodeURIComponent(symbols) + '&fields=regularMarketPrice,regularMarketChangePercent';
+    var url = 'https://corsproxy.io/?' + encodeURIComponent('https://query1.finance.yahoo.com/v7/finance/quote?symbols=' + symbols + '&fields=regularMarketPrice,regularMarketChangePercent');
     var resp = await fetch(url);
     if (!resp.ok) throw new Error('Yahoo blocked');
     var data = await resp.json();
