@@ -10,7 +10,7 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Four Fingers News">
-<meta property="og:title" content="Four Fingers News &mdash; The news, neat.
+<meta property="og:title" content="Four Fingers News &mdash; The news, neat.">
 <meta property="og:description" content="Pour first. Read second. Two fingers for the markets, two for the politics.">
 <meta property="og:url" content="https://fourfingersnews.com/">
 <!-- Twitter -->
@@ -1488,7 +1488,6 @@ body.light-mode .mountain-banner { opacity: 0.75; }
     <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1a0505,#e94560,#ff4444,#ffa500,#e94560,#1a0505);background-size:200% 100%;animation:iranStripe 3s linear infinite;"></div>
     <style>
       @keyframes iranStripe{0%{background-position:0% 0}100%{background-position:200% 0}}
-      100%{background-position:200% 0}}
       @keyframes iranPulse{0%,100%{opacity:1}50%{opacity:0.6}}
       @keyframes noDeakFlash{0%,100%{text-shadow:0 0 10px rgba(255,60,60,0.4)}50%{text-shadow:0 0 30px rgba(255,60,60,0.8),0 0 60px rgba(255,165,0,0.3)}}
       .iran-flash{/* flash disabled Ã¢ÂÂ newsprint mode */}
@@ -3436,7 +3435,7 @@ async function fetchSportsData() {
   // Seahawks
   try {
     const resp = await fetchESPNRaw('football/nfl/teams/26');
-    if (resp.ok) {
+    if (resp && resp.ok) {
       const data = await resp.json();
       const team = data.team;
       const record = team.record?.items?.[0]?.summary || '--';
@@ -3449,7 +3448,7 @@ async function fetchSportsData() {
   // Also try scoreboard for next game
   try {
     const resp = await fetchESPNRaw('football/nfl/teams/26/schedule');
-    if (resp.ok) {
+    if (resp && resp.ok) {
       const data = await resp.json();
       const events = data.events || [];
       const now = new Date();
@@ -3468,7 +3467,7 @@ async function fetchSportsData() {
   // Mariners
   try {
     const resp = await fetchESPNRaw('baseball/mlb/teams/12');
-    if (resp.ok) {
+    if (resp && resp.ok) {
       const data = await resp.json();
       const team = data.team;
       const record = team.record?.items?.[0]?.summary || 'Spring Training';
@@ -3484,7 +3483,7 @@ async function fetchSportsData() {
   // Opening Weekend banner records - Seattle (12) and Cleveland (5)
   try {
     const seaResp = await fetchESPNRaw('baseball/mlb/teams/12');
-    if (seaResp.ok) {
+    if (seaResp && seaResp.ok) {
       const d = await seaResp.json();
       const r = d.team?.record?.items?.[0]?.summary || '0-0';
       var seaEl = document.getElementById('seaRecord');
@@ -3496,7 +3495,7 @@ async function fetchSportsData() {
   } catch(e){}
   try {
     const clevResp = await fetchESPNRaw('baseball/mlb/teams/5');
-    if (clevResp.ok) {
+    if (clevResp && clevResp.ok) {
       const d = await clevResp.json();
       const r = d.team?.record?.items?.[0]?.summary || '0-0';
       var clevEl = document.getElementById('clevRecord');
@@ -3506,7 +3505,7 @@ async function fetchSportsData() {
 
   try {
     const resp = await fetchESPNRaw('baseball/mlb/scoreboard');
-    if (resp.ok) {
+    if (resp && resp.ok) {
       const data = await resp.json();
       const marGame = data.events?.find(e =>
         e.competitions?.[0]?.competitors?.some(c => c.team?.abbreviation === 'SEA')
@@ -3530,7 +3529,7 @@ async function fetchSportsData() {
           if (mlEl && homeMl != null && awayMl != null) {
             const seaMl = seaIsHome ? homeMl : awayMl;
             mlEl.textContent = (seaMl > 0 ? '+' : '') + seaMl;
-            mlDet.textContent = 'SEA ' + (seaMl > 0 ? '+' : '') + seaMl + ' / ' + (seaIsHome ? away : home).team.abbreviation + ' ' + ((!seaIsHome ? homeMl : awayMl) > 0 ? '+' : '') + (!seaIsHome ? homeMl : awayMl);
+            if (mlDet) mlDet.textContent = 'SEA ' + (seaMl > 0 ? '+' : '') + seaMl + ' / ' + (seaIsHome ? away : home).team.abbreviation + ' ' + ((!seaIsHome ? homeMl : awayMl) > 0 ? '+' : '') + (!seaIsHome ? homeMl : awayMl);
           }
           // Spread / run line
           const spread = odds.spread;
@@ -3539,10 +3538,10 @@ async function fetchSportsData() {
             if (spread != null) {
               const seaSpread = seaIsHome ? parseFloat(spread) * -1 : parseFloat(spread);
               rlEl.textContent = (seaSpread > 0 ? '+' : '') + seaSpread.toFixed(1);
-              rlDet.textContent = 'SEA ' + (seaSpread > 0 ? '+' : '') + seaSpread.toFixed(1) + (overUnder ? ' \u2022 O/U ' + overUnder : '');
+              if (rlDet) rlDet.textContent = 'SEA ' + (seaSpread > 0 ? '+' : '') + seaSpread.toFixed(1) + (overUnder ? ' \u2022 O/U ' + overUnder : '');
             } else if (overUnder != null) {
               rlEl.textContent = 'O/U ' + overUnder;
-              rlDet.textContent = 'Total runs over/under';
+              if (rlDet) rlDet.textContent = 'Total runs over/under';
             }
           }
         }
@@ -3553,7 +3552,7 @@ async function fetchSportsData() {
   // Kraken
   try {
     const resp = await fetchESPNRaw('hockey/nhl/teams/124292');
-    if (resp.ok) {
+    if (resp && resp.ok) {
       const data = await resp.json();
       const team = data.team;
       const record = team.record?.items?.[0]?.summary || '--';
@@ -3569,7 +3568,7 @@ async function fetchSportsData() {
 
   try {
     const resp = await fetchESPNRaw('hockey/nhl/scoreboard');
-    if (resp.ok) {
+    if (resp && resp.ok) {
       const data = await resp.json();
       const krkGame = data.events?.find(e =>
         e.competitions?.[0]?.competitors?.some(c => c.team?.abbreviation === 'SEA')
@@ -3584,7 +3583,7 @@ async function fetchSportsData() {
   // UW Football
   try {
     const resp = await fetchESPNRaw('football/college-football/teams/264');
-    if (resp.ok) {
+    if (resp && resp.ok) {
       const data = await resp.json();
       const team = data.team;
       const record = team.record?.items?.[0]?.summary || 'Off-Season';
@@ -3619,7 +3618,7 @@ async function fetchIranData() {
   try {
     var rssUrl = 'https://news.google.com/rss/search?q=Iran+war+military+strikes&hl=en-US&gl=US&ceid=US:en';
     var resp = await fetchViaProxy(rssUrl);
-    if (resp.ok) {
+    if (resp && resp.ok) {
       const text = await resp.text();
       const parser = new DOMParser();
       const xml = parser.parseFromString(text, 'text/xml');
@@ -3812,24 +3811,29 @@ async function fetchMarinersOdds() {
             var oppMl = seaIsHome ? awayMl : homeMl;
             var oppAbbr = (seaIsHome ? away : home).team.abbreviation;
             mlEl.textContent = (seaMl > 0 ? '+' : '') + seaMl;
-            document.getElementById('mlDetail').textContent = 'SEA ' + (seaMl > 0 ? '+' : '') + seaMl + ' / ' + oppAbbr + ' ' + (oppMl > 0 ? '+' : '') + oppMl;
+            var mlDetEl = document.getElementById('mlDetail');
+            if (mlDetEl) mlDetEl.textContent = 'SEA ' + (seaMl > 0 ? '+' : '') + seaMl + ' / ' + oppAbbr + ' ' + (oppMl > 0 ? '+' : '') + oppMl;
           }
           var spread = odds.spread;
           var ou = odds.overUnder;
           var rlEl = document.getElementById('rlOdds');
+          var rlDetEl = document.getElementById('rlDetail');
           if (rlEl) {
-            if (ou != null) { rlEl.textContent = 'O/U ' + ou; document.getElementById('rlDetail').textContent = 'Total runs'; }
+            if (ou != null) { rlEl.textContent = 'O/U ' + ou; if (rlDetEl) rlDetEl.textContent = 'Total runs'; }
             if (spread != null) {
               var seaSp = seaIsHome ? parseFloat(spread) * -1 : parseFloat(spread);
               rlEl.textContent = (seaSp > 0 ? '+' : '') + seaSp.toFixed(1);
-              document.getElementById('rlDetail').textContent = 'SEA ' + (seaSp > 0 ? '+' : '') + seaSp.toFixed(1) + (ou ? ' \u2022 O/U ' + ou : '');
+              if (rlDetEl) rlDetEl.textContent = 'SEA ' + (seaSp > 0 ? '+' : '') + seaSp.toFixed(1) + (ou ? ' \u2022 O/U ' + ou : '');
             }
           }
         } else {
           mlEl.textContent = 'TBD';
-          document.getElementById('mlDetail').textContent = 'Lines not yet posted';
-          document.getElementById('rlOdds').textContent = 'TBD';
-          document.getElementById('rlDetail').textContent = 'Check closer to game time';
+          var mlDetEl2 = document.getElementById('mlDetail');
+          if (mlDetEl2) mlDetEl2.textContent = 'Lines not yet posted';
+          var rlOddsEl = document.getElementById('rlOdds');
+          if (rlOddsEl) rlOddsEl.textContent = 'TBD';
+          var rlDetEl2 = document.getElementById('rlDetail');
+          if (rlDetEl2) rlDetEl2.textContent = 'Check closer to game time';
         }
       }
     }
