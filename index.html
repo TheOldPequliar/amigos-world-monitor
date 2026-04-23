@@ -3246,6 +3246,16 @@ const PROXIES=[
   url=>"https://corsproxy.io/?"+encodeURIComponent(url),
   url=>"https://api.codetabs.com/v1/proxy?quest="+encodeURIComponent(url)
 ];
+function timeAgoGlobal(dateStr) {
+  var d = new Date(dateStr);
+  var now = new Date();
+  var diff = Math.floor((now - d) / 1000);
+  if (diff < 60) return diff + 's ago';
+  if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+  if (diff < 604800) return Math.floor(diff/86400) + 'd ago';
+  return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+}
 async function fetchViaProxy(url,timeoutMs){
   timeoutMs=timeoutMs||6000;
   for(var i=0;i<PROXIES.length;i++){try{
@@ -3621,7 +3631,7 @@ async function fetchIranData() {
         const source = item.querySelector('source')?.textContent || '';
         const link = item.querySelector('link')?.textContent || '';
         if (title) {
-          iranHeadlines.push({ title, timeAgo: pubDate ? getTimeAgo(new Date(pubDate)) : '', source, link });
+          iranHeadlines.push({ title, timeAgo: pubDate ? timeAgoGlobal(pubDate) : '', source, link });
         }
       });
     }
@@ -3645,7 +3655,7 @@ async function fetchIranData() {
         const source = item.querySelector('source')?.textContent || '';
         const link = item.querySelector('link')?.textContent || '';
         if (title && !iranHeadlines.find(h => h.title === title)) {
-          iranHeadlines.push({ title, timeAgo: pubDate ? getTimeAgo(new Date(pubDate)) : '', source, link });
+          iranHeadlines.push({ title, timeAgo: pubDate ? timeAgoGlobal(pubDate) : '', source, link });
         }
       });
     }
@@ -3888,7 +3898,6 @@ async function fetchWorldCards() {
   await Promise.all([
     fetchStockData(),
     fetchSportsData(),
-    fetchNews(),
     fetchIranData(),
     fetchWorldCards(),
   ]);
@@ -3900,7 +3909,6 @@ async function fetchWorldCards() {
     await Promise.all([
       fetchStockData(),
       fetchSportsData(),
-      fetchNews(),
       fetchIranData(),
       fetchWorldCards(),
     ]);
