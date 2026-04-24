@@ -1361,10 +1361,11 @@ body.light-mode .mountain-banner { opacity: 0.75; }
     <div class="section-nav-inner">
       <a href="#section-world">World &amp; Geo</a>
       <a href="#section-politics">Propaganda</a>
-      <a href="#section-epstein">Epstein</a>
       <a href="#section-markets">Econ Watch</a>
+      <a href="#section-rapture">Rapture</a>
       <a href="#section-ai">The Race</a>
       <a href="#section-sports">Sports</a>
+      <a href="#section-epstein">Epstein</a>
     </div>
   </nav>
 
@@ -2243,38 +2244,380 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   </div>
 
   <!-- RAPTURE / ESCHATOLOGY TRACKER -->
-  <div style="margin-bottom:6px;padding:0 4px"><span style="font-size:9px;font-weight:700;letter-spacing:3px;color:var(--text-dim)">&#128293; RAPTURE / ESCHATOLOGY TRACKER</span></div>
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px;position:relative;overflow:hidden;">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#2e1d14,#6b3f22,#d4a017,#6b3f22,#2e1d14);"></div>
-    <div style="font-size:12px;font-weight:900;color:var(--amber);margin-bottom:8px;">&#128293; RAPTURE INDEX &amp; END TIMES</div>
-    <!-- Rapture meter -->
-    <div style="background:rgba(255,184,0,0.06);border:1px solid rgba(255,184,0,0.2);border-radius:8px;padding:10px;margin-bottom:10px;text-align:center;">
-    <div style="font-size:7px;letter-spacing:2px;color:var(--text-muted);font-weight:700;margin-bottom:4px;">RAPTURE READY INDEX (<a href="https://www.raptureready.com/rapture-ready-index/" target="_blank" style="color:var(--amber);text-decoration:underline;">raptureready.com</a>)</div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:900;color:var(--amber);">181</div>
-    <div style="font-size:8px;color:var(--red);font-weight:700;margin-top:2px;">&#9888;&#65039; &ldquo;FASTEN YOUR SEATBELTS&rdquo; (160+ threshold)</div>
-    <div style="font-size:7px;color:var(--text-muted);margin-top:4px;">All-time high: 189 &bull; Scale: 45 categories of biblical prophecy fulfillment</div>
-    <!-- Visual meter -->
-    <div style="background:var(--surface-hover);height:8px;border-radius:4px;margin-top:6px;position:relative;border:1px solid var(--border);">
-    <div style="height:100%;width:91%;background:linear-gradient(90deg,var(--green),var(--amber),var(--red));border-radius:4px;"></div>
+  <!-- AUTO-UPDATED BY: daily-sitch-refresh (hourly) -->
+  <!-- EDIT TARGETS: #raptureIndex, #raptureHotCats, #prophecyChecklist, #scriptureWire, #pewGap -->
+  <div class="section-anchor" id="section-rapture"></div>
+  <style>
+    #raptureSection{background:#ffffff;border:1px solid var(--border);border-top:3px solid #b8860b;border-radius:2px;padding:14px 18px;margin-bottom:18px;font-family:Georgia,'Times New Roman',serif;position:relative;overflow:hidden;color:#121212;}
+    #raptureSection .rp-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;flex-wrap:wrap;gap:6px;}
+    #raptureSection .rp-title{font-size:14px;font-weight:900;letter-spacing:3px;color:#121212;font-variant:small-caps;}
+    #raptureSection .rp-subtitle{font-size:9px;letter-spacing:2px;color:var(--text-muted);font-style:italic;margin-top:2px;}
+    #raptureSection .rp-dateline{font-size:9px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+    #raptureSection .rp-panel{background:#ffffff;border:1px solid var(--border);border-top:2px solid #b8860b;border-radius:2px;padding:12px 14px;margin-bottom:14px;}
+    #raptureSection .rp-panel-title{font-size:12px;font-weight:900;letter-spacing:2px;color:#121212;font-variant:small-caps;margin-bottom:4px;}
+    #raptureSection .rp-panel-sub{font-size:9px;letter-spacing:1.5px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:10px;}
+    #raptureSection .rp-index-display{text-align:center;padding:10px 0;margin-bottom:10px;}
+    #raptureSection .rp-index-val{font-family:'JetBrains Mono',monospace;font-size:42px;font-weight:900;color:#b8860b;line-height:1;}
+    #raptureSection .rp-index-label{font-size:8px;letter-spacing:2px;color:var(--red);font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:4px;}
+    #raptureSection .rp-index-sub{font-size:9px;color:var(--text-muted);margin-top:4px;}
+    #raptureSection .rp-meter{background:var(--surface-hover);height:10px;border-radius:2px;margin:8px 0;position:relative;border:1px solid var(--border);}
+    #raptureSection .rp-meter-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#2d7a3e,#b8860b,#a42020);}
+    #raptureSection .rp-meter-labels{display:flex;justify-content:space-between;font-size:7px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-top:2px;}
+    #raptureSection .rp-thresholds{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0;font-family:'JetBrains Mono',monospace;}
+    #raptureSection .rp-thresh{text-align:center;padding:6px 4px;border-radius:2px;border:1px solid var(--border);}
+    #raptureSection .rp-thresh-val{font-size:11px;font-weight:900;}
+    #raptureSection .rp-thresh-lbl{font-size:7px;letter-spacing:1px;color:var(--text-muted);margin-top:2px;}
+    #raptureSection .rp-thresh.active{background:#b8860b;border-color:#b8860b;}
+    #raptureSection .rp-thresh.active .rp-thresh-val,
+    #raptureSection .rp-thresh.active .rp-thresh-lbl{color:#ffffff;}
+    #raptureSection table{width:100%;border-collapse:collapse;font-size:11px;}
+    #raptureSection th{text-align:left;font-size:9px;font-weight:700;letter-spacing:2px;color:#121212;padding:6px 8px;border-bottom:2px solid #121212;white-space:nowrap;background:#ffffff;font-family:'JetBrains Mono',monospace;}
+    #raptureSection td{padding:6px 8px;border-bottom:1px solid var(--border);color:#121212;vertical-align:top;}
+    #raptureSection tr:hover td{background:#f5f5f5;}
+    #raptureSection .rp-cat{font-weight:700;white-space:nowrap;}
+    #raptureSection .rp-hot{color:var(--red);font-weight:900;}
+    #raptureSection .rp-score{font-family:'JetBrains Mono',monospace;font-weight:700;text-align:center;width:40px;}
+    #raptureSection .rp-score.max{color:var(--red);font-weight:900;}
+    #raptureSection .rp-trend{font-family:'JetBrains Mono',monospace;text-align:center;width:30px;}
+    #raptureSection .rp-verse{font-size:10px;color:var(--text-muted);font-style:italic;}
+    #raptureSection .rp-dual{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    #raptureSection .rp-checklist{list-style:none;padding:0;margin:0;}
+    #raptureSection .rp-checklist li{padding:5px 0;border-bottom:1px dashed var(--border);font-size:11px;line-height:1.5;display:flex;gap:8px;}
+    #raptureSection .rp-checklist li:last-child{border-bottom:none;}
+    #raptureSection .rp-check{font-family:'JetBrains Mono',monospace;font-size:12px;flex-shrink:0;width:18px;text-align:center;}
+    #raptureSection .rp-check.yes{color:var(--red);font-weight:900;}
+    #raptureSection .rp-check.partial{color:#b8860b;font-weight:700;}
+    #raptureSection .rp-check.no{color:var(--text-muted);}
+    #raptureSection .rp-prophecy-ref{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);margin-left:4px;}
+    #raptureSection .rp-prophecy-map{font-size:10px;color:var(--text-dim);display:block;margin-top:1px;margin-left:26px;}
+    #raptureSection .rp-wire{list-style:none;padding:0;margin:0;}
+    #raptureSection .rp-wire li{padding:6px 0;border-bottom:1px dashed var(--border);font-size:11px;line-height:1.5;}
+    #raptureSection .rp-wire li:last-child{border-bottom:none;}
+    #raptureSection .rp-wire-date{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);margin-right:6px;}
+    #raptureSection .rp-wire-tag{font-size:8px;font-weight:900;letter-spacing:1px;padding:1px 4px;border-radius:2px;margin-right:4px;vertical-align:1px;background:#b8860b;color:#fff;}
+    #raptureSection .rp-wire-tag.red{background:var(--red);}
+    #raptureSection .rp-wire-tag.dark{background:#121212;}
+    #raptureSection .rp-denom{padding:8px 10px;border-left:3px solid var(--border);margin-bottom:10px;font-size:11px;line-height:1.5;}
+    #raptureSection .rp-denom:last-child{margin-bottom:0;}
+    #raptureSection .rp-denom-name{font-size:9px;font-weight:900;letter-spacing:2px;color:#121212;font-family:'JetBrains Mono',monospace;margin-bottom:3px;}
+    #raptureSection .rp-denom.evangelical{border-left-color:var(--red);}
+    #raptureSection .rp-denom.catholic{border-left-color:#b8860b;}
+    #raptureSection .rp-denom.orthodox{border-left-color:#2d7a3e;}
+    #raptureSection .rp-denom.mainline{border-left-color:#4a5568;}
+    #raptureSection .rp-editorial{margin-top:10px;padding:10px 14px;border-left:3px solid #b8860b;font-size:11px;line-height:1.55;color:var(--text-dim);font-style:italic;}
+    #raptureSection .rp-footer{margin-top:10px;padding-top:8px;border-top:1px dashed var(--border);font-size:8px;color:var(--text-muted);text-align:center;font-family:'JetBrains Mono',monospace;letter-spacing:1px;}
+    #raptureSection .rp-footer a{color:var(--text-muted);text-decoration:none;border-bottom:1px dotted var(--border);margin:0 4px;}
+    #raptureSection .rp-footer a:hover{color:#b8860b;border-bottom-color:#b8860b;}
+    @media (max-width:700px){
+      #raptureSection .rp-dual{grid-template-columns:1fr;}
+      #raptureSection .rp-thresholds{grid-template-columns:repeat(2,1fr);}
+    }
+  </style>
+  <div style="margin-bottom:6px;padding:0 4px"><span style="font-size:9px;font-weight:700;letter-spacing:3px;color:var(--text-dim)">RAPTURE / ESCHATOLOGY TRACKER</span></div>
+  <div id="raptureSection">
+    <div class="rp-header">
+      <div>
+        <div class="rp-title">Rapture Index &amp; End Times Monitor</div>
+        <div class="rp-subtitle">Tracking the apocalypse so you don&rsquo;t have to &middot; All prophecies approximate</div>
+      </div>
+      <div class="rp-dateline">UPDATED: <span id="raptureUpdated">Apr 23, 2026</span></div>
     </div>
-    <div style="display:flex;justify-content:space-between;font-size:6px;color:var(--text-muted);margin-top:2px;">
-    <span>Slow prophetic activity</span><span>Moderate</span><span>Heavy</span><span>&#128165; NOW</span>
+
+    <!-- ═══ RAPTURE READY INDEX BREAKDOWN ═══ -->
+    <div class="rp-panel" id="raptureIndex">
+      <div class="rp-panel-title">The Rapture Ready Index</div>
+      <div class="rp-panel-sub">A PROPHETIC SPEEDOMETER &middot; 45 CATEGORIES &middot; SCORED 1&ndash;5 EACH &middot; <a href="https://www.raptureready.com/rapture-ready-index/" target="_blank" style="color:#b8860b;text-decoration:underline;">RAPTUREREADY.COM</a></div>
+
+      <div class="rp-index-display">
+        <div class="rp-index-val">182</div>
+        <div class="rp-index-label">&#9888; &ldquo;FASTEN YOUR SEATBELTS&rdquo; &mdash; 160+ THRESHOLD EXCEEDED</div>
+        <div class="rp-index-sub">All-time high: 189 (Oct 2016) &middot; Pre-war baseline: 173 (Jan 2026) &middot; Current: +9 since Iran war began</div>
+      </div>
+
+      <div class="rp-meter">
+        <div class="rp-meter-fill" style="width:91%;"></div>
+      </div>
+      <div class="rp-meter-labels">
+        <span>0 &middot; SLOW</span><span>100 &middot; MODERATE</span><span>130 &middot; HEAVY</span><span>160+ &middot; SEATBELTS</span><span>200</span>
+      </div>
+
+      <div class="rp-thresholds">
+        <div class="rp-thresh"><div class="rp-thresh-val">&lt;100</div><div class="rp-thresh-lbl">SLOW PROPHETIC ACTIVITY</div></div>
+        <div class="rp-thresh"><div class="rp-thresh-val">100&ndash;130</div><div class="rp-thresh-lbl">MODERATE ACTIVITY</div></div>
+        <div class="rp-thresh"><div class="rp-thresh-val">130&ndash;160</div><div class="rp-thresh-lbl">HEAVY ACTIVITY</div></div>
+        <div class="rp-thresh active"><div class="rp-thresh-val">160+</div><div class="rp-thresh-lbl">FASTEN SEATBELTS</div></div>
+      </div>
+
+      <!-- Hot categories table -->
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:#121212;margin:12px 0 6px 0;font-family:'JetBrains Mono',monospace;">HOTTEST CATEGORIES (MAXED OR NEAR-MAX)</div>
+      <table id="raptureHotCats">
+        <thead>
+          <tr>
+            <th>CATEGORY</th>
+            <th style="text-align:center;">SCORE</th>
+            <th style="text-align:center;">TREND</th>
+            <th>KEY VERSE</th>
+            <th>WHY IT&rsquo;S HOT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rp-cat rp-hot">Persia (Iran)</td>
+            <td class="rp-score max">5</td>
+            <td class="rp-trend">&#9650;</td>
+            <td class="rp-verse">Ezek 38:5</td>
+            <td>Active war. Three carrier groups. Blockade. Mines in the strait. This one kind of speaks for itself.</td>
+          </tr>
+          <tr>
+            <td class="rp-cat rp-hot">Kings of the East</td>
+            <td class="rp-score max">5</td>
+            <td class="rp-trend">&#9650;</td>
+            <td class="rp-verse">Rev 16:12</td>
+            <td>China brokering Iran&rsquo;s backchannel. Oil purchases via yuan. SCO solidarity statements.</td>
+          </tr>
+          <tr>
+            <td class="rp-cat rp-hot">Israel</td>
+            <td class="rp-score max">5</td>
+            <td class="rp-trend">&mdash;</td>
+            <td class="rp-verse">Zech 12:3</td>
+            <td>IDF operations concurrent with US strikes. Third Temple movement up 400% in Google searches since Feb.</td>
+          </tr>
+          <tr>
+            <td class="rp-cat rp-hot">Nuclear Nations</td>
+            <td class="rp-score max">5</td>
+            <td class="rp-trend">&#9650;</td>
+            <td class="rp-verse">2 Pet 3:10</td>
+            <td>Iran&rsquo;s breakout timeline. Pakistan next door. Doomsday Clock at 89 seconds.</td>
+          </tr>
+          <tr>
+            <td class="rp-cat rp-hot">Arms Proliferation</td>
+            <td class="rp-score max">5</td>
+            <td class="rp-trend">&#9650;</td>
+            <td class="rp-verse">Joel 3:9&ndash;10</td>
+            <td>IRGC mines in Hormuz. Global defense spending at post-WWII high. Everyone&rsquo;s buying.</td>
+          </tr>
+          <tr>
+            <td class="rp-cat">Gog (Russia)</td>
+            <td class="rp-score">4</td>
+            <td class="rp-trend">&#9650;</td>
+            <td class="rp-verse">Ezek 38:2</td>
+            <td>Moscow&rsquo;s &ldquo;deep condolences&rdquo; to Tehran. Quiet materiel flow. Ukraine still grinding.</td>
+          </tr>
+          <tr>
+            <td class="rp-cat">Beast Government</td>
+            <td class="rp-score">4</td>
+            <td class="rp-trend">&#9650;</td>
+            <td class="rp-verse">Rev 13:1&ndash;2</td>
+            <td>Emergency powers, executive overreach in multiple capitals. Wartime consolidation pattern.</td>
+          </tr>
+          <tr>
+            <td class="rp-cat">Mark of the Beast</td>
+            <td class="rp-score">4</td>
+            <td class="rp-trend">&#9650;</td>
+            <td class="rp-verse">Rev 13:16&ndash;17</td>
+            <td>CBDCs advancing in 130 countries. AI surveillance. Digital ID requirements expanding.</td>
+          </tr>
+          <tr>
+            <td class="rp-cat">Oil Supply/Price</td>
+            <td class="rp-score">4</td>
+            <td class="rp-trend">&#9650;</td>
+            <td class="rp-verse">Rev 6:6</td>
+            <td>Brent at $103. Strait of Hormuz mined. Supply chokepoint is the prophecy footnote nobody talks about.</td>
+          </tr>
+          <tr>
+            <td class="rp-cat">False Prophet</td>
+            <td class="rp-score">4</td>
+            <td class="rp-trend">&mdash;</td>
+            <td class="rp-verse">Rev 19:20</td>
+            <td>AI-generated deepfake sermons. Prosperity gospel at scale. The algorithm is the new pulpit.</td>
+          </tr>
+          <tr>
+            <td class="rp-cat">Apostasy</td>
+            <td class="rp-score">4</td>
+            <td class="rp-trend">&mdash;</td>
+            <td class="rp-verse">2 Thess 2:3</td>
+            <td>US church attendance at historic low. &ldquo;Spiritual but not religious&rdquo; now the plurality position.</td>
+          </tr>
+          <tr>
+            <td class="rp-cat">Moral Standards</td>
+            <td class="rp-score">4</td>
+            <td class="rp-trend">&mdash;</td>
+            <td class="rp-verse">2 Tim 3:1&ndash;5</td>
+            <td>Per the index methodology, this one has been at 4 since roughly the invention of television.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:9px;color:var(--text-muted);margin-top:6px;font-style:italic;text-align:center;">Remaining 33 categories range from 2&ndash;4. Full breakdown at <a href="https://www.raptureready.com/rapture-ready-index/" target="_blank" style="color:#b8860b;">raptureready.com</a>. We are not making this up.</div>
     </div>
+
+    <!-- ═══ PROPHECY CHECKLIST ═══ -->
+    <div class="rp-dual">
+      <div class="rp-panel" id="prophecyChecklist">
+        <div class="rp-panel-title">The Checklist</div>
+        <div class="rp-panel-sub">MAJOR END-TIMES PROPHECIES &middot; STATUS VS. CURRENT EVENTS</div>
+        <ul class="rp-checklist">
+          <li>
+            <span class="rp-check yes">&#10003;</span>
+            <div><b>Israel reborn as a nation</b> <span class="rp-prophecy-ref">Isa 66:8</span>
+            <span class="rp-prophecy-map">Fulfilled 1948. Running 78 years. The prophecy clock&rsquo;s anchor date.</span></div>
+          </li>
+          <li>
+            <span class="rp-check yes">&#10003;</span>
+            <div><b>Wars and rumors of wars</b> <span class="rp-prophecy-ref">Matt 24:6</span>
+            <span class="rp-prophecy-map">Iran war, Ukraine, Sudan, Myanmar. The rumors part is doing a lot of work right now given the Pacific situation.</span></div>
+          </li>
+          <li>
+            <span class="rp-check yes">&#10003;</span>
+            <div><b>Nation rising against nation</b> <span class="rp-prophecy-ref">Matt 24:7</span>
+            <span class="rp-prophecy-map">US + Israel vs. Iran. Russia vs. Ukraine. This one has been checkable for most of recorded history, if we&rsquo;re being honest.</span></div>
+          </li>
+          <li>
+            <span class="rp-check yes">&#10003;</span>
+            <div><b>Persia in the Gog coalition</b> <span class="rp-prophecy-ref">Ezek 38:5</span>
+            <span class="rp-prophecy-map">Iran (ancient Persia) allied with Russia (Gog/Magog, per evangelical mapping) and at war with Israel&rsquo;s allies. Prophecy Twitter is having a field day.</span></div>
+          </li>
+          <li>
+            <span class="rp-check yes">&#10003;</span>
+            <div><b>Knowledge shall increase</b> <span class="rp-prophecy-ref">Dan 12:4</span>
+            <span class="rp-prophecy-map">AI. The entire AI section of this website. Daniel didn&rsquo;t see Claude coming, but here we are.</span></div>
+          </li>
+          <li>
+            <span class="rp-check yes">&#10003;</span>
+            <div><b>Gospel preached to all nations</b> <span class="rp-prophecy-ref">Matt 24:14</span>
+            <span class="rp-prophecy-map">Internet, satellite, Bible apps in 2,000+ languages. Whether the quality of the preaching counts is a separate theological question.</span></div>
+          </li>
+          <li>
+            <span class="rp-check partial">&#9679;</span>
+            <div><b>Earthquakes in diverse places</b> <span class="rp-prophecy-ref">Matt 24:7</span>
+            <span class="rp-prophecy-map">Seismic activity normal by geological standards. Elevated by cable-news standards. Depends on who you ask.</span></div>
+          </li>
+          <li>
+            <span class="rp-check partial">&#9679;</span>
+            <div><b>Famine and pestilence</b> <span class="rp-prophecy-ref">Matt 24:7</span>
+            <span class="rp-prophecy-map">Sudan famine. Post-COVID world. Bird flu scares. Not Revelation-grade yet, but the ingredients are on the counter.</span></div>
+          </li>
+          <li>
+            <span class="rp-check partial">&#9679;</span>
+            <div><b>Mark of the Beast system</b> <span class="rp-prophecy-ref">Rev 13:16&ndash;17</span>
+            <span class="rp-prophecy-map">CBDCs, digital IDs, AI surveillance. The infrastructure exists. Nobody&rsquo;s asked for your forehead yet.</span></div>
+          </li>
+          <li>
+            <span class="rp-check partial">&#9679;</span>
+            <div><b>One-world government forming</b> <span class="rp-prophecy-ref">Rev 13:7</span>
+            <span class="rp-prophecy-map">UN, WHO pandemic treaty, WEF. Counterpoint: the world can&rsquo;t agree on daylight saving time, let alone a single government.</span></div>
+          </li>
+          <li>
+            <span class="rp-check no">&#10007;</span>
+            <div><b>Third Temple built</b> <span class="rp-prophecy-ref">2 Thess 2:4</span>
+            <span class="rp-prophecy-map">Temple Institute has the blueprints and the furniture. The Dome of the Rock has the location. This is a scheduling conflict.</span></div>
+          </li>
+          <li>
+            <span class="rp-check no">&#10007;</span>
+            <div><b>The Antichrist revealed</b> <span class="rp-prophecy-ref">2 Thess 2:3&ndash;4</span>
+            <span class="rp-prophecy-map">Every generation picks a candidate. Current nominees include several world leaders, the Pope, and Elon Musk. The position remains officially vacant.</span></div>
+          </li>
+          <li>
+            <span class="rp-check no">&#10007;</span>
+            <div><b>Two witnesses appear</b> <span class="rp-prophecy-ref">Rev 11:3</span>
+            <span class="rp-prophecy-map">Not yet. Though some commenters on YouTube are confident they&rsquo;ve found them. The commenters are always confident.</span></div>
+          </li>
+          <li>
+            <span class="rp-check no">&#10007;</span>
+            <div><b>Battle of Armageddon</b> <span class="rp-prophecy-ref">Rev 16:16</span>
+            <span class="rp-prophecy-map">Megiddo is a nice archaeological park in northern Israel. Still a park. Still has a gift shop.</span></div>
+          </li>
+        </ul>
+        <div style="font-size:9px;color:var(--text-muted);margin-top:8px;font-style:italic;text-align:center;">6 of 14 checked. 4 partial. Historically this is a high score but also every generation thinks that.</div>
+      </div>
+
+      <!-- ═══ SCRIPTURE WIRE ═══ -->
+      <div class="rp-panel" id="scriptureWire">
+        <div class="rp-panel-title">The Scripture Wire</div>
+        <div class="rp-panel-sub">BIBLE VERSES &times; TODAY&rsquo;S HEADLINES &middot; CONNECTIONS READERS ARE MAKING</div>
+        <ul class="rp-wire">
+          <li>
+            <span class="rp-wire-tag red">WAR</span>
+            <b>&ldquo;I will summon a sword against Gog on all my mountains&rdquo;</b> &mdash; <a href="https://www.biblegateway.com/passage/?search=Ezekiel+38%3A21&version=NIV" target="_blank" style="color:#b8860b;">Ezek 38:21</a>
+            <br/><span style="font-size:10px;color:var(--text-dim);">Mapped to: US/Israel strikes on Iranian mountain military installations. The geography is doing a lot of heavy lifting in prophecy forums right now.</span>
+          </li>
+          <li>
+            <span class="rp-wire-tag red">WAR</span>
+            <b>&ldquo;Against Elam I will bring the four winds&rdquo;</b> &mdash; <a href="https://www.biblegateway.com/passage/?search=Jeremiah+49%3A36&version=NIV" target="_blank" style="color:#b8860b;">Jer 49:36</a>
+            <br/><span style="font-size:10px;color:var(--text-dim);">Mapped to: Iran (ancient Elam). Four winds = attacks from multiple directions. US Navy from the south, Israel from the west, US Air Force from the east. Three out of four winds confirmed.</span>
+          </li>
+          <li>
+            <span class="rp-wire-tag">TRADE</span>
+            <b>&ldquo;A quart of wheat for a day&rsquo;s wages&rdquo;</b> &mdash; <a href="https://www.biblegateway.com/passage/?search=Revelation+6%3A6&version=NIV" target="_blank" style="color:#b8860b;">Rev 6:6</a>
+            <br/><span style="font-size:10px;color:var(--text-dim);">Mapped to: Oil at $103/bbl. Strait of Hormuz mined. 21% of global oil transits a waterway currently decorated with Iranian sea mines.</span>
+          </li>
+          <li>
+            <span class="rp-wire-tag dark">TECH</span>
+            <b>&ldquo;It forced all people to receive a mark&rdquo;</b> &mdash; <a href="https://www.biblegateway.com/passage/?search=Revelation+13%3A16&version=NIV" target="_blank" style="color:#b8860b;">Rev 13:16</a>
+            <br/><span style="font-size:10px;color:var(--text-dim);">Mapped to: CBDCs in 130 countries. AI-powered surveillance. Digital ID. The &ldquo;image of the beast&rdquo; crowd has pivoted from barcodes to large language models. Progress.</span>
+          </li>
+          <li>
+            <span class="rp-wire-tag">NATURE</span>
+            <b>&ldquo;There will be signs in the sun, moon and stars&rdquo;</b> &mdash; <a href="https://www.biblegateway.com/passage/?search=Luke+21%3A25&version=NIV" target="_blank" style="color:#b8860b;">Luke 21:25</a>
+            <br/><span style="font-size:10px;color:var(--text-dim);">Mapped to: Solar maximum cycle 25 is the strongest in 20 years. Northern lights visible as far south as Texas. Technically just solar physics but try telling that to the prophecy forums.</span>
+          </li>
+          <li>
+            <span class="rp-wire-tag dark">DECEPTION</span>
+            <b>&ldquo;Even the elect would be deceived&rdquo;</b> &mdash; <a href="https://www.biblegateway.com/passage/?search=Matthew+24%3A24&version=NIV" target="_blank" style="color:#b8860b;">Matt 24:24</a>
+            <br/><span style="font-size:10px;color:var(--text-dim);">Mapped to: Deepfakes, AI-generated everything, information environment where nobody can tell what&rsquo;s real. If Matthew were writing today he&rsquo;d just link to any social media platform.</span>
+          </li>
+          <li>
+            <span class="rp-wire-tag">DIPLOMACY</span>
+            <b>&ldquo;When people are saying, &lsquo;Peace and safety,&rsquo; destruction will come&rdquo;</b> &mdash; <a href="https://www.biblegateway.com/passage/?search=1+Thessalonians+5%3A3&version=NIV" target="_blank" style="color:#b8860b;">1 Thess 5:3</a>
+            <br/><span style="font-size:10px;color:var(--text-dim);">Mapped to: Ceasefire negotiations while mines are being laid. The peace-and-safety-followed-by-sudden-destruction pattern is, unfortunately, a pretty accurate description of how ceasefires in this region tend to go.</span>
+          </li>
+        </ul>
+        <div style="font-size:9px;color:var(--text-muted);margin-top:8px;font-style:italic;text-align:center;">&ldquo;No one knows the day or the hour&rdquo; &mdash; <a href="https://www.biblegateway.com/passage/?search=Matthew+24%3A36&version=NIV" target="_blank" style="color:var(--text-muted);">Matt 24:36</a>. (The index is at 182, so maybe pack a bag.)</div>
+      </div>
     </div>
-    <div style="font-size:8px;color:var(--text);line-height:1.7;">
-    <div style="margin-bottom:4px;">&#127759; <b>Iran war:</b> Seen as fulfillment of Ezekiel 38/Gog-Magog prophecy by evangelicals. <a href="https://www.gotquestions.org/Battle-of-Gog-and-Magog.html" target="_blank" style="color:var(--amber);font-size:7px;">[Study]</a></div>
-    <div style="margin-bottom:4px;">&#128338; <b>Doomsday Clock:</b> 89 seconds to midnight (closest ever, Jan 2025). <a href="https://thebulletin.org/doomsday-clock/" target="_blank" style="color:var(--amber);font-size:7px;">[Bulletin]</a></div>
-    <div>&#128302; <b>AI as Beast System:</b> Growing movement sees AI as the &ldquo;image of the beast&rdquo; from Revelation 13. <a href="https://www.biblegateway.com/passage/?search=Revelation+13&version=NIV" target="_blank" style="color:var(--amber);font-size:7px;">[Rev 13]</a></div>
+
+    <!-- ═══ THE PEW GAP — DENOMINATIONAL TAKES ═══ -->
+    <div class="rp-panel" id="pewGap">
+      <div class="rp-panel-title">The Pew Gap</div>
+      <div class="rp-panel-sub">SAME WAR, SAME BIBLE, FOUR VERY DIFFERENT READINGS</div>
+
+      <div class="rp-denom evangelical">
+        <div class="rp-denom-name">EVANGELICAL / DISPENSATIONALIST</div>
+        <b>Reading:</b> This is it, or close to it. Iran = Persia in Ezekiel 38. Russia = Gog. The coalition is assembling. Israel is back. The generation that saw 1948 is running out of clock (Psalm 90:10 gives 70&ndash;80 years; 1948 + 80 = 2028). Rapture could be any moment. John Hagee, Mar 2026: &ldquo;Prophetically, we&rsquo;re right on cue.&rdquo;
+        <br/><b>Tone:</b> Excited. Not &ldquo;oh no, war&rdquo; but &ldquo;oh yes, prophecy.&rdquo; This theological tradition is the only one where a major Middle East conflict is, structurally, good news.
+        <br/><span style="font-size:9px;color:var(--text-muted);">Stonebriar Church is hosting a &ldquo;End Times for Our Times&rdquo; prophecy conference May 1&ndash;2, 2026. Tickets are $45. There is a gift shop.</span>
+      </div>
+
+      <div class="rp-denom catholic">
+        <div class="rp-denom-name">ROMAN CATHOLIC</div>
+        <b>Reading:</b> Revelation is largely symbolic, not a military forecast. The Church doesn&rsquo;t map modern nation-states onto ancient prophecy. The Vatican has called for diplomacy, ceasefire, and protection of Eastern Christians caught in the crossfire. Catholic World Report (Mar 2026) centered the 300,000+ Christians in Iran who are now living under airstrikes.
+        <br/><b>Tone:</b> Pastoral concern. The focus is on the people in the blast radius, not the prophetic timeline.
+      </div>
+
+      <div class="rp-denom orthodox">
+        <div class="rp-denom-name">EASTERN ORTHODOX</div>
+        <b>Reading:</b> Eschatology is real but not a news ticker. The Orthodox tradition reads Revelation as spiritual allegory unfolding across all of history, not a checklist for this Tuesday. Russian Orthodox Patriarch Kirill sent condolences to Tehran and praised Khamenei&rsquo;s &ldquo;convictions&rdquo; &mdash; a geopolitical alignment wearing vestments.
+        <br/><b>Tone:</b> Ancient. Patient. Also complicated by the fact that Moscow&rsquo;s church and Moscow&rsquo;s foreign policy are reading from the same briefing book.
+      </div>
+
+      <div class="rp-denom mainline">
+        <div class="rp-denom-name">MAINLINE PROTESTANT</div>
+        <b>Reading:</b> The dispensationalist framework is a 19th-century invention, not historic Christianity. Mainline denominations &mdash; Episcopal, Presbyterian (PCUSA), Methodist, ELCA Lutheran &mdash; have broadly opposed the war, called for diplomatic resolution, and pushed back on the idea that any modern war is divinely ordained. Baptist News Global ran a piece calling the end-times framing &ldquo;the theology driving US intervention.&rdquo;
+        <br/><b>Tone:</b> Frustrated. A lot of &ldquo;this is not what Revelation means&rdquo; energy.
+      </div>
     </div>
-    <div style="text-align:center;font-size:7px;color:var(--text-muted);font-style:italic;margin-top:8px;">
-    &ldquo;No one knows the day or the hour&rdquo; &mdash; <a href="https://www.biblegateway.com/passage/?search=Matthew+24%3A36&version=NIV" target="_blank" style="color:var(--text-muted);text-decoration:underline;">Matthew 24:36</a><br/>
-    (but the index is at 181, so maybe pack a bag)
+
+    <!-- ═══ EDITORIAL NOTE ═══ -->
+    <div class="rp-editorial">
+      <b>Four Fingers note:</b> We track the Rapture Index the same way we track the Doomsday Clock &mdash; as a cultural indicator, not a countdown. When 25% of Americans believe the Second Coming will happen in their lifetime (Pew, 2022), the eschatological lens shapes policy, voting, and public tolerance for war. That makes it news, regardless of whether Ezekiel was talking about Iran or just having a very detailed dream. We link every verse and every source. Read them yourself. Draw your own conclusions. We&rsquo;ll be here either way &mdash; unless, of course, we&rsquo;re not.
     </div>
-    <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);font-size:7px;color:var(--text-muted);text-align:center;">
-    &#128279; <a href="https://www.raptureready.com/rapture-ready-index/" target="_blank" style="color:var(--amber);text-decoration:underline;">Rapture Index</a> &bull;
-    <a href="https://thebulletin.org/doomsday-clock/" target="_blank" style="color:var(--amber);text-decoration:underline;">Doomsday Clock</a> &bull;
-    <a href="https://www.biblegateway.com/" target="_blank" style="color:var(--amber);text-decoration:underline;">Bible Gateway</a> &bull;
-    <a href="https://endtimeheadlines.org/" target="_blank" style="color:var(--amber);text-decoration:underline;">End Time Headlines</a>
+
+    <div class="rp-footer">
+      <a href="https://www.raptureready.com/rapture-ready-index/" target="_blank">Rapture Index</a> &middot;
+      <a href="https://thebulletin.org/doomsday-clock/" target="_blank">Doomsday Clock</a> &middot;
+      <a href="https://www.biblegateway.com/" target="_blank">Bible Gateway</a> &middot;
+      <a href="https://endtimeheadlines.org/" target="_blank">End Time Headlines</a> &middot;
+      <a href="https://www.gotquestions.org/end-times-signs.html" target="_blank">Got Questions</a> &middot;
+      <a href="https://harvest.org/resources/gregs-blog/post/israel-iran-bible-prophecy-update/" target="_blank">Harvest: Iran &amp; Prophecy</a>
     </div>
   </div>
 
