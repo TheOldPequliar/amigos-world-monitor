@@ -214,18 +214,24 @@
   <div class="editor-note">
     <div class="en-tag">From the Editor <span class="en-date" id="editorNoteDate">&middot; April 27, 2026</span></div>
     <div class="en-text">
-      Two leaders flew toward each other this morning. King Charles is set to land at the South Portico for tea around the same hour Araghchi sits with Putin in St. Petersburg, both of them carrying papers nobody has shown the cameras. Meanwhile Beirut woke up to a precise strike on a Hezbollah intel chief, the Beqaa to its first hit in three weeks, and Joseph Aoun to a delegation he met with the words &ldquo;negotiation is not betrayal,&rdquo; which is the kind of line a Lebanese president doesn&rsquo;t say lightly and which Naim Qassem matched within hours by calling the same talks &ldquo;a grave sin.&rdquo; Brent printed a three-week high in Asia and pared on the Hormuz-first headline. The Mariners swept St. Louis behind a Refsnyder pinch-hit homer in the ninth, which is the kind of small thing that holds a Sunday together. The Seahawks took Bud Clark out of TCU and Julian Neal out of Arkansas in Rounds 2 and 3 &mdash; safety and corner, both ball-hawks, the back-half-of-the-secondary draft a team has when it remembers what hurt it last year. Pour something.
+      A new paper crossed two desks this morning. Tehran&rsquo;s proposal, handed to Pakistani mediators over the weekend and confirmed at the White House: reopen the Strait, lift the blockade, end the war first. The nuclear file gets deferred to a later phase. Trump convenes the NSC at 11 PT; Araghchi sits with Putin in St. Petersburg at the same hour. Tehran is shopping one paper in two capitals &mdash; reading Moscow, signaling Washington that Round 2 isn&rsquo;t the only door.<br><br>Day 59, and the interesting story isn&rsquo;t the temperature anymore &mdash; it&rsquo;s the architecture. Each side has something the other cannot get without paying. Washington holds the cards on enrichment; Tehran holds them on the Strait. Neither has spent without a guarantee on the other. So the war <span class="en-emph">calcifies</span>: 38 ships stay redirected since Apr 13, and a six-month mine-clearance scenario gets briefed to Congress as if it were furniture.<br><br>Markets have absorbed it. The S&amp;P closed Friday at a record 7,165; Asia opened higher overnight on the Hormuz-first headline. The Magnificent Seven print this week, the Fed announces Wednesday &mdash; Powell&rsquo;s likely last, with Warsh cleared to succeed him &mdash; and Brent printed a three-week high near $108 before paring back as if to apologize. The index does not think the war widens; the freight tape does not think it ends. Both have been right about something for two months.<br><br>A footnote, two scenes apart. Charles and Camilla arrive at the South Portico this afternoon for the state visit; the king addresses a joint session Tuesday. And in DC federal court today, Allen is arraigned for charging a Secret Service checkpoint outside Saturday&rsquo;s Correspondents&rsquo; with multiple weapons. The agent who took the round is fine. One scene is choreography, the other is reminder. Both are happening on the same calendar page.
     </div>
     <div class="en-sig">T.</div>
   </div>
   <script>
-    // Auto-fill today's date in From The Editor (format: April 14, 2026)
+    // Auto-fill today's date in From The Editor (format: April 27, 2026).
+    // Re-checks every 5 minutes so a tab left open across midnight doesn't go stale.
     (function(){
       var el = document.getElementById('editorNoteDate');
       if(!el) return;
-      var d = new Date();
       var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-      el.innerHTML = '&middot; ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+      function paint(){
+        var d = new Date();
+        el.innerHTML = '&middot; ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+      }
+      paint();
+      setInterval(paint, 300000);
+      document.addEventListener('visibilitychange', function(){ if(!document.hidden) paint(); });
     })();
   </script>
 
