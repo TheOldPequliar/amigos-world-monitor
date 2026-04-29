@@ -263,6 +263,10 @@ def run(today: dt.date, live: bool, root: Path) -> int:
     else:
         print(f'{BOLD}{total} issue(s){RESET}: '
               f'{len(issues.errors)} error(s), {len(issues.warnings)} warning(s)')
+        # Per-page summary so the CI report has a tl;dr at the bottom.
+        from collections import Counter
+        per_page = Counter(p for p, *_ in issues.errors + issues.warnings)
+        print(f'  by page: ' + ', '.join(f'{p}({n})' for p, n in per_page.most_common()))
     return len(issues.errors)
 
 
