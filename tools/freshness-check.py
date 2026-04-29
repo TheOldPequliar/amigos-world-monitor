@@ -33,6 +33,7 @@ from typing import Iterable
 
 # ────── KNOWN DATES ──────
 WAR_START = dt.date(2026, 2, 28)  # Operation Epic Fury begins → "Day 1"
+BLOCKADE_START = dt.date(2026, 4, 13)  # US blockade of Hormuz begins → "Day 1 of US blockade"
 
 PAGES = [
     'index.html', 'iran.html', 'lebanon.html', 'troops.html',
@@ -62,6 +63,10 @@ BOLD = '\033[1m' if sys.stdout.isatty() else ''
 
 def iran_day_for(today: dt.date) -> int:
     return (today - WAR_START).days + 1
+
+
+def blockade_day_for(today: dt.date) -> int:
+    return (today - BLOCKADE_START).days + 1
 
 
 def parse_short_date(s: str, today: dt.date) -> dt.date | None:
@@ -135,7 +140,7 @@ def check_iran_day_text(today: dt.date, page: str, lines: list[str],
     expected = iran_day_for(today)
     patterns = [
         re.compile(r'IRAN[^A-Za-z]+DAY\s*(\d{2,3})\b', re.IGNORECASE),
-        re.compile(r'\bDay\s*(\d{2,3})\s+of\s+(?:the\s+)?(?:war|US\s+blockade)\b',
+        re.compile(r'\bDay\s*(\d{2,3})\s+of\s+(?:the\s+)?war\b',
                    re.IGNORECASE),
     ]
     for i, line in enumerate(lines, start=1):
@@ -149,6 +154,27 @@ def check_iran_day_text(today: dt.date, page: str, lines: list[str],
                 if n != expected:
                     issues.add('error', page, i, line,
                                f'"{m.group(0)}" — expected Day {expected}')
+
+
+def check_blockade_day_text(today: dt.date, page: str, lines: list[str],
+                              issues: Issues) -> None:
+    """'Day NN of US blockade' is a different clock than the war-day counter
+    (the blockade started Apr 13, the war started Feb 28)."""
+    expected = blockade_day_for(today)
+    rx = re.compile(
+        r'\bDay\s*(\d{1,3})\s+of\s+(?:the\s+)?'
+        r'(?:US|U\.S\.|U\. S\.)?\s*blockade\b',
+        re.IGNORECASE,
+    )
+    for i, line in enumerate(lines, start=1):
+        if line.lstrip().startswith(('/*', '*', '#')):
+            continue
+        text = _strip_tags(line)
+        for m in rx.finditer(text):
+            n = int(m.group(1))
+            if n != expected:
+                issues.add('error', page, i, line,
+                           f'"{m.group(0)}" — expected Day {expected} of blockade')
 
 
 def check_countdowns(today: dt.date, page: str, lines: list[str],
@@ -241,6 +267,7 @@ def run(today: dt.date, live: bool, root: Path) -> int:
         lines = html.split('\n')
         check_iran_day_count(today, page, lines, issues)
         check_iran_day_text(today, page, lines, issues)
+        check_blockade_day_text(today, page, lines, issues)
         check_countdowns(today, page, lines, issues)
         check_updated_labels(today, page, lines, issues)
 
