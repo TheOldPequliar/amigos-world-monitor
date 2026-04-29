@@ -259,7 +259,7 @@ def run(today: dt.date, live: bool, root: Path) -> int:
 
     total = len(issues.errors) + len(issues.warnings)
     if total == 0:
-        print(f'{BOLD}✓ clean{RESET} — no stale content detected')
+        print(f'{BOLD}✓ clean{RESET} — checked {len(PAGES)} pages, no stale content detected')
     else:
         print(f'{BOLD}{total} issue(s){RESET}: '
               f'{len(issues.errors)} error(s), {len(issues.warnings)} warning(s)')
