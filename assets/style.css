@@ -2413,3 +2413,242 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   margin-top: 4px;
 }
 @media (max-width: 700px) { .vault-extras { grid-template-columns: 1fr; } }
+
+/* ════════════════════════════════════════════════════════════════
+   THE POUR — newsletter archive page styling. Each issue is an
+   <article class="pour-issue">. Sections within an issue use
+   .pour-section. Headlines serif (Georgia), body sans (DM Sans).
+   ════════════════════════════════════════════════════════════════ */
+.pour-about {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: 2px;
+  padding: 14px 18px;
+  margin: 0 0 16px 0;
+}
+.pour-about-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.pour-about p {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0 0 10px 0;
+}
+.pour-about p:last-of-type { margin-bottom: 12px; }
+.pour-about p b { color: #1a1611; font-weight: 700; }
+.pour-subscribe-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #1a1611;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 1px solid #1a1611;
+  transition: background .15s ease;
+}
+.pour-subscribe-btn:hover {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.pour-index {
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 12px 18px;
+  margin: 0 0 18px 0;
+}
+.pour-index-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.pour-index ul { list-style: none; margin: 0; padding: 0; }
+.pour-index li { padding: 4px 0; }
+.pour-index a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 14px;
+  padding: 4px 0;
+}
+.pour-index a:hover { color: var(--red); }
+.pour-idx-no {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: var(--red);
+  min-width: 50px;
+}
+.pour-idx-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  min-width: 110px;
+}
+.pour-idx-title {
+  flex: 1;
+  font-style: italic;
+  color: var(--text);
+}
+.pour-idx-state {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.pour-idx-draft {
+  background: #fff5e6;
+  color: var(--amber);
+  border: 1px solid #f0d699;
+}
+.pour-idx-published {
+  background: #ebf3ee;
+  color: var(--green);
+  border: 1px solid #c4dfd0;
+}
+
+.pour-issue {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-top: 3px solid #1a1611;
+  border-radius: 2px;
+  padding: 22px 28px 18px 28px;
+  margin: 0 0 22px 0;
+  scroll-margin-top: 70px;
+}
+.pour-issue-head {
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #1a1611;
+}
+.pour-issue-no {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.pour-issue-title {
+  font-family: Georgia, 'Playfair Display', 'Times New Roman', serif;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.1;
+  color: #1a1611;
+  letter-spacing: -0.5px;
+  margin: 0 0 6px 0;
+  font-style: italic;
+}
+.pour-issue-tagline {
+  font-family: Georgia, serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.pour-section {
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+}
+.pour-section:last-of-type { border-bottom: none; padding-bottom: 0; }
+.pour-section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.pour-section p {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 0 0 12px 0;
+}
+.pour-section p:last-child { margin-bottom: 0; }
+.pour-section p b { color: #1a1611; font-weight: 700; }
+.pour-section p a { color: var(--red); text-decoration: none; border-bottom: 1px dotted currentColor; }
+.pour-section p a:hover { border-bottom-style: solid; }
+
+.pour-pull {
+  margin: 14px 0 4px 0;
+  padding: 10px 16px;
+  border-left: 3px solid var(--red);
+  background: #fafafa;
+  font-family: Georgia, 'Playfair Display', 'Times New Roman', serif;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--text-dim);
+  font-style: italic;
+}
+.pour-pull em {
+  font-style: italic;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.pour-section-editor { padding-top: 6px; }
+.pour-sig {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: 8px;
+}
+
+.pour-issue-foot {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 2px solid #1a1611;
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-align: center;
+}
+.pour-issue-foot a { color: var(--text-muted); border-bottom: 1px dotted currentColor; text-decoration: none; }
+.pour-issue-foot a:hover { color: var(--red); border-bottom-color: var(--red); }
+
+@media (max-width: 600px) {
+  .pour-issue { padding: 16px 18px; }
+  .pour-issue-title { font-size: 24px; }
+  .pour-section p { font-size: 14px; }
+}
