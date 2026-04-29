@@ -2066,3 +2066,110 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   background: #fff8ef;
   border-bottom: 2px solid #1a1611;
 }
+
+/* DUDE WATCH — daily auto-counter on the unnamed F-15E aircrew (Dude 44 A/B).
+   Big number, dark headline, sustained editorial framing. */
+.dude-watch {
+  background: #1a1611;
+  color: #ffffff;
+  border: 1px solid #1a1611;
+  border-left: 3px solid var(--red);
+  border-radius: 2px;
+  padding: 16px 20px 14px 20px;
+  margin: 0 0 16px 0;
+  position: relative;
+  overflow: hidden;
+}
+.dude-watch::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--red), var(--amber), var(--red));
+}
+.dude-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #3a342c;
+}
+.dude-headline {
+  font-family: Georgia, 'Playfair Display', 'Times New Roman', serif;
+  font-size: 30px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  font-style: italic;
+}
+.dude-counter {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #221c14;
+  border: 1px solid #3a342c;
+  border-radius: 2px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+}
+.dude-counter-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 64px;
+  font-weight: 900;
+  color: var(--amber);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  min-width: 110px;
+  text-align: center;
+}
+.dude-counter-lbl {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #e8dfcf;
+}
+.dude-counter-lbl b { color: var(--red); font-weight: 800; }
+.dude-body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #e8dfcf;
+  margin: 0 0 10px 0;
+}
+.dude-days-inline {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 900;
+  color: var(--amber);
+}
+.dude-aphorism {
+  margin-top: 12px;
+  padding: 10px 16px;
+  border-left: 3px solid var(--amber);
+  background: #221c14;
+  font-family: Georgia, 'Playfair Display', 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.4;
+  color: #ffffff;
+}
+.dude-aphorism cite {
+  display: block;
+  margin-top: 4px;
+  font-style: normal;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+@media (max-width: 600px) {
+  .dude-counter { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .dude-counter-num { font-size: 48px; min-width: auto; text-align: left; }
+  .dude-headline { font-size: 24px; }
+}
