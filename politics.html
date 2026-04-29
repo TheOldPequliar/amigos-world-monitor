@@ -281,49 +281,49 @@
           <tr class="cl-featured">
             <td><b>The Dude 44 Easter Story.</b> Hegseth&rsquo;s narrative on the F-15E rescue: shot down Friday Apr 3 (DUDE 44 Alpha + Bravo), Bravo on the run through Saturday in Iranian terrain, recovered Sunday &mdash; the resurrection arc, told from the podium. Easter Sunday 2026: Apr 5. The WSO recovery: Apr 5. Names of either crewman: <b>still withheld three weeks later.</b></td>
             <td class="cl-cell-date">Apr 5, 2026</td>
-            <td class="cl-cell-days">23</td>
+            <td class="cl-cell-days cl-auto-days" data-claim-date="2026-04-05"></td>
             <td><span class="cl-status cl-disputed">NEVER NAMED</span></td>
             <td>155 aircraft committed, 21 in Iranian airspace for ~7 hours in daylight, A-10 lost, HH-60W damaged. FOB was an abandoned ag airstrip ~23 km N of Shahreza, southern Isfahan &mdash; not on any plausible egress line for a parachute landing 100+ km away. Analysts (Press TV, regional OSINT, several US-based national-security writers) read the footprint as a failed heliborne insertion at an Isfahan-area target, repackaged as a rescue. The names would settle the question. They have not been released.</td>
           </tr>
           <tr>
             <td>Iran agreed to hand over its enriched uranium stockpile (~440 kg HEU)</td>
             <td class="cl-cell-date">Apr 19, 2026</td>
-            <td class="cl-cell-days">9</td>
+            <td class="cl-cell-days cl-auto-days" data-claim-date="2026-04-19"></td>
             <td><span class="cl-status cl-no-receipts">NO RECEIPTS</span></td>
             <td>No IAEA confirmation. Tehran position unchanged: enriched uranium does not leave the country.</td>
           </tr>
           <tr>
             <td>&ldquo;Tehran agreed to everything&rdquo; (CBS News, Bloomberg)</td>
             <td class="cl-cell-date">Apr 18, 2026</td>
-            <td class="cl-cell-days">10</td>
+            <td class="cl-cell-days cl-auto-days" data-claim-date="2026-04-18"></td>
             <td><span class="cl-status cl-denied">DENIED BY COUNTERPARTY</span></td>
             <td>Iran MFA spokesman Esmaeil Baghaei, same week: &ldquo;no meeting is planned.&rdquo;</td>
           </tr>
           <tr>
             <td>Meeting will &ldquo;probably take place over the weekend&rdquo; / &ldquo;deal in the next day or two&rdquo;</td>
             <td class="cl-cell-date">Apr 19, 2026</td>
-            <td class="cl-cell-days">9</td>
+            <td class="cl-cell-days cl-auto-days" data-claim-date="2026-04-19"></td>
             <td><span class="cl-status cl-expired">EXPIRED</span></td>
             <td>Weekend passed. Witkoff and Kushner trip cancelled. Round 2 still phones-only.</td>
           </tr>
           <tr>
             <td>Iran agreed to &ldquo;unlimited&rdquo; suspension of its nuclear program</td>
             <td class="cl-cell-date">Apr 19, 2026</td>
-            <td class="cl-cell-days">9</td>
+            <td class="cl-cell-days cl-auto-days" data-claim-date="2026-04-19"></td>
             <td><span class="cl-status cl-no-receipts">NO RECEIPTS</span></td>
             <td>No IAEA inspection. No public Iranian acknowledgment of any suspension framework.</td>
           </tr>
           <tr>
             <td>Hormuz is &ldquo;Sealed up Tight,&rdquo; US Navy &ldquo;total control&rdquo;</td>
             <td class="cl-cell-date">Apr 17, 2026</td>
-            <td class="cl-cell-days">11</td>
+            <td class="cl-cell-days cl-auto-days" data-claim-date="2026-04-17"></td>
             <td><span class="cl-status cl-disputed">DISPUTED</span></td>
             <td>CENTCOM tally: 38 redirects since Apr 13, zero evasions on US side. IRGC continues to interdict on the Iranian side; both sides hold tankers.</td>
           </tr>
           <tr>
             <td>Iran told the US it wants Hormuz reopened &ldquo;ASAP&rdquo; (Axios sourcing Trump)</td>
             <td class="cl-cell-date">Apr 28, 2026</td>
-            <td class="cl-cell-days">0</td>
+            <td class="cl-cell-days cl-auto-days" data-claim-date="2026-04-28"></td>
             <td><span class="cl-status cl-unverified">UNVERIFIED</span></td>
             <td>Tehran&rsquo;s Hormuz-first paper does exist (per Axios), but framed with a sequencing condition the WH publicly rejects. The &ldquo;ASAP&rdquo; framing is Trump&rsquo;s, not the document&rsquo;s.</td>
           </tr>
@@ -337,6 +337,19 @@
         </tbody>
       </table>
     </div>
+    <script>
+      // Auto-calculate day counts in the claims ledger
+      (function(){
+        var now=new Date();
+        document.querySelectorAll('.cl-auto-days').forEach(function(el){
+          var d=el.getAttribute('data-claim-date');
+          if(!d)return;
+          var parts=d.split('-');
+          var start=new Date(+parts[0],+parts[1]-1,+parts[2]);
+          el.textContent=Math.max(0,Math.floor((now-start)/86400000));
+        });
+      })();
+    </script>
     <p class="cl-frame">Read the ledger like a credit report. The principal isn&rsquo;t the claim &mdash; the principal is whether the receipt shows up. Day-count is the time the borrower has been carrying the balance.</p>
     <div class="cl-aphorism">&ldquo;Up at 2 AM saying we have a deal? Where&rsquo;s the deal? Where&rsquo;s the name?&rdquo;<cite>&mdash; The Editor</cite></div>
     <div class="cl-src">
