@@ -17,7 +17,7 @@
 <meta name="twitter:title" content="Sports &middot; Seattle Teams &mdash; Four Fingers News">
 <meta name="twitter:description" content="Live scoreboards and standings: Seahawks, Mariners, Kraken, UW Football. Plus the NFL draft.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='14' y='10' width='36' height='44' rx='3' ry='3' fill='none' stroke='%23d4af37' stroke-width='3'/%3E%3Crect x='17' y='28' width='30' height='23' fill='%23b8860b' opacity='0.95'/%3E%3Crect x='17' y='28' width='30' height='3' fill='%23d4a017' opacity='0.9'/%3E%3Ccircle cx='40' cy='34' r='3' fill='%23fff8e7' opacity='0.55'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/style.css?v=1777391998">
+<link rel="stylesheet" href="assets/style.css?v=1777479789">
 </head>
 <body class="light-mode">
 
@@ -218,14 +218,9 @@
     <div class="lpm-name">Seattle &amp; Beyond</div>
     <div class="lpm-kicker">Seahawks, Mariners, Kraken, UW. Live scoreboards and the NFL draft.</div>
   </div>
-  <!-- SEATTLE TEAMS -->
-  
+  <!-- SEATTLE TEAM CARDS -->
   <div class="sports-compact">
-    <div class="section-header">
-      <span class="section-tag">SEATTLE TEAMS</span>
-      <span class="section-quip">Pain is just weakness leaving your wallet at the stadium.</span>
-    </div>
-    <div class="cards-row" id="sportsCards">
+    <div class="cards-row" id="sportsCards" style="grid-template-columns:repeat(4,1fr);">
       <!-- Seahawks -->
       <div class="card card-seahawks fade-in" style="position:relative;">
         <img src="https://a.espncdn.com/i/teamlogos/nfl/500/sea.png" alt="Seahawks" style="position:absolute;top:10px;right:10px;width:48px;height:48px;opacity:0.25;">
@@ -262,14 +257,23 @@
         <div class="card-next" id="uwNext">NEXT: --</div>
         <div class="card-quip" id="uwQuip">Big Ten money, Pac-12 memories.</div>
       </div>
-      <!-- NBA Playoffs -->
-      <div class="card card-nba fade-in" style="position:relative;">
-        <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nba.png" alt="NBA" style="position:absolute;top:10px;right:10px;width:48px;height:48px;opacity:0.25;">
-        <div class="card-team-name">NBA PLAYOFFS</div>
-        <div class="card-score" id="nbaPlayoffStatus">Round 1</div>
-        <div class="card-detail" id="nbaPlayoffDetail">8 series underway</div>
-        <div class="card-next" id="nbaPlayoffNext">TONIGHT: NYK@ATL G3 &bull; CLE@TOR G3 &bull; DEN@MIN G3</div>
-        <div class="card-quip" id="nbaPlayoffQuip">DET 1-1 ORL &bull; BOS 1-1 PHI &bull; NYK 1-1 ATL &bull; CLE 2-0 TOR &bull; OKC 1-0 PHX &bull; SAS 1-1 POR &bull; LAL 2-0 HOU &bull; DEN-MIN series underway</div>
+    </div>
+  </div>
+
+  <!-- NBA PLAYOFFS — own row -->
+  <div class="sports-compact" style="margin-bottom:14px;">
+    <div class="cards-row" style="grid-template-columns:1fr;">
+      <div class="card card-nba fade-in" style="position:relative;display:grid;grid-template-columns:auto 1fr;gap:0 18px;align-items:start;padding:14px 18px;">
+        <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nba.png" alt="NBA" style="width:52px;height:52px;opacity:0.3;grid-row:1/4;">
+        <div>
+          <div class="card-team-name" style="font-size:12px;margin-bottom:2px;">NBA PLAYOFFS</div>
+          <div class="card-score" id="nbaPlayoffStatus" style="font-size:18px;">Round 1</div>
+          <div class="card-detail" id="nbaPlayoffDetail">8 series underway</div>
+        </div>
+        <div style="grid-column:1/-1;margin-top:6px;">
+          <div class="card-next" id="nbaPlayoffNext" style="margin-bottom:4px;">TONIGHT: NYK@ATL G3 &bull; CLE@TOR G3 &bull; DEN@MIN G3</div>
+          <div class="card-quip" id="nbaPlayoffQuip" style="max-height:none;-webkit-line-clamp:unset;">DET 1-1 ORL &bull; BOS 1-1 PHI &bull; NYK 1-1 ATL &bull; CLE 2-0 TOR &bull; OKC 1-0 PHX &bull; SAS 1-1 POR &bull; LAL 2-0 HOU &bull; DEN-MIN series underway</div>
+        </div>
       </div>
     </div>
   </div>
@@ -419,7 +423,7 @@
   <!-- ═══ FOOTER ═══ -->
     <div class="footer">
     <div class="footer-text">
-      <span class="highlight">FOUR FINGERS NEWS</span> &#8212; <a href="https://fourfingersnews.com/" style="color:inherit;text-decoration:none;border-bottom:1px dotted currentColor;">fourfingersnews.com</a> &#8212; BUILT BY AI &#8212; TRUSTED BY NOBODY &#8212; SERVED NEAT
+      <span class="highlight">FOUR FINGERS NEWS</span> &#8212; <a href="https://fourfingersnews.com/" style="color:inherit;text-decoration:none;border-bottom:1px dotted currentColor;">fourfingersnews.com</a>
     </div>
     <div class="last-refresh">Last refresh: <span id="lastRefresh">Wed Apr 29 &middot; 06:00 PT</span></div>
     <div class="visit-counter" style="margin-top:10px;font-family:'JetBrains Mono','Courier New',monospace;font-size:8px;letter-spacing:2px;color:#6b6b6b;text-align:center;text-transform:uppercase;">DISPATCHES SERVED: <span id="visitCount" style="color:#121212;font-weight:700;">&#8212;</span></div>

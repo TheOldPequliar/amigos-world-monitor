@@ -1315,13 +1315,13 @@ body.light-mode .mountain-banner { opacity: 0.75; }
     .sports-compact .section-header{margin-bottom:6px;}
     .sports-compact .section-tag{font-size:9px;padding:3px 8px;}
     .sports-compact .section-quip{font-size:9px;}
-    .sports-compact .cards-row{gap:8px;grid-template-columns:repeat(5,1fr);}
-    .sports-compact .card{padding:10px 12px;min-height:0;}
+    .sports-compact .cards-row{gap:10px;grid-template-columns:repeat(4,1fr);}
+    .sports-compact .card{padding:12px 14px;min-height:0;}
     .sports-compact .card-team-name{font-size:11px;letter-spacing:2px;margin-bottom:3px;}
-    .sports-compact .card-score{font-size:16px;margin-bottom:2px;}
+    .sports-compact .card-score{font-size:18px;margin-bottom:3px;}
     .sports-compact .card-detail{font-size:9px;margin-bottom:3px;}
     .sports-compact .card-next{font-size:8px;margin-bottom:4px;}
-    .sports-compact .card-quip{font-size:9px;line-height:1.45;max-height:4.4em;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+    .sports-compact .card-quip{font-size:9px;line-height:1.5;max-height:5.5em;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;}
 /* ════════ MULTI-PAGE NAV + LANDING CARDS ════════ */
 .section-nav a.active{color:var(--red);font-weight:900;border-bottom:2px solid var(--red);}
 .landing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:18px 0 24px;}
