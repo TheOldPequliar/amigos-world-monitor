@@ -262,7 +262,7 @@
 
   <!-- NBA PLAYOFFS — own row -->
   <div class="sports-compact" style="margin-bottom:14px;">
-    <div class="cards-row" style="grid-template-columns:1fr;">
+    <div class="cards-row" style="grid-template-columns:1fr 1fr;gap:10px;">
       <div class="card card-nba fade-in" style="position:relative;display:grid;grid-template-columns:auto 1fr;gap:0 18px;align-items:start;padding:14px 18px;">
         <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nba.png" alt="NBA" style="width:52px;height:52px;opacity:0.3;grid-row:1/4;">
         <div>
@@ -273,6 +273,18 @@
         <div style="grid-column:1/-1;margin-top:6px;">
           <div class="card-next" id="nbaPlayoffNext" style="margin-bottom:4px;">TONIGHT: NYK@ATL G3 &bull; CLE@TOR G3 &bull; DEN@MIN G3</div>
           <div class="card-quip" id="nbaPlayoffQuip" style="max-height:none;-webkit-line-clamp:unset;">DET 1-1 ORL &bull; BOS 1-1 PHI &bull; NYK 1-1 ATL &bull; CLE 2-0 TOR &bull; OKC 1-0 PHX &bull; SAS 1-1 POR &bull; LAL 2-0 HOU &bull; DEN-MIN series underway</div>
+        </div>
+      </div>
+      <div class="card card-nhl fade-in" style="position:relative;display:grid;grid-template-columns:auto 1fr;gap:0 18px;align-items:start;padding:14px 18px;">
+        <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nhl.png" alt="NHL" style="width:52px;height:52px;opacity:0.3;grid-row:1/4;">
+        <div>
+          <div class="card-team-name" style="font-size:12px;margin-bottom:2px;">STANLEY CUP PLAYOFFS</div>
+          <div class="card-score" id="nhlPlayoffStatus" style="font-size:18px;">Round 1</div>
+          <div class="card-detail" id="nhlPlayoffDetail">2 sweeps complete &bull; 6 series active</div>
+        </div>
+        <div style="grid-column:1/-1;margin-top:6px;">
+          <div class="card-next" id="nhlPlayoffNext" style="margin-bottom:4px;">TONIGHT: MTL@TBL G5 (7 ET) &bull; PIT@PHI G6 (7:30) &bull; UTA@VGK G5 (10)</div>
+          <div class="card-quip" id="nhlPlayoffQuip" style="max-height:none;-webkit-line-clamp:unset;"><b>EAST:</b> CAR 4-0 OTT &#10003; &bull; BUF 3-2 BOS &bull; MTL-TBL 2-2 &bull; PIT 3-2 PHI<br><b>WEST:</b> COL 4-0 LAK &#10003; &bull; ANA 3-1 EDM &bull; WPG-STL 2-2 &bull; VGK-UTA 2-2</div>
         </div>
       </div>
     </div>

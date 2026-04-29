@@ -478,6 +478,7 @@
   .card-mariners::before { background: linear-gradient(90deg, var(--mariners-teal), var(--mariners-blue)); }
   .card-kraken::before { background: linear-gradient(90deg, var(--kraken-teal), var(--kraken-blue)); }
   .card-nba::before { background: linear-gradient(90deg, var(--nba-blue), var(--nba-red)); }
+  .card-nhl::before { background: linear-gradient(90deg, #000000, #a2aaad); }
   .card-uw::before { background: linear-gradient(90deg, var(--uw-purple), var(--uw-gold)); }
 
   .card-team-name {
