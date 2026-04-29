@@ -1769,3 +1769,152 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   margin: 12px 0 6px 0;
 }
 @media (max-width: 700px) { .pvh-grid { grid-template-columns: 1fr; } }
+
+/* PAPER OIL vs SPOT tracker — three-column physical/futures spread panel. */
+.pos-panel {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--copper);
+  border-radius: 2px;
+  padding: 14px 18px 12px 18px;
+  margin: 0 0 16px 0;
+}
+.pos-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  color: var(--copper);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.pos-intro {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0 0 12px 0;
+}
+.pos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.pos-col {
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--text-muted);
+  border-radius: 2px;
+  padding: 12px 14px;
+}
+.pos-col.pos-paper { border-top-color: var(--text-muted); }
+.pos-col.pos-dated { border-top-color: var(--amber); }
+.pos-col.pos-spot { border-top-color: var(--red); }
+.pos-col-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.pos-paper .pos-col-tag { color: var(--text-muted); }
+.pos-dated .pos-col-tag { color: var(--amber); }
+.pos-spot .pos-col-tag { color: var(--red); }
+.pos-col-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 900;
+  color: #1a1611;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.pos-col-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.pos-col-note {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text);
+}
+.pos-spread {
+  background: #1a1611;
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 2px;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.pos-spread-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  color: #cccccc;
+  text-transform: uppercase;
+}
+.pos-spread-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--amber);
+}
+.pos-spread-sub {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 12px;
+  color: #cccccc;
+  flex: 1;
+  min-width: 240px;
+}
+.pos-frame {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0 0 10px 0;
+}
+.pos-aphorism {
+  margin: 8px 0 10px 0;
+  padding: 10px 16px;
+  border-left: 3px solid var(--red);
+  background: #fafafa;
+  font-family: Georgia, 'Playfair Display', 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--text-dim);
+}
+.pos-aphorism cite {
+  display: block;
+  margin-top: 4px;
+  font-style: normal;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.pos-src {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+}
+.pos-src a { color: var(--text-muted); text-decoration: none; margin-right: 10px; border-bottom: 1px dotted var(--border-glow); }
+.pos-src a:hover { color: var(--red); border-bottom-color: var(--red); }
+@media (max-width: 700px) { .pos-grid { grid-template-columns: 1fr; } }
