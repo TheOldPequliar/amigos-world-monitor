@@ -20,6 +20,7 @@ The site is a **multi-page** static dispatch. Read this before editing.
 | `rapture.html` | Rapture / Eschatology. |
 | `sports.html` | Seattle teams + Live Scoreboards + NFL Draft. |
 | `epstein.html` | Epstein Files Corner. |
+| `wildcard.html` | Wild Card — goofs, gaffes, group-chat classics, pizza odysseys. Manual, append-only. |
 | `assets/style.css` | Shared stylesheet. All section CSS lives here. |
 | `assets/app.js` | Shared engine — clock, stocks, sports, Iran data, world cards, gas prices, etc. |
 | `_notes/` | Private editorial notes. Not published. |
@@ -115,6 +116,7 @@ the shared script works on every page.
 | Markets / gas prices | live JS, no HTML edit needed; static fallbacks on `markets.html` |
 | Sports live scoreboards | live JS, no HTML edit needed |
 | Epstein day counter | live JS, no HTML edit needed |
+| Wild Card entry | `wildcard.html` only (newest entries at top of `#wcFeed`) |
 | Footer visit counter / cache headers / global cosmetic | **all 11 HTML files** |
 
 ---
