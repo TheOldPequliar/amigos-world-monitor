@@ -21,6 +21,7 @@ The site is a **multi-page** static dispatch. Read this before editing.
 | `sports.html` | Seattle teams + Live Scoreboards + NFL Draft. |
 | `epstein.html` | Epstein Files Corner. |
 | `wildcard.html` | Wild Card — goofs, gaffes, group-chat classics, pizza odysseys. Manual, append-only. |
+| `pour.html` | The Pour — weekly editorial column / newsletter archive. Issues append at top of `<div class="pour-issues">`; back-issue list mirrored in `.pour-index`. Manual. |
 | `assets/style.css` | Shared stylesheet. All section CSS lives here. |
 | `assets/app.js` | Shared engine — clock, stocks, sports, Iran data, world cards, gas prices, etc. |
 | `_notes/` | Private editorial notes. Not published. |
@@ -117,6 +118,7 @@ the shared script works on every page.
 | Sports live scoreboards | live JS, no HTML edit needed |
 | Epstein day counter | live JS, no HTML edit needed |
 | Wild Card entry | `wildcard.html` only (newest entries at top of `#wcFeed`) |
+| The Pour issue | `pour.html` — append `<article class="pour-issue">` at top, add row to `.pour-index <ul>` |
 | Footer visit counter / cache headers / global cosmetic | **all 11 HTML files** |
 
 ---
