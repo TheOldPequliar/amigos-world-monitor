@@ -22,6 +22,7 @@ The site is a **multi-page** static dispatch. Read this before editing.
 | `epstein.html` | Epstein Files Corner. |
 | `wildcard.html` | Wild Card — goofs, gaffes, group-chat classics, pizza odysseys. Manual, append-only. |
 | `pour.html` | The Pour — weekly editorial column / newsletter archive. Issues append at top of `<div class="pour-issues">`; back-issue list mirrored in `.pour-index`. Manual. |
+| `watch.html` | The Watch — curated video. Two surfaces: TIMELY (`#watchTimely`, short shelf life) and ABIDING (`#watchAbiding`, evergreen). Append `<article class="watch-entry">` to the right surface. Manual. |
 | `assets/style.css` | Shared stylesheet. All section CSS lives here. |
 | `assets/app.js` | Shared engine — clock, stocks, sports, Iran data, world cards, gas prices, etc. |
 | `_notes/` | Private editorial notes. Not published. |
