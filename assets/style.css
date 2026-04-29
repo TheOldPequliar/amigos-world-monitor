@@ -2377,3 +2377,39 @@ body.light-mode .mountain-banner { opacity: 0.75; }
 .vault-src a:hover { color: var(--red); border-bottom-color: var(--red); }
 @media (max-width: 900px) { .vault-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 500px) { .vault-grid { grid-template-columns: 1fr; } }
+
+/* Vault Watch extras: historical context + Macgregor wire side-by-side. */
+.vault-extras {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 12px 0;
+}
+.vault-extra {
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--brass);
+  border-radius: 2px;
+  padding: 10px 14px;
+}
+.vault-extra-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--brass);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.vault-extra p {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0;
+}
+.vault-aphorism-close {
+  border-left-color: #1a1611;
+  margin-top: 4px;
+}
+@media (max-width: 700px) { .vault-extras { grid-template-columns: 1fr; } }
