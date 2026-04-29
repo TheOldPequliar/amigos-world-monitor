@@ -1612,3 +1612,7 @@ body.light-mode .mountain-banner { opacity: 0.75; }
 #ttHeatWindow .tt-analyst-tag { color: var(--amber); }
 #ttDesalTripwire { border-left-color: var(--red); }
 #ttDesalTripwire .tt-analyst-tag { color: var(--red); }
+
+/* Beyond The Oil panel: dark accent (this one is the gut-punch). */
+#ttBeyondOil { border-left-color: #1a1611; }
+#ttBeyondOil .tt-analyst-tag { color: #1a1611; }
