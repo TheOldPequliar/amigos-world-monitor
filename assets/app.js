@@ -1379,6 +1379,18 @@ try { localStorage.removeItem('themeOverride'); } catch(e) {}
   fetchApproval();
   setInterval(fetchApproval,3600000);
 
+// ── Auto-fill section datelines with today's date ──
+(function(){
+  var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var d=new Date();
+  var label=days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate();
+  ['lt-updated'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)el.textContent=label;
+  });
+})();
+
 // ── Visit Counter ──
 (function initVisitCounter(){
   var el=document.getElementById('visitCount');
