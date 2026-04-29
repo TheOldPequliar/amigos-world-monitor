@@ -1524,3 +1524,36 @@ body.light-mode .mountain-banner { opacity: 0.75; }
   color: var(--text);
   margin: 0;
 }
+
+/* Photo figure inside a Wild Card entry. Constrained max-width so a tall
+   portrait photo doesn't dominate; caption styled like the kicker labels. */
+.wc-figure {
+  margin: 16px auto;
+  text-align: center;
+}
+.wc-figure img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 520px;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.wc-figure figcaption {
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.wc-figure figcaption em {
+  text-transform: none;
+  letter-spacing: 0.5px;
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--text-dim);
+}
