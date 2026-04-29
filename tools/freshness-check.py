@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# rev: 2
 """Freshness lint for fourfingersnews.com.
 
 Catches the kinds of stale content that drift when pages are refreshed
