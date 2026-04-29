@@ -21,7 +21,7 @@
 *(first-draft thoughts, rewrite in my voice whenever)*
 
 - I followed my parents strictly because I thought they had the answer. They didn't — nobody does. I want you to follow me because you love me, not because you think I have the answer.
-- The world is strange. Grown-ups don't agree about what's happening. I don't know what's going to happen either. But we're here, we're having dinner, the dog is on the floor, and we'll figure it out as it comes.
+- The world is strange. Grown-ups don't agree about what's happening. I don't know what's going to happen either. But we're here, we're having dinner, laughing telling stories, and we'll figure it out as it comes.
 - I don't know exactly what a prayer is. I do know how to pay attention. (Mary Oliver said it first. She's right.)
 - If something is enjoyable, that's not evidence it doesn't matter. Sometimes the enjoyment is the proof the thing is alive.
 - The people you love will disappoint you, and you will disappoint them. That's not a failure. That's what being close to someone is. The question is whether you keep showing up.
